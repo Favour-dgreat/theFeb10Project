@@ -139,7 +139,6 @@ const ScholarshipInfo = () => {
     return (
         <div className="w-full bg-white p-6 md:p-8 rounded-xl shadow-sm border border-gray-100">
             <div className="mb-10">
-                <h2 className="text-[#1a237e] text-sm font-bold tracking-widest uppercase mb-2">Scholarship Page</h2>
                 <h1 className="text-3xl md:text-4xl font-extrabold text-[#1a237e] mb-4 leading-tight">
                     THE FEB10 PROJECT 2026 SCHOLARSHIP
                 </h1>

@@ -55,11 +55,11 @@ const Section05 = () => {
                     >
                         <h3 className="text-white text-xl font-bold mb-4">Quick Links</h3>
                         <ul className="space-y-3">
-                            <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Scholarships</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Initiatives</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Media</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Contact Us</a></li>
+                            <li><a href="/about" className="hover:text-white transition-colors">About Us</a></li>
+                            <li><a href="/scholarship" className="hover:text-white transition-colors">Scholarships</a></li>
+                            <li><a href="/initiatives" className="hover:text-white transition-colors">Initiatives</a></li>
+                            <li><a href="/media" className="hover:text-white transition-colors">Media</a></li>
+                            <li><a href="/volunteer" className="hover:text-white transition-colors">Volunteer</a></li>
                         </ul>
                     </motion.div>
 
