@@ -48,20 +48,8 @@ const HeroSlider = () => {
         return () => clearInterval(timer);
     }, []);
 
-    // Typing effect
-    useEffect(() => {
-        const currentText = slides[currentIndex].text;
-
-        if (displayedText.length < currentText.length) {
-            const timeout = setTimeout(() => {
-                setDisplayedText(currentText.slice(0, displayedText.length + 1));
-            }, 50); // Speed of typing (50ms per character)
-
-            return () => clearTimeout(timeout);
-        } else {
-            setIsTyping(false);
-        }
-    }, [displayedText, currentIndex]);
+    
+   
 
     return (
         <div className="relative w-full h-[600px] overflow-hidden bg-black">
@@ -87,7 +75,7 @@ const HeroSlider = () => {
 
             <div className="absolute inset-0 flex items-center justify-center px-4 text-center z-10">
                 <h1 className="text-white text-3xl md:text-5xl lg:text-6xl font-bold max-w-5xl leading-tight drop-shadow-lg">
-                    {displayedText}
+                    {slides[currentIndex].text}
                     <span className={`inline-block w-1 h-[1em] bg-white ml-1 align-middle ${isTyping ? 'animate-blink' : 'animate-blink-slow'}`} />
                 </h1>
             </div>
