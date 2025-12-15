@@ -26,7 +26,7 @@ const Section02 = () => {
 
                         {/* Text Content based on the image */}
                         <p className="text-base sm:text-lg text-[#2e3b86] font-semibold mb-6">
-                            We offer scholarship opportunities to exceptional students from economically disadvantaged backgrounds in government-owned and privately-operated junior and senior secondary schools in Nigeria. Applications for scholarships are processed annually from June to August.
+                            What began as a simple act of service has grown into a purposeful African impact movement. The FEB 10 Project was founded out of a deep burden and a commitment to transform lives through compassion, empowerment, and opportunity. From supporting orphanages to investing in promising students, we exist to help individuals rise and reach their full potential.  
                         </p>
 
                         <a href="#" className="font-bold text-[#2e3b86] hover:text-orange-500 transition duration-300 inline-block">

@@ -35,11 +35,12 @@ const Section05 = () => {
 
                         {/* Text Content */}
                         <p className="text-base sm:text-lg text-white font-normal mb-4 max-w-md">
-                            We offer scholarship opportunities to exceptional students from economically disadvantaged backgrounds in government-owned and privately-operated junior and senior secondary schools in Nigeria.
+                            To transform lives by bridging the gap between potential and opportunity through scholarships, grants, youth empowerment, mentorship, and development programs that provide resources, direction, and hope.
+
                         </p>
 
                         <a href="#" className="font-semibold text-white hover:text-gray-200 transition duration-300 text-sm inline-block">
-                            &gt;&gt;&gt;Read More
+                            &gt;&gt;&gt; Read More
                         </a>
                     </motion.div>
 
@@ -61,11 +62,12 @@ const Section05 = () => {
 
                         {/* Text Content */}
                         <p className="text-base sm:text-lg text-white font-normal mb-4 max-w-md">
-                            We offer scholarship opportunities to exceptional students from economically disadvantaged backgrounds in government-owned and privately-operated junior and senior secondary schools in Nigeria.
+                            A world where no potential is wasted, where people across Africa and beyond are equipped, funded, and empowered to live a meaningful life, rise into their fullest capacity and impact their world.
+
                         </p>
 
                         <a href="#" className="font-semibold text-white hover:text-gray-200 transition duration-300 text-sm inline-block">
-                            &gt;&gt;&gt;Read More
+                            &gt;&gt;&gt; Read More
                         </a>
                     </motion.div>
                 </div>
