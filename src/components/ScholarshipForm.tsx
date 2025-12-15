@@ -25,6 +25,8 @@ const ScholarshipForm = () => {
         consentInstructions: false,
     });
 
+    const [error, setError] = useState('');
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value, type } = e.target;
         const checked = (e.target as HTMLInputElement).checked;
@@ -33,6 +35,7 @@ const ScholarshipForm = () => {
             ...prev,
             [name]: type === 'checkbox' ? checked : value
         }));
+        if (error) setError('');
     };
 
     const handleRadioChange = (name: string, value: boolean) => {
@@ -40,6 +43,7 @@ const ScholarshipForm = () => {
             ...prev,
             [name]: value
         }));
+        if (error) setError('');
     };
 
     const nextStep = () => {
@@ -48,13 +52,14 @@ const ScholarshipForm = () => {
 
     const prevStep = () => {
         setCurrentStep(prev => Math.max(prev - 1, 1));
+        setError('');
     };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         console.log('Form Submitted', formData);
         // Add real submission logic here
-        alert('Application Submitted (Simulation)');
+        // alert('Application Submitted (Simulation)');
     };
 
     return (
@@ -97,6 +102,7 @@ const ScholarshipForm = () => {
                                 <input
                                     type="text"
                                     name="firstName"
+                                    required
                                     value={formData.firstName}
                                     onChange={handleInputChange}
                                     className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all"
@@ -108,6 +114,7 @@ const ScholarshipForm = () => {
                                 <input
                                     type="text"
                                     name="surname"
+                                    required
                                     value={formData.surname}
                                     onChange={handleInputChange}
                                     className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all"
@@ -178,10 +185,12 @@ const ScholarshipForm = () => {
                                 <option value="">Select State</option>
                                 <option value="Ondo">Ondo</option>
                                 <option value="Lagos">Lagos</option>
+                                <option value="Ekiti">Ekiti</option>
+                                <option value="Osun">Osun</option>
                                 <option value="Abuja">Abuja</option>
                                 <option value="Ogun">Ogun</option>
                                 <option value="Oyo">Oyo</option>
-                                {/* Add more states as needed or just use a full list */}
+
                                 <option value="Other">Other</option>
                             </select>
                         </div>
@@ -327,32 +336,62 @@ const ScholarshipForm = () => {
                 )}
 
                 {/* Navigation Buttons */}
-                <div className="flex gap-4 pt-4 mt-6 border-t border-gray-200">
-                    {currentStep > 1 && (
-                        <button
-                            type="button"
-                            onClick={prevStep}
-                            className="px-6 py-3 bg-gray-200 text-gray-700 font-bold rounded-lg hover:bg-gray-300 transition-colors w-1/3"
+                <div className="pt-4 mt-6 border-t border-gray-200">
+                    {error && (
+                        <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="text-red-500 text-sm font-semibold mb-3 text-center bg-red-50 p-2 rounded"
                         >
-                            Back
-                        </button>
+                            {error}
+                        </motion.div>
                     )}
 
-                    <button
-                        type={currentStep === 3 ? "submit" : "button"}
-                        onClick={(e) => {
-                            if (currentStep < 3) {
-                                e.preventDefault();
-                                nextStep();
-                            }
-                        }}
-                        className={`px-6 py-3 font-bold rounded-lg transition-colors ${currentStep === 3
+                    <div className="flex gap-4">
+                        {currentStep > 1 && (
+                            <button
+                                type="button"
+                                onClick={prevStep}
+                                className="px-6 py-3 bg-gray-200 text-gray-700 font-bold rounded-lg hover:bg-gray-300 transition-colors w-1/3"
+                            >
+                                Back
+                            </button>
+                        )}
+
+                        <button
+                            type={currentStep === 3 ? "submit" : "button"}
+                            onClick={(e) => {
+                                if (currentStep < 3) {
+                                    e.preventDefault();
+
+                                    // Step 1 Validation
+                                    if (currentStep === 1) {
+                                        if (!formData.firstName || !formData.surname || !formData.email || !formData.phone || !formData.gender || !formData.state) {
+                                            setError("Please fill in all required fields.");
+                                            return;
+                                        }
+                                    }
+
+                                    // Step 2 Validation
+                                    if (currentStep === 2) {
+                                        if (formData.isEnrolled === null || formData.understandsPurpose === null || formData.agreesToProcess === null) {
+                                            setError("Please answer all questions.");
+                                            return;
+                                        }
+                                    }
+
+                                    setError('');
+                                    nextStep();
+                                }
+                            }}
+                            className={`px-6 py-3 font-bold rounded-lg transition-colors ${currentStep === 3
                                 ? 'w-2/3 bg-[#1a237e] text-white hover:bg-blue-900'
                                 : `bg-[#FFD700] text-[#1a237e] hover:bg-[#FFC000] ${currentStep === 1 ? 'w-full' : 'w-2/3'}`
-                            }`}
-                    >
-                        {currentStep === 3 ? "SUBMIT APPLICATION" : "Continue"}
-                    </button>
+                                }`}
+                        >
+                            {currentStep === 3 ? "SUBMIT APPLICATION" : "Continue"}
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>

@@ -20,7 +20,8 @@ const Section01 = () => {
                         2026 Undergraduate Scholarship Applications Are Now Open
                     </h2>
 
-                    <button className="bg-white text-[#2e3b86] text-lg sm:text-2xl md:text-3xl lg:text-4xl px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-full font-semibold uppercase hover:bg-gray-200 transition-colors flex items-center gap-2 md:gap-3 mx-auto">
+                    <button className="bg-white text-[#2e3b86] hover:cursor-pointer text-lg sm:text-2xl md:text-3xl lg:text-4xl px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-full font-semibold uppercase hover:bg-gray-200 transition-colors flex items-center gap-2 md:gap-3 mx-auto"
+                    onClick={() => window.location.href = '/scholarship'}>
                         Apply Now <ArrowBigRight className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10" />
                     </button>
 
