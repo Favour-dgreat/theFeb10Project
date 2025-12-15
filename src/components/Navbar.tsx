@@ -7,13 +7,43 @@ import Image from 'next/image';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [activeSubDropdown, setActiveSubDropdown] = useState<string | null>(null);
 
-  const navLinks = [
+  interface NavItem {
+    name: string;
+    href: string;
+    subItems?: NavItem[];
+  }
+
+  const navLinks: NavItem[] = [
     { name: 'HOME', href: '/' },
-    { name: 'ABOUT', href: '/about' },
-    { name: 'SCHOLARSHIPS', href: '/scholarships' },
-    { name: 'INITIATIVES', href: '/initiatives' },
-    { name: 'MEDIA', href: '/media' },
+    {
+      name: 'ABOUT',
+      href: '/about',
+      subItems: [
+        { name: 'About Us', href: '/about' },
+        { name: 'The Vision', href: '/about#vision' },
+        { name: 'The Mission', href: '/about#mission' },
+      ]
+    },
+    { name: 'SCHOLARSHIPS', href: '/scholarship' },
+    {
+      name: 'INITIATIVES',
+      href: '/initiatives',
+      subItems: [
+        { name: 'Growth Community', href: '/initiatives/growth-community' }
+      ]
+    },
+    {
+      name: 'MEDIA',
+      href: '/media',
+      subItems: [
+        { name: 'Testimonials', href: '/media/testimonials' },
+        { name: 'Videos', href: '/media/videos' },
+        { name: 'Social Links', href: '/media/social-links' }
+      ]
+    },
   ];
 
   return (
@@ -24,7 +54,6 @@ const Navbar = () => {
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center gap-2">
               <Image src="/images/logo.png" alt="Logo" width={250} height={250} />
-              {/* <span className="font-bold text-xl tracking-wide">TheFeb10Project</span> */}
             </Link>
           </div>
 
@@ -32,13 +61,62 @@ const Navbar = () => {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
               {navLinks.map((link) => (
-                <Link
+                <div
                   key={link.name}
-                  href={link.href}
-                  className="hover:text-gray-300 px-3 py-2 rounded-md text-sm font-bold tracking-wide transition-colors"
+                  className="relative group"
+                  onMouseEnter={() => {
+                    if (link.subItems) setActiveDropdown(link.name);
+                  }}
+                  onMouseLeave={() => {
+                    setActiveDropdown(null);
+                    setActiveSubDropdown(null);
+                  }}
                 >
-                  {link.name}
-                </Link>
+                  <Link
+                    href={link.href}
+                    className="hover:text-gray-300 px-3 py-2 rounded-md text-sm font-bold tracking-wide transition-colors flex items-center gap-1"
+                  >
+                    {link.name}
+                    {link.subItems && (
+                      <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                    )}
+                  </Link>
+
+                  {/* Level 1 Dropdown */}
+                  {link.subItems && (
+                    <div className="absolute left-0 mt-0 w-64 bg-white rounded-md shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 text-gray-800 border-t-4 border-[#f06436]">
+                      {link.subItems.map((item, idx) => (
+                        <div
+                          key={idx}
+                          className="relative group/sub"
+                          onMouseEnter={() => item.subItems && setActiveSubDropdown(item.name)}
+                          onMouseLeave={() => setActiveSubDropdown(null)}
+                        >
+                          <Link
+                            href={item.href}
+                            className="flex items-center justify-between w-full px-4 py-2 text-sm font-semibold text-gray-700 hover:text-[#f06436] hover:bg-gray-50 transition-colors"
+                          >
+                            {item.name}
+                            {item.subItems && (
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                            )}
+                          </Link>
+
+                          {/* Level 2 Dropdown (Flyout) */}
+                          {item.subItems && (
+                            <div className="absolute left-full top-0 mt-0 w-56 bg-white rounded-md shadow-lg py-2 opacity-0 invisible group/sub-hover:opacity-100 group/sub-hover:visible transition-all duration-200 z-50 text-gray-800 border-l-4 border-[#2e3b86]">
+                              {item.subItems.map((sub, sIdx) => (
+                                <Link key={sIdx} href={sub.href} className="block px-4 py-2 text-sm text-gray-700 hover:text-[#f06436] hover:bg-gray-50 transition-colors">
+                                  {sub.name}
+                                </Link>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               ))}
               <Link
                 href="/volunteer"
@@ -63,17 +141,48 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-[#2e3b86]">
+        <div className="md:hidden bg-[#2e3b86] border-t border-blue-800">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-800"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.name}
-              </Link>
+              <div key={link.name}>
+                {link.subItems ? (
+                  <div className="space-y-1">
+                    <span className="block px-3 py-2 text-base font-bold text-gray-300 uppercase">{link.name}</span>
+                    <div className="pl-4 border-l-2 border-blue-700 ml-3 space-y-1">
+                      {link.subItems.map((item, idx) => (
+                        <div key={idx}>
+                          {item.subItems ? (
+                            <div className="mt-1">
+                              <Link href={item.href} onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-md text-sm font-bold text-[#f06436] hover:bg-blue-800">
+                                {item.name}
+                              </Link>
+                              <div className="pl-4 border-l border-blue-600 ml-2 mt-1 space-y-1">
+                                {item.subItems.map((sub, sIdx) => (
+                                  <Link key={sIdx} href={sub.href} onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-800 text-gray-300">
+                                    {sub.name}
+                                  </Link>
+                                ))}
+                              </div>
+                            </div>
+                          ) : (
+                            <Link href={item.href} onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-800 text-white">
+                              {item.name}
+                            </Link>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <Link
+                    href={link.href}
+                    className="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-800"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {link.name}
+                  </Link>
+                )}
+              </div>
             ))}
             <Link
               href="/volunteer"

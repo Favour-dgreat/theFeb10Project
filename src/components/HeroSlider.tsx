@@ -8,27 +8,27 @@ const slides = [
     {
         id: 1,
         image: '/images/ScrollBanner1_jpg.jpg',
-        text: "| We Don't Just Give - We Equip.",
+        text: "We Don't Just Give - We Equip.",
     },
     {
         id: 2,
         image: '/images/ScrollBanner2_jpg.jpg',
-        text: '| Inspiring Hope. Unlocking Potential. Transforming Students.',
+        text: 'Inspiring Hope. Unlocking Potential. Transforming Students.',
     },
     {
         id: 3,
         image: '/images/ScrollBanner3_jpg.jpg',
-        text: '| 2023: Over 3000 Students Empowered through our Career Talk Initiative in Ondo State',
+        text: '2023: Over 3000 Students Empowered through our Career Talk Initiative in Ondo State.',
     },
     {
         id: 4,
         image: '/images/ScrollBanner4_jpg.jpg',
-        text: '| Shaping Young Minds Through Our School Outreach Initiative',
+        text: 'Shaping Young Minds Through Our School Outreach Initiative.',
     },
     {
         id: 5,
         image: '/images/ScrollBanner5_jpg.jpg',
-        text: "|2017: Our First Step of Love - Reaching Motherless Babies' Homes and Orphanages in Oyo State",
+        text: "2017: Our First Step of Love - Reaching Motherless Babies' Homes and Orphanages in Oyo State.",
     },
 ];
 
@@ -76,7 +76,6 @@ const HeroSlider = () => {
             <div className="absolute inset-0 flex items-center justify-center px-4 text-center z-10">
                 <h1 className="text-white text-3xl md:text-5xl lg:text-6xl font-bold max-w-5xl leading-tight drop-shadow-lg">
                     {slides[currentIndex].text}
-                    <span className={`inline-block w-1 h-[1em] bg-white ml-1 align-middle ${isTyping ? 'animate-blink' : 'animate-blink-slow'}`} />
                 </h1>
             </div>
 
