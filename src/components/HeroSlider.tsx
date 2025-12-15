@@ -34,22 +34,15 @@ const slides = [
 
 const HeroSlider = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [displayedText, setDisplayedText] = useState('');
-    const [isTyping, setIsTyping] = useState(true);
 
     // Handle slide transition
     useEffect(() => {
         const timer = setInterval(() => {
             setCurrentIndex((prev) => (prev + 1) % slides.length);
-            setDisplayedText(''); // Reset text when changing slides
-            setIsTyping(true);
         }, 5000);
 
         return () => clearInterval(timer);
     }, []);
-
-    
-   
 
     return (
         <div className="relative w-full h-[600px] overflow-hidden bg-black">
@@ -70,14 +63,14 @@ const HeroSlider = () => {
                         priority
                     />
                     <div className="absolute inset-0 bg-black/30" /> {/* Overlay for better text readability */}
+
+                    <div className="absolute inset-0 flex items-center justify-center px-4 text-center z-10">
+                        <h1 className="text-white text-3xl md:text-5xl lg:text-6xl font-bold max-w-5xl leading-tight drop-shadow-lg">
+                            {slides[currentIndex].text}
+                        </h1>
+                    </div>
                 </motion.div>
             </AnimatePresence>
-
-            <div className="absolute inset-0 flex items-center justify-center px-4 text-center z-10">
-                <h1 className="text-white text-3xl md:text-5xl lg:text-6xl font-bold max-w-5xl leading-tight drop-shadow-lg">
-                    {slides[currentIndex].text}
-                </h1>
-            </div>
 
             {/* Dots Indicator */}
             <div className="absolute bottom-8 left-0 right-0 flex justify-center gap-3 z-20">
@@ -86,8 +79,6 @@ const HeroSlider = () => {
                         key={index}
                         onClick={() => {
                             setCurrentIndex(index);
-                            setDisplayedText('');
-                            setIsTyping(true);
                         }}
                         className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentIndex ? 'bg-white scale-125' : 'bg-white/50 hover:bg-white/80'
                             }`}
@@ -126,5 +117,6 @@ const HeroSlider = () => {
         </div>
     );
 };
+
 
 export default HeroSlider;

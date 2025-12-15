@@ -8,6 +8,7 @@ const Section05 = () => {
         <section className="relative py-12 sm:py-16 md:py-20 px-4 bg-white bg-[url('/images/H5_jpg.jpg')] bg-cover bg-center bg-no-repeat">
             {/* Full-width Orange Overlay for the bottom section */}
             <div className="absolute inset-x-0 bottom-0 h-1/2"></div>
+            <div className="absolute inset-0 bg-black/20" /> {/* Overlay for better text readability */}
 
             <div className="max-w-7xl mx-auto relative z-10"> {/* z-10 ensures content sits on top of the overlay */}
 
