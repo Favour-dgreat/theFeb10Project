@@ -2,13 +2,14 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown, ChevronUp } from 'lucide-react';
 import Image from 'next/image';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [activeSubDropdown, setActiveSubDropdown] = useState<string | null>(null);
+  const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
 
   interface NavItem {
     name: string;
@@ -147,31 +148,52 @@ const Navbar = () => {
               <div key={link.name}>
                 {link.subItems ? (
                   <div className="space-y-1">
-                    <span className="block px-3 py-2 text-base font-bold text-gray-300 uppercase">{link.name}</span>
-                    <div className="pl-4 border-l-2 border-blue-700 ml-3 space-y-1">
-                      {link.subItems.map((item, idx) => (
-                        <div key={idx}>
-                          {item.subItems ? (
-                            <div className="mt-1">
-                              <Link href={item.href} onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-md text-sm font-bold text-[#f06436] hover:bg-blue-800">
+                    <button
+                      onClick={() => setMobileExpanded(mobileExpanded === link.name ? null : link.name)}
+                      className="w-full flex items-center justify-between px-3 py-2 text-base font-bold text-gray-300 uppercase hover:bg-blue-800 rounded-md transition-colors"
+                    >
+                      <span>{link.name}</span>
+                      {mobileExpanded === link.name ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                    </button>
+                    {mobileExpanded === link.name && (
+                      <div className="pl-4 border-l-2 border-blue-700 ml-3 space-y-1 animate-in slide-in-from-top-2 duration-200">
+                        {link.subItems.map((item, idx) => (
+                          <div key={idx}>
+                            {item.subItems ? (
+                              <div className="mt-1">
+                                <Link
+                                  href={item.href}
+                                  onClick={() => setIsOpen(false)}
+                                  className="block px-3 py-2 rounded-md text-sm font-bold text-[#f06436] hover:bg-blue-800"
+                                >
+                                  {item.name}
+                                </Link>
+                                <div className="pl-4 border-l border-blue-600 ml-2 mt-1 space-y-1">
+                                  {item.subItems.map((sub, sIdx) => (
+                                    <Link
+                                      key={sIdx}
+                                      href={sub.href}
+                                      onClick={() => setIsOpen(false)}
+                                      className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-800 text-gray-300"
+                                    >
+                                      {sub.name}
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
+                            ) : (
+                              <Link
+                                href={item.href}
+                                onClick={() => setIsOpen(false)}
+                                className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-800 text-white"
+                              >
                                 {item.name}
                               </Link>
-                              <div className="pl-4 border-l border-blue-600 ml-2 mt-1 space-y-1">
-                                {item.subItems.map((sub, sIdx) => (
-                                  <Link key={sIdx} href={sub.href} onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-800 text-gray-300">
-                                    {sub.name}
-                                  </Link>
-                                ))}
-                              </div>
-                            </div>
-                          ) : (
-                            <Link href={item.href} onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-800 text-white">
-                              {item.name}
-                            </Link>
-                          )}
-                        </div>
-                      ))}
-                    </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <Link

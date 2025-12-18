@@ -5,9 +5,11 @@ import Image from 'next/image';
 
 const Section03 = () => {
     return (
-        <section className="py-12 sm:py-20 md:py-40 px-4 sm:px-6 md:px-10 bg-white bg-[url('/images/H3_jpg.jpg')] bg-cover bg-center bg-no-repeat">
+        <section className="py-12 sm:py-20 md:py-40 px-4 sm:px-6 md:px-10 bg-[url('/images/New1.jpg')] lg:bg-[url('/images/H3_jpg.jpg')] bg-cover bg-center bg-no-repeat">
             <div className="max-w-7xl mx-auto">
+
                 <div className="grid md:grid-cols-2 items-center">
+                    
                     {/* Left Side - Content from the Image */}
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
@@ -23,6 +25,7 @@ const Section03 = () => {
                                 Empowering the<br />  Next Generation - <br />  <span className="text-orange-500">One Project</span> at a time
                             </h1>
                         </div>
+                        <Image className='lg:hidden' src="/images/students.jpg" alt="Flags of various countries on a white desk" width={400} height={300} />
 
 
                     </motion.div>

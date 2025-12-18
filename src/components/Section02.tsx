@@ -5,9 +5,11 @@ import Image from 'next/image';
 
 const Section02 = () => {
     return (
-        <section className="py-12 md:py-20 px-4 bg-white bg-[url('/images/H2_jpg.jpg')] bg-cover bg-center bg-no-repeat">
+        <section className="py-12 md:py-20 px-4 bg-[url('/images/New4.jpg')] lg:bg-[url('/images/H2_jpg.jpg')] bg-cover bg-center bg-no-repeat min-h-[500px] md:min-h-[600px] flex items-center">
             <div className="max-w-7xl mx-auto">
                 <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                    <Image className='lg:hidden' src="/images/Flagsonly.jpg" alt="Flags of various countries on a white desk" width={400} height={300} />
+
                     {/* Left Side - Content from the Image */}
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
@@ -29,12 +31,11 @@ const Section02 = () => {
                             What began as a simple act of service has grown into a purposeful African impact movement. The FEB 10 Project was founded out of a deep burden and a commitment to transform lives through compassion, empowerment, and opportunity. From supporting orphanages to investing in promising students, we exist to help individuals rise and reach their full potential.  
                         </p>
 
-                        <a href="#" className="font-bold text-[#2e3b86] hover:text-orange-500 transition duration-300 inline-block">
+                        <a href="/about" className="font-bold text-[#2e3b86] hover:text-orange-500 transition duration-300 inline-block">
                             &gt;&gt;&gt; Read More
                         </a>
                     </motion.div>
 
-                    {/* Right Side - Image/Flags based on the image, wrapped in a div to take up the other column */}
                     <motion.div
                         initial={{ opacity: 0, x: 50 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -44,10 +45,9 @@ const Section02 = () => {
                     >
                         {/* Placeholder for the image of the flags/desk */}
                         {/* In a real scenario, you would use an <img> tag here. */}
-                        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/your-flags-desk-image.jpg')" }} aria-label="Small flags of various countries on a white desk" />
+                        {/* <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/Flagsonly.jpg')" }} aria-label="Small flags of various countries on a white desk" /> */}
 
                         {/* Overlay gradient - kept from your original request */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
                     </motion.div>
                 </div>
             </div>

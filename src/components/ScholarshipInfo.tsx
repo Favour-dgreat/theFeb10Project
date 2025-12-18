@@ -142,7 +142,7 @@ const ScholarshipInfo = () => {
                 <h1 className="text-3xl md:text-4xl font-extrabold text-[#1a237e] mb-4 leading-tight">
                     THE FEB10 PROJECT 2026 SCHOLARSHIP
                 </h1>
-                <h3 className="text-xl md:text-2xl text-gray-600 font-serif italic mb-8 border-l-4 border-[#FFD700] pl-4">
+                <h3 className="text-xl md:text-2xl text-gray-600 font-serif italic mb-8 border-l-4 border-orange-500 pl-4">
                     A Bridge from Struggle to Possibility
                 </h3>
 
