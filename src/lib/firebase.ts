@@ -3,12 +3,13 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyApCM0Fsa7SFe2rhW-We7N2N5cjVN22WIU",
-  authDomain: "xprintlogistics.firebaseapp.com",
-  projectId: "xprintlogistics",
-  storageBucket: "xprintlogistics.firebasestorage.app",
-  messagingSenderId: "184105229978",
-  appId: "1:184105229978:web:3f253bae8db378a9eb4923"
+  apiKey: "AIzaSyA_cJA4pV5wnOTbByj6tooCnl7CazaQhAQ",
+  authDomain: "team-project-b50a9.firebaseapp.com",
+  projectId: "team-project-b50a9",
+  storageBucket: "team-project-b50a9.firebasestorage.app",
+  messagingSenderId: "260770492334",
+  appId: "1:260770492334:web:4c9ffb2f7310a6141a223f",
+  measurementId: "G-5DN4SVMB4P"
 };
 
 // Initialize Firebase (Singleton pattern)
