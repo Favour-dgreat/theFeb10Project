@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { MailtrapClient } from 'mailtrap';
+import { db } from '@/lib/firebase';
+import { collection, addDoc } from 'firebase/firestore';
 
 // Initialize Mailtrap client
 const TOKEN = process.env.MailtrapAPIkey || "";
@@ -19,6 +21,17 @@ export async function POST(req: NextRequest) {
         // Generate unique Application ID
         const applicationId = `FEB-${Date.now().toString().slice(-6)}-${Math.random().toString(36).substring(2, 5).toUpperCase()}`;
 
+        // Save to Firebase
+        await addDoc(collection(db, "applications"), {
+            applicationId,
+            firstName,
+            surname,
+            email,
+            currentStage: 0,
+            status: "ENROLLED",
+            createdAt: new Date().toISOString()
+        });
+
         // Send Email via Mailtrap
         const sender = {
             email: SENDER_EMAIL,
@@ -29,6 +42,15 @@ export async function POST(req: NextRequest) {
                 email: email,
             }
         ];
+
+        // Create the Stage 1 Link with query parameters to carry over user context
+        const stage1Url = new URL("https://www.thefeb10project.org/application/stage1");
+        stage1Url.searchParams.append("applicationId", applicationId);
+        stage1Url.searchParams.append("email", email);
+        stage1Url.searchParams.append("firstName", firstName);
+        stage1Url.searchParams.append("surname", surname);
+
+        const stage1Link = stage1Url.toString();
 
         const htmlContent = `
 <!DOCTYPE html>
@@ -77,7 +99,7 @@ export async function POST(req: NextRequest) {
             <h2>Next Step: Orientation</h2>
             <div class="cta-box">
                 <p style="margin-top: 0;">To proceed, you must now watch <strong>Orientation Video 1</strong>. This is a compulsory part of your application process.</p>
-                <a href="https://www.thefeb10project.org/application/stage1" class="button">WATCH VIDEO & CONTINUE</a>
+                <a href="${stage1Link}" class="button">WATCH VIDEO & CONTINUE</a>
             </div>
 
             <h3>What's Next?</h3>
@@ -104,15 +126,33 @@ export async function POST(req: NextRequest) {
 </html>
         `;
 
+        // Send confirmation to Applicant
         await client.send({
             from: sender,
             to: recipients,
             subject: "Your FEB10 Project Scholarship Application – Next Step Required",
-            text: `Dear ${firstName} ${surname},
-Your application has been received. Your ID is ${applicationId}.
-Next Step: Watch Orientation Video 1 here: https://www.thefeb10project.org/application/stage1`,
+            text: `Dear ${firstName} ${surname},\n\nYour application has been received. Your ID is ${applicationId}.\n\nNext Step: Watch Orientation Video 1 here: ${stage1Link}`,
             html: htmlContent,
             category: "Scholarship Enrollment",
+        });
+
+        // Send Notification to Admins
+        const adminHtml = `
+            <h2>New Scholarship Enrollment</h2>
+            <p><strong>Name:</strong> ${firstName} ${surname}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Application ID:</strong> ${applicationId}</p>
+            <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
+        `;
+
+        await client.send({
+            from: { email: SENDER_EMAIL, name: "Scholarship System" },
+            to: [{ email: "applications@thefeb10project.org" }],
+            cc: [{ email: "adeshinafavour4@gmail.com" }],
+            subject: `New Enrollment: ${firstName} ${surname}`,
+            text: `New Enrollment\nName: ${firstName} ${surname}\nEmail: ${email}\nID: ${applicationId}`,
+            html: adminHtml,
+            category: "New Enrollment Notification",
         });
 
         return NextResponse.json({
