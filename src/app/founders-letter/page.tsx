@@ -55,17 +55,13 @@ export default function FoundersLetter() {
                                     className="object-cover"
                                 />
                             </div>
-                            <div className="bg-[#2e3b86] text-white p-4 text-center">
-                                <p className="font-bold text-sm uppercase tracking-widest">Sunny Willz</p>
-                                <p className="text-xs opacity-80">Founder, The FEB10 Project</p>
-                            </div>
                         </div>
 
                         <p>
                             Still, I refused to give up. By God’s grace, through discipline, sacrifice, and resilience, I graduated with a first-class degree. But behind that result was a story of struggle — a story many brilliant students across Africa are still living today.
                         </p>
 
-                        <p className="font-semibold text-[#f06436] text-xl">
+                        <p>
                             That truth stayed with me.
                         </p>
 
@@ -85,8 +81,6 @@ export default function FoundersLetter() {
                             Today, through the FEB10 Project and its initiatives, we have reached close to 7,000 young people across Africa. Not because we had everything figured out, but because we believed that impact does not require perfection — it requires commitment.
                         </p>
 
-                        <h3 className="text-2xl font-bold text-[#2e3b86] pt-2">Standing in the Gap</h3>
-
                         <p>
                             The FEB10 Project 2026 Undergraduate Scholarship is a continuation of that belief. It exists to stand in the gap for undergraduates who are brilliant, disciplined, and driven, but burdened by financial uncertainty. It is for students who are fighting quietly, carrying dreams bigger than their circumstances. It is a reminder that lack should never be the end of the story.
                         </p>
@@ -95,11 +89,9 @@ export default function FoundersLetter() {
                             At its core, this project is about more than scholarships. It is about belief. About resilience. About finishing the race even when the odds are against you. It is about proving that one act of kindness, one decision to give back, one heart willing to act — can ripple outward in ways we may never fully see.
                         </p>
 
-                        <div className="bg-[#f8f9ff] p-8 rounded-2xl border-l-4 border-[#f06436] my-12 not-prose">
-                            <p className="text-xl md:text-2xl font-medium text-[#2e3b86] italic leading-relaxed">
-                                "If there is one truth I hope this letter leaves with you, it is this: your story is not over. Where you start does not determine where you finish. And no matter how small your contribution may seem, it matters."
-                            </p>
-                        </div>
+                        <p>
+                            If there is one truth I hope this letter leaves with you, it is this: your story is not over. Where you start does not determine where you finish. And no matter how small your contribution may seem, it matters.
+                        </p>
 
                         <p>
                             If each of us chooses to do a little — to lift one person, support one dream, and give back in our own way — the world becomes brighter, fairer, and full of hope.
@@ -117,6 +109,15 @@ export default function FoundersLetter() {
                     </div>
 
                     <div className="mt-16 pt-8 border-t border-gray-100 flex items-center justify-between">
+                        <div className="text-left">
+                            <Image
+                                src="/images/signature.png"
+                                alt="Sunny Willz Signature"
+                                width={180}
+                                height={180}
+                                className="rounded-full"
+                            />
+                        </div>
                         <div>
                             <Image
                                 src="/images/logo.png"
@@ -125,10 +126,6 @@ export default function FoundersLetter() {
                                 height={40}
                                 className="opacity-80"
                             />
-                        </div>
-                        <div className="text-right">
-                            <p className="font-dancing text-3xl text-[#f06436] font-bold">Sunny Willz</p>
-                            <p className="text-sm font-bold text-gray-400 uppercase tracking-widest mt-1">Founder</p>
                         </div>
                     </div>
 

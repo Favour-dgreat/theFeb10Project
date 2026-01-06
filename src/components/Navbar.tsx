@@ -165,7 +165,7 @@ const Navbar = () => {
                                 <Link
                                   href={item.href}
                                   onClick={() => setIsOpen(false)}
-                                  className="block px-3 py-2 rounded-md text-sm font-bold text-[#f06436] hover:bg-blue-800"
+                                  className="block px-3 py-2 rounded-md text-sm font-bold text-white hover:bg-blue-800"
                                 >
                                   {item.name}
                                 </Link>

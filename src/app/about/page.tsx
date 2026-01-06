@@ -148,10 +148,10 @@ export default function About() {
             </section>
 
             {/* Summary Statement */}
-            <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#2e3b86] text-white text-center">
+            <section className="py-12 px-4 sm:px-6 lg:px-8 bg-[#2e3b86] text-white text-center">
                 <div className="max-w-4xl mx-auto">
-                    <h2 className="text-3xl font-bold mb-8">SUMMARY STATEMENT</h2>
-                    <div className="text-xl md:text-2xl font-light italic leading-relaxed space-y-4">
+                    <h2 className="text-3xl font-bold mb-4">SUMMARY STATEMENT</h2>
+                    <div className="text-sm md:text-xl font-light italic leading-tight space-y-2">
                         <p>The FEB10 Project is more than a charity.</p>
                         <p>More than a scholarship.</p>
                         <p>More than an initiative.</p>
@@ -168,8 +168,8 @@ export default function About() {
                     FOUNDER’S STORY
                 </h2>
                 <div className="bg-[#f8f9ff] p-12 rounded-3xl border border-blue-100 shadow-xl">
-                    <p className="text-2xl text-gray-700 italic mb-8">
-                        “THE HEART BEHIND THE FEB10 PROJECT”
+                    <p className="text-xl text-gray-700  mb-8">
+                        THE HEART BEHIND THE FEB10 PROJECT
                     </p>
                     <a
                         href="/founders-letter"
