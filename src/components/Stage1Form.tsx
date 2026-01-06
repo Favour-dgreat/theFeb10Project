@@ -17,6 +17,7 @@ function Stage1FormContent() {
     const [formData, setFormData] = useState({
         matricNumber: '',
         department: '',
+        school:'',
         level: '',
         cgpa: '',
         essay: ''
@@ -149,6 +150,17 @@ function Stage1FormContent() {
                             onChange={handleInputChange}
                             className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#f06436] focus:border-transparent outline-none"
                             placeholder="e.g. AAA/00/0000"
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-sm font-bold text-gray-700 mb-2">School/Faculty</label>
+                        <input
+                            type="text"
+                            name="school"
+                            value={formData.school}
+                            onChange={handleInputChange}
+                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#f06436] focus:border-transparent outline-none"
+                            placeholder="Your Department"
                         />
                     </div>
                     <div>

@@ -83,7 +83,6 @@ const ScholarshipForm = () => {
             if (response.ok) {
                 setApplicationId(result.applicationId);
                 setIsSubmitted(true);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
                 setError(result.error || "Submission failed. Please try again.");
             }
