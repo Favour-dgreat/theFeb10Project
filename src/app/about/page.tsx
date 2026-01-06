@@ -16,7 +16,7 @@ export default function About() {
                 />
                 <div className="absolute inset-0 bg-black/50" />
                 <div className="relative z-10 text-center px-4">
-                    <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-4 tracking-tight">
+                    <h1 className="text-white text-3xl md:text-5xl lg:text-6xl font-bold max-w-5xl leading-tight drop-shadow-lg">
                         Igniting Purpose in the Next Generation
                     </h1>
                 </div>
@@ -86,7 +86,7 @@ export default function About() {
             </section>
 
             {/* Vision & Mission */}
-            <section className="py-2 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+            <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
                 {/* Vision */}
                 <div id="vision" className="bg-gray-50 p-8 rounded-2xl border-l-4 border-[#f06436] shadow-md hover:shadow-xl transition-shadow duration-300 scroll-mt-24">
                     <h3 className="text-2xl font-bold text-[#2e3b86] mb-4">OUR VISION</h3>

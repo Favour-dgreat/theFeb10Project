@@ -26,7 +26,7 @@ export default function FoundersLetter() {
             </section>
 
             {/* Content Section */}
-            <section className="py-20 px-4 sm:px-6 lg:px-8">
+            <section className="py-20 px-6 sm:px-6 lg:px-8">
                 <div className="max-w-4xl mx-auto">
 
                     <div className="prose prose-lg md:prose-xl text-gray-700 leading-relaxed space-y-8">
