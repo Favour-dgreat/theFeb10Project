@@ -20,8 +20,8 @@ const ScholarshipInfo = () => {
                     <p className="font-semibold">Applicants must:</p>
                     <ul className="list-disc pl-5 space-y-2">
                         <li>Be currently enrolled in The Federal University of Technology, Akure.</li>
-                        <li>Be an undergraduate student with strong academic performance.</li>
-                        <li>Demonstrate a clear trajectory toward graduating with a first-class or high-distinction result.</li>
+                        <li>Be an undergraduate student with a strong commitment to academic excellence.</li>
+                        <li>Exhibit discipline, and perseverance in their academic journey.</li>
                         <li>Face genuine financial challenges that may affect academic stability.</li>
                         <li>Be willing to participate fully in all stages of the scholarship process, including video-based orientation and documentation verification.</li>
                     </ul>
@@ -37,30 +37,26 @@ const ScholarshipInfo = () => {
                         The FEB10 Project Scholarship uses a transparent, multi-stage process designed to evaluate academic excellence, authenticity, and financial need.
                     </p>
                     <div className="pl-4 border-l-4 border-blue-900/20">
-                        <h4 className="font-bold text-blue-900">Stage 1 – Initial Application & Orientation Video</h4>
+                        <h4 className="font-bold text-blue-900">Stage 1 – Application & Orientation Video</h4>
                         <ul className="list-disc pl-5 mt-2 space-y-1">
-                            <li>Applicant signs up with the online form.</li>
-                            <li>An automatic email is sent with a link to the website.</li>
+                            <li>Applicants submit an online application.</li>
+                            <li>Applicants complete a brief orientation designed to guide them through the scholarship process.</li>
                             <li>Applicants must complete orientation video 1.</li>
-                            <li>After watching, they proceed to complete and submit the first-stage form.</li>
-                            <li>A confirmation message appears informing them that their application is under review.</li>
+                            <li>Applications are reviewed upon submission.</li>
                         </ul>
                     </div>
                     <div className="pl-4 border-l-4 border-blue-900/20">
-                        <h4 className="font-bold text-blue-900">Stage 2 – Shortlisting, Verification & Video 2</h4>
+                        <h4 className="font-bold text-blue-900">Stage 2 – Review & Verification </h4>
                         <ul className="list-disc pl-5 mt-2 space-y-1">
-                            <li>Shortlisted applicants receive an email confirming they made it to the next stage.</li>
-                            <li>The email instructs them to prepare and upload required documents.</li>
-                            <li>They return to the website, where they must complete orientation video 2.</li>
-                            <li>After the video, they complete the second-stage form and upload all verification documents.</li>
+                            <li>Selected applicants are contacted to proceed to the next stage, which includes additional screening and document verification to confirm eligibility.</li>
+                            
                         </ul>
                     </div>
                     <div className="pl-4 border-l-4 border-blue-900/20">
-                        <h4 className="font-bold text-blue-900">Stage 3 – Final Selection & Live Announcement</h4>
+                        <h4 className="font-bold text-blue-900">Stage 3 – Final Selection & Announcement</h4>
                         <ul className="list-disc pl-5 mt-2 space-y-1">
-                            <li>Successful applicants receive a final notification email.</li>
-                            <li>Email includes details for the live announcement of scholarship winners.</li>
-                            <li>Winners are unveiled during the FEB 10 Live Stream Event.</li>
+                            <li>Final recipients are selected after thorough review and officially announced during the FEB10 Live Stream Event.</li>
+                          
                         </ul>
                     </div>
                 </div>
@@ -126,10 +122,13 @@ const ScholarshipInfo = () => {
             content: (
                 <div className="space-y-4 text-gray-700">
                     <p>
-                        The application deadline for the FEB10 Project 2026 Scholarship will be announced on the official website and all social platforms.
+                        The application deadline for the FEB10 Project 2026 Scholarship is <b>31st January 2026.</b> 
                     </p>
                     <p>
-                        Shortlisted candidates and finalists will receive all timing details directly via email throughout the selection process.
+                        All updates and official announcements will be published on our website and social media platforms. 
+                    </p>
+                    <p>
+                        Shortlisted candidates and finalists will receive detailed timelines and next steps directly via email throughout the selection process.
                     </p>
                 </div>
             )
@@ -151,7 +150,7 @@ const ScholarshipInfo = () => {
                         The FEB10 Project Scholarship was born from a place of empathy. It originated from lived experiences, personal battles, and the quiet understanding that brilliance should never be buried under financial hardship. Our founder, <span className="font-semibold text-[#1a237e]">Sunny Willz</span>, walked the same road many young Nigerians walk today: a journey defined by resilience, survival, and a relentless commitment to rise above limitation.
                     </p>
                     <p className="mb-4">
-                        Growing up, he watched his father, a man who never had the privilege of school, yet worked with dignity and strength, sacrifice everything to ensure he had a chance at education. Entering university was a miracle. Staying in university was the battle. School fees, rent, feeding, books, and basic needs were never guaranteed. Balancing survival with academic excellence felt impossible, yet through God’s help, sacrifice, and unwavering determination, he graduated with a first-class degree.
+                        Growing up, he watched his father - a man who never had the privilege of school, yet worked with dignity and strength, sacrifice everything to ensure his son had a chance at education. Entering university was a miracle. Staying in university was the battle. School fees, rent, feeding, books, and basic needs were never guaranteed. Balancing survival with academic excellence felt impossible, yet through relentless sacrifice, resilience, and unwavering determination, he graduated with a first-class degree.
                     </p>
                     <p className="font-medium text-gray-900 italic">
                         Behind that first class was a story of struggle. A story many brilliant students are still living. The FEB10 Project Scholarship exists to rewrite that story.
@@ -161,21 +160,21 @@ const ScholarshipInfo = () => {
                 <div className="bg-blue-50/50 p-6 rounded-lg border border-blue-100 mb-8">
                     <h4 className="text-lg font-bold text-[#1a237e] mb-3">About the Scholarship</h4>
                     <p className="text-gray-700 mb-4">
-                        The FEB10 Project 2026 Scholarship is a transformative support initiative designed for exceptional undergraduate students in The Federal University of Technology, Akure, Ondo State, who demonstrate outstanding academic performance but lack the financial resources to sustain their education. It is also our founder’s way of giving back to his Alma Matter.
+                        The FEB10 Project 2026 Scholarship is designed to support undergraduate students at the Federal University of Technology, Akure, Ondo State, who demonstrate a commitment to academic excellence reflected in strong and consistent performance, yet face financial constraints that threaten their ability to continue their studies. This initiative is also the founder’s way of giving back to his alma mater
                     </p>
                     <p className="font-semibold text-gray-800 mb-2">We are committed to supporting students who are:</p>
                     <ul className="list-none space-y-2 mb-4">
                         <li className="flex items-center gap-2">
-                            <span className="text-[#FFD700]">★</span> Academically excellent and on a clear path toward a first-class degree
+                            <span className="text-[#FFD700]">★</span> Demonstrating a strong commitment to academic excellence through consistent effort and performance
                         </li>
                         <li className="flex items-center gap-2">
-                            <span className="text-[#FFD700]">★</span> Committed, disciplined, and driven
+                            <span className="text-[#FFD700]">★</span> Disciplined, focused, and driven to succeed
                         </li>
                         <li className="flex items-center gap-2">
-                            <span className="text-[#FFD700]">★</span> Facing genuine financial challenges
+                            <span className="text-[#FFD700]">★</span> Experiencing genuine financial challenges
                         </li>
                         <li className="flex items-center gap-2">
-                            <span className="text-[#FFD700]">★</span> Ready to grow, learn, and impact their communities
+                            <span className="text-[#FFD700]">★</span> Eager to grow, learn, and positively impact their communities
                         </li>
                     </ul>
                 </div>

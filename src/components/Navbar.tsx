@@ -24,6 +24,7 @@ const Navbar = () => {
       href: '/about',
       subItems: [
         { name: 'About Us', href: '/about' },
+        { name: 'Founder’s Letter', href: '/founders-letter' },
         { name: 'The Vision', href: '/about#vision' },
         { name: 'The Mission', href: '/about#mission' },
       ]
@@ -33,7 +34,7 @@ const Navbar = () => {
       name: 'INITIATIVES',
       href: '/initiatives',
       subItems: [
-        { name: 'Growth Community', href: '/initiatives/growth-community' }
+        { name: 'Growth Community', href: 'https://growthcommunity.thefeb10project.org' }
       ]
     },
     {

@@ -37,7 +37,7 @@ const Section05 = () => {
                             </div>
 
                             <p className="text-lg md:text-xl text-gray-100 font-medium leading-relaxed mb-8">
-                                To transform lives by bridging the gap between potential and opportunity through scholarships, grants, youth empowerment, mentorship, and development programs that provide resources, direction, and hope.
+                                To provide opportunities, resources, mentorship, and funding that enable individuals to grow holistically—personally, professionally, and socially—while equipping them with the skills and mindset needed to lead, innovate, and impact their communities positively.
                             </p>
 
                             <a href="#" className="inline-flex items-center gap-2 font-bold text-white hover:text-[#f06436] transition duration-300 text-sm group/btn">
@@ -77,7 +77,7 @@ const Section05 = () => {
                             </div>
 
                             <p className="text-lg md:text-xl text-gray-100 font-medium leading-relaxed mb-8">
-                                A world where no potential is wasted, where people across Africa and beyond are equipped, funded, and empowered to live a meaningful life, rise into their fullest capacity and impact their world.
+                                A world where no potential is left untapped—a world where individuals across Africa and beyond are equipped, empowered, and funded to realize their purpose, rise to their fullest capacity, and create lasting, transformative impact in their communities and the world.
                             </p>
 
                             <a href="#" className="inline-flex items-center gap-2 font-bold text-white hover:text-[#2e3b86] transition duration-300 text-sm group/btn">
