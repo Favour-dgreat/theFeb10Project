@@ -11,7 +11,7 @@ export default function About() {
                     src="/images/About_Image.jpg"
                     alt="About Banner"
                     fill
-                    className="object-cover md"
+                    className="object-cover object-[75%_5%] md:object-[50%_5%]"
                     priority
                 />
                 <div className="absolute inset-0 bg-black/50" />
@@ -32,14 +32,14 @@ export default function About() {
             </section>
 
             {/* Main Content Narrative */}
-            <section className="py-20 px-4 sm:px-6 lg:px-8">
+            <section className="py-4 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
                     <div className="relative h-[200px] md:h-[500px] w-full">
                         <Image
                             src="/images/About_Image2_jpg.jpg"
                             alt="Sunny Willz"
                             fill
-                            className="object-contain bg-gray-50"
+                            className="object-contain object-[15%_2%] md:object-[50%_2%] opacity-80 bg-gray-50"
                         />
                     </div>
                     <div className="p-8 md:p-12 space-y-6">
@@ -86,7 +86,7 @@ export default function About() {
             </section>
 
             {/* Vision & Mission */}
-            <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+            <section className="py-2 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
                 {/* Vision */}
                 <div id="vision" className="bg-gray-50 p-8 rounded-2xl border-l-4 border-[#f06436] shadow-md hover:shadow-xl transition-shadow duration-300 scroll-mt-24">
                     <h3 className="text-2xl font-bold text-[#2e3b86] mb-4">OUR VISION</h3>
@@ -172,7 +172,7 @@ export default function About() {
                         “THE HEART BEHIND THE FEB10 PROJECT”
                     </p>
                     <a
-                        href="https://sunnywillz.com"
+                        href="/founders-letter"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 bg-[#2e3b86] text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-[#f06436] transition-all duration-300 transform hover:scale-105"

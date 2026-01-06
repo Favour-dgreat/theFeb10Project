@@ -37,28 +37,29 @@ const ScholarshipInfo = () => {
                         The FEB10 Project Scholarship uses a transparent, multi-stage process designed to evaluate academic excellence, authenticity, and financial need.
                     </p>
                     <div className="pl-4 border-l-4 border-blue-900/20">
-                        <h4 className="font-bold text-blue-900">Stage 1 – Application & Orientation Video</h4>
-                        <ul className="list-disc pl-5 mt-2 space-y-1">
-                            <li>Applicants submit an online application.</li>
-                            <li>Applicants complete a brief orientation designed to guide them through the scholarship process.</li>
-                            <li>Applicants must complete orientation video 1.</li>
-                            <li>Applications are reviewed upon submission.</li>
-                        </ul>
+                        <h4 className="font-bold text-blue-900">Stage 1 – Application </h4>
+                        <p className="text-gray-700 mt-2">
+                        Submit your online application and watch a short introductory video.
+                        </p>
+                        
                     </div>
                     <div className="pl-4 border-l-4 border-blue-900/20">
-                        <h4 className="font-bold text-blue-900">Stage 2 – Review & Verification </h4>
-                        <ul className="list-disc pl-5 mt-2 space-y-1">
-                            <li>Selected applicants are contacted to proceed to the next stage, which includes additional screening and document verification to confirm eligibility.</li>
+                        <h4 className="font-bold text-blue-900">Stage 2 – Verification & Review </h4>
+                        <p className="text-gray-700 mt-2">
+                            Shortlisted applicants provide documentation and watch a short follow-up video guiding them through the document upload and next steps.
+                        </p>
                             
-                        </ul>
                     </div>
                     <div className="pl-4 border-l-4 border-blue-900/20">
                         <h4 className="font-bold text-blue-900">Stage 3 – Final Selection & Announcement</h4>
-                        <ul className="list-disc pl-5 mt-2 space-y-1">
-                            <li>Final recipients are selected after thorough review and officially announced during the FEB10 Live Stream Event.</li>
-                          
-                        </ul>
+                        <p className="text-gray-700 mt-2">
+                            Scholars selected for the scholarship are notified and celebrated during The FEB10 Project Live Stream Event.
+                        </p>
+
                     </div>
+                    <p className="text-gray-700 mt-2">
+                        Each stage is designed to be fair, transparent, and thorough, ensuring that deserving and committed students are recognized.
+                    </p>
                 </div>
             )
         },
@@ -168,7 +169,7 @@ const ScholarshipInfo = () => {
                             <span className="text-[#FFD700]">★</span> Demonstrating a strong commitment to academic excellence through consistent effort and performance
                         </li>
                         <li className="flex items-center gap-2">
-                            <span className="text-[#FFD700]">★</span> Disciplined, focused, and driven to succeed
+                            <span className="text-[#FFD700]">★</span> Disciplined, focused, and driven to succeed 
                         </li>
                         <li className="flex items-center gap-2">
                             <span className="text-[#FFD700]">★</span> Experiencing genuine financial challenges
@@ -177,6 +178,17 @@ const ScholarshipInfo = () => {
                             <span className="text-[#FFD700]">★</span> Eager to grow, learn, and positively impact their communities
                         </li>
                     </ul>
+                </div>
+
+                <div className="bg-blue-50/50 p-6 rounded-lg border border-blue-100 mb-8">
+                    <h4 className="text-lg font-bold text-[#1a237e] mb-3">What the Scholarship Covers</h4>
+                    <p className="text-gray-700 mb-4">
+                        The FEB10 Project 2026 Scholarship is a holistic initiative designed to support students who demonstrate strong commitment to their academics, foster personal growth, and create long-term opportunities for undergraduate students.
+                    </p>
+                    <p className="font-semibold text-gray-800 mb-2"> Tuition Support</p>
+                    <p className="text-gray-700 mb-4">
+                        Full coverage of tuition fees for one academic session, enabling scholars to stay enrolled, focused, and excel in their studies. In addition, applicants not selected in this cycle may be placed under consideration for future scholarship opportunities with The FEB10 Project, ensuring that deserving candidates are not overlooked.
+                    </p>
                 </div>
             </div>
 
