@@ -6,7 +6,7 @@ import { ArrowBigRight } from 'lucide-react';
 
 const Section01 = () => {
     return (
-        <section className="relative py-20 md:py-32 px-4 bg-[url('/images/H1_jpg.jpg')] bg-cover bg-[center_top] sm:bg-center bg-no-repeat min-h-[600px] md:min-h-[700px] flex items-center overflow-hidden">
+        <section className="relative py-20 md:py-32 px-4 md:bg-[url('/images/H1_jpg.jpg')] bg-[url('/images/New5_seamless.jpg')] bg-cover bg-[center_top] sm:bg-center bg-no-repeat min-h-[600px] md:min-h-[700px] flex items-center overflow-hidden">
             <div className="absolute inset-0 bg-black/40 z-0" />
             <div className="max-w-7xl mx-auto w-full relative z-10">
                 {/* Section Header */}
