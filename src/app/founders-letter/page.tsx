@@ -101,14 +101,14 @@ export default function FoundersLetter() {
                             We look forward to joining hands with organizations, partners, and individuals who share our vision of empowering young people and unlocking potential. No single person or institution can create lasting impact alone; it is through collaboration, shared purpose, and collective action that we can transform lives. Together, by each of us contributing our time, resources, and expertise, we can make a meaningful difference — creating a brighter, fairer, and more hopeful future for the next generation and leaving a lasting impact on the world we all share.
                         </p>
 
-                        <p className="text-xl font-bold text-[#2e3b86] pt-4">
+                        <p>
                             This is why we do what we do. <br />
                             And this is only the beginning.
                         </p>
 
                     </div>
 
-                    <div className="mt-16 pt-8 border-t border-gray-100 flex items-center justify-between">
+                    <div className="mt-2 pt-2 flex items-center justify-between">
                         <div className="text-left">
                             <Image
                                 src="/images/signature.png"
