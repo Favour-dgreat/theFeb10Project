@@ -85,7 +85,6 @@ function Stage1FormContent() {
 
             // Success
             setIsSubmitted(true);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (err) {
             console.error(err);
             setError('Failed to submit application. Please try again.');
@@ -160,7 +159,7 @@ function Stage1FormContent() {
                             value={formData.school}
                             onChange={handleInputChange}
                             className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#f06436] focus:border-transparent outline-none"
-                            placeholder="Your Department"
+                            placeholder="Your School/Faculty"
                         />
                     </div>
                     <div>
