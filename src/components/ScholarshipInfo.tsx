@@ -39,16 +39,16 @@ const ScholarshipInfo = () => {
                     <div className="pl-4 border-l-4 border-blue-900/20">
                         <h4 className="font-bold text-blue-900">Stage 1 – Application </h4>
                         <p className="text-gray-700 mt-2">
-                        Submit your online application and watch a short introductory video.
+                            Submit your online application and watch a short introductory video.
                         </p>
-                        
+
                     </div>
                     <div className="pl-4 border-l-4 border-blue-900/20">
                         <h4 className="font-bold text-blue-900">Stage 2 – Verification & Review </h4>
                         <p className="text-gray-700 mt-2">
                             Shortlisted applicants provide documentation and watch a short follow-up video guiding them through the document upload and next steps.
                         </p>
-                            
+
                     </div>
                     <div className="pl-4 border-l-4 border-blue-900/20">
                         <h4 className="font-bold text-blue-900">Stage 3 – Final Selection & Announcement</h4>
@@ -123,10 +123,10 @@ const ScholarshipInfo = () => {
             content: (
                 <div className="space-y-4 text-gray-700">
                     <p>
-                        The application deadline for the FEB10 Project 2026 Scholarship is <b>31st January 2026.</b> 
+                        The application deadline for the FEB10 Project 2026 Scholarship is <b>31st January 2026.</b>
                     </p>
                     <p>
-                        All updates and official announcements will be published on our website and social media platforms. 
+                        All updates and official announcements will be published on our website and social media platforms.
                     </p>
                     <p>
                         Shortlisted candidates and finalists will receive detailed timelines and next steps directly via email throughout the selection process.
@@ -165,17 +165,21 @@ const ScholarshipInfo = () => {
                     </p>
                     <p className="font-semibold text-gray-800 mb-2">We are committed to supporting students who are:</p>
                     <ul className="list-none space-y-2 mb-4">
-                        <li className="flex items-center gap-2">
-                            <span className="text-[#FFD700]">★</span> Demonstrating a strong commitment to academic excellence through consistent effort and performance
+                        <li className="flex items-start gap-2">
+                            <span className="text-[#FFD700] shrink-0 ">★</span>
+                            <span>Demonstrating a strong commitment to academic excellence through consistent effort and performance</span>
                         </li>
-                        <li className="flex items-center gap-2">
-                            <span className="text-[#FFD700]">★</span> Disciplined, focused, and driven to succeed 
+                        <li className="flex items-start gap-2">
+                            <span className="text-[#FFD700] shrink-0 ">★</span>
+                            <span>Disciplined, focused, and driven to succeed</span>
                         </li>
-                        <li className="flex items-center gap-2">
-                            <span className="text-[#FFD700]">★</span> Experiencing genuine financial challenges
+                        <li className="flex items-start gap-2">
+                            <span className="text-[#FFD700] shrink-0 ">★</span>
+                            <span>Experiencing genuine financial challenges</span>
                         </li>
-                        <li className="flex items-center gap-2">
-                            <span className="text-[#FFD700]">★</span> Eager to grow, learn, and positively impact their communities
+                        <li className="flex items-start gap-2">
+                            <span className="text-[#FFD700] shrink-0 ">★</span>
+                            <span>Eager to grow, learn, and positively impact their communities</span>
                         </li>
                     </ul>
                 </div>

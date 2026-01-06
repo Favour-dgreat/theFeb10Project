@@ -17,7 +17,6 @@ const ScholarshipForm = () => {
 
         // Step 2
         isEnrolled: null as boolean | null,
-        understandsPurpose: null as boolean | null,
         agreesToProcess: null as boolean | null,
 
         // Step 3
@@ -113,7 +112,7 @@ const ScholarshipForm = () => {
                     Thank you for applying. A confirmation email has been sent to your inbox with your unique Application ID and next steps.
                 </p>
 
-                
+
             </motion.div>
         );
     }
@@ -239,14 +238,43 @@ const ScholarshipForm = () => {
                                 className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all bg-white"
                             >
                                 <option value="">Select State</option>
-                                <option value="Ondo">Ondo</option>
-                                <option value="Lagos">Lagos</option>
+                                <option value="Abia">Abia</option>
+                                <option value="Adamawa">Adamawa</option>
+                                <option value="Akwa Ibom">Akwa Ibom</option>
+                                <option value="Anambra">Anambra</option>
+                                <option value="Bauchi">Bauchi</option>
+                                <option value="Bayelsa">Bayelsa</option>
+                                <option value="Benue">Benue</option>
+                                <option value="Borno">Borno</option>
+                                <option value="Cross River">Cross River</option>
+                                <option value="Delta">Delta</option>
+                                <option value="Ebonyi">Ebonyi</option>
+                                <option value="Edo">Edo</option>
                                 <option value="Ekiti">Ekiti</option>
-                                <option value="Osun">Osun</option>
-                                <option value="Abuja">Abuja</option>
+                                <option value="Enugu">Enugu</option>
+                                <option value="FCT">Federal Capital Territory</option>
+                                <option value="Gombe">Gombe</option>
+                                <option value="Imo">Imo</option>
+                                <option value="Jigawa">Jigawa</option>
+                                <option value="Kaduna">Kaduna</option>
+                                <option value="Kano">Kano</option>
+                                <option value="Katsina">Katsina</option>
+                                <option value="Kebbi">Kebbi</option>
+                                <option value="Kogi">Kogi</option>
+                                <option value="Kwara">Kwara</option>
+                                <option value="Lagos">Lagos</option>
+                                <option value="Nasarawa">Nasarawa</option>
+                                <option value="Niger">Niger</option>
                                 <option value="Ogun">Ogun</option>
+                                <option value="Ondo">Ondo</option>
+                                <option value="Osun">Osun</option>
                                 <option value="Oyo">Oyo</option>
-
+                                <option value="Plateau">Plateau</option>
+                                <option value="Rivers">Rivers</option>
+                                <option value="Sokoto">Sokoto</option>
+                                <option value="Taraba">Taraba</option>
+                                <option value="Yobe">Yobe</option>
+                                <option value="Zamfara">Zamfara</option>
                                 <option value="Other">Other</option>
                             </select>
                         </div>
@@ -293,33 +321,7 @@ const ScholarshipForm = () => {
                             )}
                         </div>
 
-                        <div className="bg-white p-4 rounded-lg border border-gray-200">
-                            <p className="text-sm font-medium text-gray-800 mb-3">
-                                Do you understand that this scholarship is for academically excellent students who face financial challenges?
-                            </p>
-                            <div className="flex gap-4">
-                                <label className="flex items-center gap-2 cursor-pointer">
-                                    <input
-                                        type="radio"
-                                        name="understandsPurpose"
-                                        checked={formData.understandsPurpose === true}
-                                        onChange={() => handleRadioChange('understandsPurpose', true)}
-                                        className="accent-[#1a237e]"
-                                    />
-                                    <span>Yes</span>
-                                </label>
-                                <label className="flex items-center gap-2 cursor-pointer">
-                                    <input
-                                        type="radio"
-                                        name="understandsPurpose"
-                                        checked={formData.understandsPurpose === false}
-                                        onChange={() => handleRadioChange('understandsPurpose', false)}
-                                        className="accent-[#1a237e]"
-                                    />
-                                    <span>No</span>
-                                </label>
-                            </div>
-                        </div>
+
 
                         <div className="bg-white p-4 rounded-lg border border-gray-200">
                             <p className="text-sm font-medium text-gray-800 mb-3">
@@ -431,7 +433,7 @@ const ScholarshipForm = () => {
 
                                     // Step 2 Validation
                                     if (currentStep === 2) {
-                                        if (formData.isEnrolled === null || formData.understandsPurpose === null || formData.agreesToProcess === null) {
+                                        if (formData.isEnrolled === null || formData.agreesToProcess === null) {
                                             setError("Please answer all questions.");
                                             return;
                                         }
