@@ -144,14 +144,14 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden bg-[#2e3b86] border-t border-blue-800">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 ">
             {navLinks.map((link) => (
-              <div key={link.name}>
+              <div key={link.name} >
                 {link.subItems ? (
                   <div className="space-y-1">
                     <button
                       onClick={() => setMobileExpanded(mobileExpanded === link.name ? null : link.name)}
-                      className="w-full flex items-center justify-between px-3 py-2 text-base font-bold text-gray-300 uppercase hover:bg-blue-800 rounded-md transition-colors"
+                      className="w-full flex items-center justify-between px-3 py-2 text-base font-bold text-white uppercase hover:bg-blue-800 rounded-md transition-colors"
                     >
                       <span>{link.name}</span>
                       {mobileExpanded === link.name ? <ChevronUp size={20} /> : <ChevronDown size={20} />}

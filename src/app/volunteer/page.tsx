@@ -88,199 +88,199 @@ export default function VolunteerPage() {
     return (
         <main className="min-h-screen bg-white flex flex-col">
 
-            <div className="flex-grow bg-gradient-to-br from-[#2e3b86] to-[#1a237e] relative overflow-hidden flex items-center">
-                {/* Decorative background elements */}
-                <div className="absolute top-0 right-0 w-96 h-96 bg-[#f06436]/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
-                <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2" />
-
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-24 relative z-10 w-full">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                        {/* Left Side: Content */}
-                        <div className="text-white space-y-8">
-                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-sm font-bold tracking-widest uppercase">
-                                <span className="w-2 h-2 bg-[#f06436] rounded-full animate-pulse" />
-                                Join the Movement
-                            </div>
-                            <h1 className="text-4xl md:text-6xl font-black leading-tight">
-                                Volunteer With <br /><span className="text-[#f06436]">The FEB10 Project</span>
+            {/* Banner Section */}
+            {/* Banner Section */}
+            <section className="relative h-[50vh] min-h-[400px] w-full bg-[url('/images/Volunteer2_jpg.jpg')] md:bg-[url('/images/Volunteer_WIDE2_jpg.jpg')] bg-cover bg-center flex items-center justify-center">
+                <div className="absolute inset-0 bg-white/20" />
+                <div className="relative z-10 px-4 max-w-4xl mx-auto w-full">
+                    <div className="flex justify-center md:justify-start pb-56 md:pb-8 md:-ml-56">
+                        <div className="border-l-[6px] md:border-l-[8px] border-[#f06436] pl-6 md:pl-8 py-2">
+                            <h1 className="text-[#2e3b86]  leading-none">
+                                <span className="block text-4xl md:text-6xl mb-1 md:mb-2 font-weight-[100]"><b>Join</b> the</span>
+                                <span className="block text-5xl md:text-8xl font-black tracking-tight uppercase">MOVEMENT</span>
                             </h1>
-                            <p className="text-blue-100 text-lg md:text-xl leading-relaxed max-w-lg">
-                                Be part of a mission that opens doors, creates access, and empowers the next generation of students and leaders.
-                            </p>
-                            <p className="text-white/80 leading-relaxed">
-                                The FEB10 Project is driven by people who believe in impact, service, and growth. If you’re passionate about education, youth development, and creating real change, we’d love to have you on the team.
-                            </p>
-                        </div>
-                        {/* Right Side: Form */}
-                        <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-100">
-                            <div className="mb-8">
-                                <h2 className="text-2xl font-bold text-[#2e3b86] mb-2">Volunteer Application</h2>
-                                <p className="text-gray-500">Fill in your details below to get started.</p>
-                            </div>
-
-                            <form onSubmit={handleSubmit} className="space-y-6">
-                                {/* Name Input */}
-                                <div className="space-y-2">
-                                    <label className="text-sm font-bold text-gray-700 uppercase tracking-wider ml-1">Full Name</label>
-                                    <div className="relative group">
-                                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                            <User className="h-5 w-5 text-gray-400 group-focus-within:text-[#f06436] transition-colors" />
-                                        </div>
-                                        <input
-                                            required
-                                            type="text"
-                                            placeholder="Enter your full name"
-                                            className="block w-full pl-11 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#f06436]/20 focus:border-[#f06436] focus:bg-white transition-all outline-none"
-                                            value={formData.name}
-                                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                        />
-                                    </div>
-                                </div>
-
-                                {/* Email Input */}
-                                <div className="space-y-2">
-                                    <label className="text-sm font-bold text-gray-700 uppercase tracking-wider ml-1">Email Address</label>
-                                    <div className="relative group">
-                                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                            <Mail className="h-5 w-5 text-gray-400 group-focus-within:text-[#f06436] transition-colors" />
-                                        </div>
-                                        <input
-                                            required
-                                            type="email"
-                                            placeholder="example@email.com"
-                                            className="block w-full pl-11 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#f06436]/20 focus:border-[#f06436] focus:bg-white transition-all outline-none"
-                                            value={formData.email}
-                                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                        />
-                                    </div>
-                                </div>
-
-                                {/* Phone Input */}
-                                <div className="space-y-2">
-                                    <label className="text-sm font-bold text-gray-700 uppercase tracking-wider ml-1">Phone Number <span className="text-gray-400 text-xs normal-case tracking-normal">(WhatsApp preferred)</span></label>
-                                    <div className="relative group">
-                                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                            <Phone className="h-5 w-5 text-gray-400 group-focus-within:text-[#f06436] transition-colors" />
-                                        </div>
-                                        <input
-                                            required
-                                            type="tel"
-                                            placeholder="Enter your phone number"
-                                            className="block w-full pl-11 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#f06436]/20 focus:border-[#f06436] focus:bg-white transition-all outline-none"
-                                            value={formData.phone}
-                                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                        />
-                                    </div>
-                                </div>
-
-                                {/* Location Input */}
-                                <div className="space-y-2">
-                                    <label className="text-sm font-bold text-gray-700 uppercase tracking-wider ml-1">Location <span className="text-gray-400 text-xs normal-case tracking-normal">(City & Country)</span></label>
-                                    <div className="relative group">
-                                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                            <MapPin className="h-5 w-5 text-gray-400 group-focus-within:text-[#f06436] transition-colors" />
-                                        </div>
-                                        <input
-                                            required
-                                            type="text"
-                                            placeholder="e.g. Lagos, Nigeria"
-                                            className="block w-full pl-11 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#f06436]/20 focus:border-[#f06436] focus:bg-white transition-all outline-none"
-                                            value={formData.location}
-                                            onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                                        />
-                                    </div>
-                                </div>
-
-                                {/* Areas Checkboxes */}
-                                <div className="space-y-3">
-                                    <label className="text-sm font-bold text-gray-700 uppercase tracking-wider ml-1">Area(s) You’d Like to Volunteer In <span className="text-gray-400 text-xs normal-case tracking-normal">(Select all that apply)</span></label>
-                                    <div className="grid grid-cols-1 gap-3">
-                                        {[
-                                            "Community Outreach & Engagement",
-                                            "Content Creation (Writing, Design, Video)",
-                                            "Social Media & Communications",
-                                            "Program Coordination & Support",
-                                            "Research & Data",
-                                            "Partnerships & Sponsorships",
-                                            "Event Planning & Logistics",
-                                            "Mentorship & Student Support"
-                                        ].map((area) => (
-                                            <label key={area} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors border border-transparent hover:border-gray-200">
-                                                <div className="relative flex items-center">
-                                                    <input
-                                                        type="checkbox"
-                                                        className="peer h-5 w-5 cursor-pointer appearance-none rounded-md border border-gray-300 transition-all checked:border-[#f06436] checked:bg-[#f06436]"
-                                                        checked={formData.areas.includes(area)}
-                                                        onChange={(e) => {
-                                                            const newAreas = e.target.checked
-                                                                ? [...formData.areas, area]
-                                                                : formData.areas.filter(a => a !== area);
-                                                            setFormData({ ...formData, areas: newAreas });
-                                                        }}
-                                                    />
-                                                    <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 transition-opacity peer-checked:opacity-100">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
-                                                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                                        </svg>
-                                                    </div>
-                                                </div>
-                                                <span className="text-gray-700 font-medium">{area}</span>
-                                            </label>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                {/* Consent */}
-                                <div className="pt-2">
-                                    <label className="flex items-start space-x-3 cursor-pointer">
-                                        <div className="relative flex items-center mt-1">
-                                            <input
-                                                type="checkbox"
-                                                required
-                                                className="peer h-5 w-5 cursor-pointer appearance-none rounded-md border border-gray-300 transition-all checked:border-[#f06436] checked:bg-[#f06436]"
-                                                checked={formData.consent}
-                                                onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
-                                            />
-                                            <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 transition-opacity peer-checked:opacity-100">
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <span className="text-sm text-gray-600 leading-tight pt-0.5">
-                                            I agree to be contacted by The FEB10 Project regarding volunteer opportunities and related updates.
-                                        </span>
-                                    </label>
-                                </div>
-
-                                {errorMessage && (
-                                    <div className="p-4 bg-red-50 text-red-600 rounded-xl text-sm font-medium border border-red-100">
-                                        {errorMessage}
-                                    </div>
-                                )}
-
-                                <button
-                                    type="submit"
-                                    disabled={status === 'loading'}
-                                    className="w-full bg-[#2e3b86] text-white py-5 rounded-xl font-black text-lg tracking-widest uppercase hover:bg-[#f06436] hover:shadow-2xl hover:shadow-[#f06436]/40 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 group"
-                                >
-                                    {status === 'loading' ? (
-                                        <>
-                                            <Loader2 className="w-6 h-6 animate-spin" />
-                                            Processing...
-                                        </>
-                                    ) : (
-                                        <>
-                                            Submit Application
-                                            <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-                                        </>
-                                    )}
-                                </button>
-                            </form>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
+
+            {/* Form Section */}
+            <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+                <div className="max-w-3xl mx-auto">
+                    <div className="text-center mb-12 space-y-4">
+                        <p className="text-gray-600 text-lg leading-relaxed max-w-2xl mx-auto">
+                            The FEB10 Project is driven by people who believe in impact, service, and growth. If you’re passionate about education, youth development, and creating real change, we’d love to have you on the team.
+                        </p>
+                    </div>
+
+                    <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12 border border-gray-100">
+                        <div className="mb-8 border-b border-gray-100 pb-6">
+                            <h2 className="text-2xl font-bold text-[#2e3b86] mb-2">Volunteer Application</h2>
+                            <p className="text-gray-500">Fill in your details below to get started.</p>
+                        </div>
+
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                            {/* Name Input */}
+                            <div className="space-y-2">
+                                <label className="text-sm font-bold text-gray-700 uppercase tracking-wider ml-1">Full Name</label>
+                                <div className="relative group">
+                                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                        <User className="h-5 w-5 text-gray-400 group-focus-within:text-[#f06436] transition-colors" />
+                                    </div>
+                                    <input
+                                        required
+                                        type="text"
+                                        placeholder="Enter your full name"
+                                        className="block w-full pl-11 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#f06436]/20 focus:border-[#f06436] focus:bg-white transition-all outline-none"
+                                        value={formData.name}
+                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Email Input */}
+                            <div className="space-y-2">
+                                <label className="text-sm font-bold text-gray-700 uppercase tracking-wider ml-1">Email Address</label>
+                                <div className="relative group">
+                                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                        <Mail className="h-5 w-5 text-gray-400 group-focus-within:text-[#f06436] transition-colors" />
+                                    </div>
+                                    <input
+                                        required
+                                        type="email"
+                                        placeholder="example@email.com"
+                                        className="block w-full pl-11 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#f06436]/20 focus:border-[#f06436] focus:bg-white transition-all outline-none"
+                                        value={formData.email}
+                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Phone Input */}
+                            <div className="space-y-2">
+                                <label className="text-sm font-bold text-gray-700 uppercase tracking-wider ml-1">Phone Number <span className="text-gray-400 text-xs normal-case tracking-normal">(WhatsApp preferred)</span></label>
+                                <div className="relative group">
+                                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                        <Phone className="h-5 w-5 text-gray-400 group-focus-within:text-[#f06436] transition-colors" />
+                                    </div>
+                                    <input
+                                        required
+                                        type="tel"
+                                        placeholder="Enter your phone number"
+                                        className="block w-full pl-11 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#f06436]/20 focus:border-[#f06436] focus:bg-white transition-all outline-none"
+                                        value={formData.phone}
+                                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Location Input */}
+                            <div className="space-y-2">
+                                <label className="text-sm font-bold text-gray-700 uppercase tracking-wider ml-1">Location <span className="text-gray-400 text-xs normal-case tracking-normal">(City & Country)</span></label>
+                                <div className="relative group">
+                                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                        <MapPin className="h-5 w-5 text-gray-400 group-focus-within:text-[#f06436] transition-colors" />
+                                    </div>
+                                    <input
+                                        required
+                                        type="text"
+                                        placeholder="e.g. Lagos, Nigeria"
+                                        className="block w-full pl-11 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#f06436]/20 focus:border-[#f06436] focus:bg-white transition-all outline-none"
+                                        value={formData.location}
+                                        onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Areas Checkboxes */}
+                            <div className="space-y-3">
+                                <label className="text-sm font-bold text-gray-700 uppercase tracking-wider ml-1">Area(s) You’d Like to Volunteer In <span className="text-gray-400 text-xs normal-case tracking-normal">(Select all that apply)</span></label>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                    {[
+                                        "Community Outreach & Engagement",
+                                        "Content Creation (Writing, Design, Video)",
+                                        "Social Media & Communications",
+                                        "Program Coordination & Support",
+                                        "Research & Data",
+                                        "Partnerships & Sponsorships",
+                                        "Event Planning & Logistics",
+                                        "Mentorship & Student Support"
+                                    ].map((area) => (
+                                        <label key={area} className="flex items-start space-x-3 p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors border border-transparent hover:border-gray-200">
+                                            <div className="relative flex items-center mt-1">
+                                                <input
+                                                    type="checkbox"
+                                                    className="peer h-5 w-5 cursor-pointer appearance-none rounded-md border border-gray-300 transition-all checked:border-[#f06436] checked:bg-[#f06436]"
+                                                    checked={formData.areas.includes(area)}
+                                                    onChange={(e) => {
+                                                        const newAreas = e.target.checked
+                                                            ? [...formData.areas, area]
+                                                            : formData.areas.filter(a => a !== area);
+                                                        setFormData({ ...formData, areas: newAreas });
+                                                    }}
+                                                />
+                                                <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 transition-opacity peer-checked:opacity-100">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <span className="text-gray-700 font-medium text-sm leading-tight pt-1">{area}</span>
+                                        </label>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Consent */}
+                            <div className="pt-2">
+                                <label className="flex items-start space-x-3 cursor-pointer">
+                                    <div className="relative flex items-center mt-1">
+                                        <input
+                                            type="checkbox"
+                                            required
+                                            className="peer h-5 w-5 cursor-pointer appearance-none rounded-md border border-gray-300 transition-all checked:border-[#f06436] checked:bg-[#f06436]"
+                                            checked={formData.consent}
+                                            onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
+                                        />
+                                        <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 transition-opacity peer-checked:opacity-100">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <span className="text-sm text-gray-600 leading-tight pt-0.5">
+                                        I agree to be contacted by The FEB10 Project regarding volunteer opportunities and related updates.
+                                    </span>
+                                </label>
+                            </div>
+
+                            {errorMessage && (
+                                <div className="p-4 bg-red-50 text-red-600 rounded-xl text-sm font-medium border border-red-100">
+                                    {errorMessage}
+                                </div>
+                            )}
+
+                            <button
+                                type="submit"
+                                disabled={status === 'loading'}
+                                className="w-full bg-[#2e3b86] text-white py-5 rounded-xl font-black text-lg tracking-widest uppercase hover:bg-[#f06436] hover:shadow-2xl hover:shadow-[#f06436]/40 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 group"
+                            >
+                                {status === 'loading' ? (
+                                    <>
+                                        <Loader2 className="w-6 h-6 animate-spin" />
+                                        Processing...
+                                    </>
+                                ) : (
+                                    <>
+                                        Submit Application
+                                        <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                                    </>
+                                )}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
 
             <Footer />
         </main>
