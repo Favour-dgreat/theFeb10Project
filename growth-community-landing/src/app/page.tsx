@@ -17,6 +17,7 @@ export default function GrowthCommunityLanding() {
     consent: false
   });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [showForm, setShowForm] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleInterestChange = (interest: string) => {
@@ -93,24 +94,39 @@ export default function GrowthCommunityLanding() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative h-[100vh] bg-url('/images/GC_jpg1.jpg') bg-cover md:min-h-screen flex items-center overflow-hidden bg-white">
+      <section className="relative h-[100vh] bg-url('/images/GC_jpg1.jpg') md:bg-url('/images/long_jpg.jpg') bg-cover md:min-h-screen flex items-center overflow-hidden bg-white">
+        {/* Mobile Image */}
+        <div className="absolute inset-0 md:hidden block">
+          <Image
+            src="/images/long_jpg.jpg"
+            alt="Growth Community Leadership"
+            fill
+            className="object-cover object-top"
+            priority
+          />
+        </div>
+
+        {/* Desktop Image */}
+        <div className="absolute inset-0 hidden md:block">
           <Image
             src="/images/GC_jpg1.jpg"
             alt="Growth Community Leadership"
             fill
-          className="object-contain md:object-cover"
+            className="object-cover object-[50%_5%]"
             priority
           />
+        </div>
 
-        <div className="relative z-10 max-w-12xl w-full h-[25vh] md:h-[100vh] flex flex-col justify-center align-center text-right">
+
+        <div className="relative z-10 w-full min-h-[50vh] md:h-screen flex flex-col justify-center items-center md:items-end text-center md:text-right mt-72 md:pb-20 md:pb-0">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="space-y-6 md:space-y-12 lg:max-w-4xl mr-auto"
+            className="space-y-6 md:space-y-12 max-w-lg md:max-w-4xl mx-auto md:mx-0 md:mr-auto px-4 md:px-0"
           >
             <div className="space-y-4">
-              <h1 className="text-2xl md:text-4xl lg:text-7xl font-semibold ml-[40px] text-right leading-[1.1] text-[#696969]">
+              <h1 className="text-4xl md:text-5xl lg:text-7xl font-semibold md:ml-[40px] leading-[1.2] md:leading-[1.1] text-[#696969]">
                 Discover Your <span className="text-primary">Purpose.</span> <br />
                 Unlock Your <span className="text-primary">Potential.</span> <br />
                 Connect <span className="text-primary">Globally.</span>
@@ -120,7 +136,7 @@ export default function GrowthCommunityLanding() {
             <div className="pt-4">
               <Link
                 href="#membership-form"
-                className="inline-flex items-center justify-center bg-primary text-white px-6 md:px-6 py-4 rounded-xl font-bold text-5xl tracking-tight hover:bg-primary-dark transition-all duration-300 shadow-xl shadow-primary/20 h-auto"
+                className="inline-flex items-center justify-center bg-primary text-white px-8 py-4 md:px-10 md:py-6 rounded-xl font-bold text-2xl md:text-4xl lg:text-5xl tracking-tight hover:bg-primary-dark transition-all duration-300 shadow-xl shadow-primary/20 h-auto"
               >
                 Join Now
               </Link>
@@ -189,20 +205,20 @@ export default function GrowthCommunityLanding() {
       </section>
 
       {/* What You'll Gain */}
-      <section className="py-32 px-4 bg-white">
-        <div className="max-w-7xl mx-auto space-y-24">
+      <section className="py-20 md:py-32 px-4 bg-white">
+        <div className="max-w-7xl mx-auto space-y-16 md:space-y-24">
           <div className="text-center">
             <h2 className="text-4xl md:text-6xl font-black text-[#4a4a4a]">What You’ll <span className="text-primary italic">Gain</span></h2>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div className="flex gap-8 p-10 bg-white rounded-[2.5rem] shadow-sm border border-gray-100 hover:shadow-xl hover:border-primary/10 transition-all group">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+            <div className="flex flex-col md:flex-row gap-6 md:gap-8 p-6 md:p-10 bg-white rounded-[2rem] md:rounded-[2.5rem] shadow-sm border border-gray-100 hover:shadow-xl hover:border-primary/10 transition-all group">
               <div className="flex-shrink-0 w-16 h-16 bg-primary/5 rounded-2xl flex items-center justify-center group-hover:bg-primary transition-all text-primary group-hover:text-white">
                 <Target className="w-8 h-8" />
               </div>
               <div>
-                <h4 className="text-2xl font-black text-[#4a4a4a] mb-3">1. Personal Growth & Leadership Development</h4>
-                <ul className="text-gray-500 font-medium leading-relaxed list-disc list-inside space-y-2">
+                <h4 className="text-xl md:text-2xl font-black text-[#4a4a4a] mb-3">1. Personal Growth & Leadership Development</h4>
+                <ul className="text-gray-500 font-medium leading-relaxed list-disc list-inside space-y-2 text-sm md:text-base">
                   <li>Workshops, webinars, and seminars on leadership.</li>
                   <li>Mentorship programs connecting members with experienced leaders.</li>
                   <li>Personalized development plans.</li>
@@ -210,13 +226,13 @@ export default function GrowthCommunityLanding() {
               </div>
             </div>
 
-            <div className="flex gap-8 p-10 bg-white rounded-[2.5rem] shadow-sm border border-gray-100 hover:shadow-xl hover:border-primary/10 transition-all group">
+            <div className="flex flex-col md:flex-row gap-6 md:gap-8 p-6 md:p-10 bg-white rounded-[2rem] md:rounded-[2.5rem] shadow-sm border border-gray-100 hover:shadow-xl hover:border-primary/10 transition-all group">
               <div className="flex-shrink-0 w-16 h-16 bg-primary/5 rounded-2xl flex items-center justify-center group-hover:bg-primary transition-all text-primary group-hover:text-white">
                 <RocketIcon className="w-8 h-8" />
               </div>
               <div>
-                <h4 className="text-2xl font-black text-[#4a4a4a] mb-3">2. Entrepreneurship & Start-Up Support</h4>
-                <ul className="text-gray-500 font-medium leading-relaxed list-disc list-inside space-y-2">
+                <h4 className="text-xl md:text-2xl font-black text-[#4a4a4a] mb-3">2. Entrepreneurship & Start-Up Support</h4>
+                <ul className="text-gray-500 font-medium leading-relaxed list-disc list-inside space-y-2 text-sm md:text-base">
                   <li>Guidance on business idea validation and execution.</li>
                   <li>Access to a network of experts, investors, and mentors.</li>
                   <li>Skill-building sessions on strategy and finance.</li>
@@ -224,13 +240,13 @@ export default function GrowthCommunityLanding() {
               </div>
             </div>
 
-            <div className="flex gap-8 p-10 bg-white rounded-[2.5rem] shadow-sm border border-gray-100 hover:shadow-xl hover:border-primary/10 transition-all group">
+            <div className="flex flex-col md:flex-row gap-6 md:gap-8 p-6 md:p-10 bg-white rounded-[2rem] md:rounded-[2.5rem] shadow-sm border border-gray-100 hover:shadow-xl hover:border-primary/10 transition-all group">
               <div className="flex-shrink-0 w-16 h-16 bg-primary/5 rounded-2xl flex items-center justify-center group-hover:bg-primary transition-all text-primary group-hover:text-white">
                 <Sparkles className="w-8 h-8" />
               </div>
               <div>
-                <h4 className="text-2xl font-black text-[#4a4a4a] mb-3">3. Purpose Discovery & Mindset Coaching</h4>
-                <ul className="text-gray-500 font-medium leading-relaxed list-disc list-inside space-y-2">
+                <h4 className="text-xl md:text-2xl font-black text-[#4a4a4a] mb-3">3. Purpose Discovery & Mindset Coaching</h4>
+                <ul className="text-gray-500 font-medium leading-relaxed list-disc list-inside space-y-2 text-sm md:text-base">
                   <li>Resources to uncover unique strengths and purpose.</li>
                   <li>Mindset coaching to build resilience and perspective.</li>
                   <li>Encouragement to think beyond borders.</li>
@@ -238,13 +254,13 @@ export default function GrowthCommunityLanding() {
               </div>
             </div>
 
-            <div className="flex gap-8 p-10 bg-white rounded-[2.5rem] shadow-sm border border-gray-100 hover:shadow-xl hover:border-primary/10 transition-all group">
+            <div className="flex flex-col md:flex-row gap-6 md:gap-8 p-6 md:p-10 bg-white rounded-[2rem] md:rounded-[2.5rem] shadow-sm border border-gray-100 hover:shadow-xl hover:border-primary/10 transition-all group">
               <div className="flex-shrink-0 w-16 h-16 bg-primary/5 rounded-2xl flex items-center justify-center group-hover:bg-primary transition-all text-primary group-hover:text-white">
                 <Globe className="w-8 h-8" />
               </div>
               <div>
-                <h4 className="text-2xl font-black text-[#4a4a4a] mb-3">4. Networking & Community Engagement</h4>
-                <ul className="text-gray-500 font-medium leading-relaxed list-disc list-inside space-y-2">
+                <h4 className="text-xl md:text-2xl font-black text-[#4a4a4a] mb-3">4. Networking & Community Engagement</h4>
+                <ul className="text-gray-500 font-medium leading-relaxed list-disc list-inside space-y-2 text-sm md:text-base">
                   <li>Connect with peers, mentors, and industry leaders.</li>
                   <li>Participate in events, forums, and projects.</li>
                   <li>Showcase your ideas, initiatives, and achievements.</li>
@@ -267,124 +283,146 @@ export default function GrowthCommunityLanding() {
       </section>
 
       {/* Form Section */}
-      <section id="membership-form" className="py-32 px-4 bg-white overflow-hidden relative">
-        <div className="max-w-3xl mx-auto relative z-10">
-          <div className="text-center mb-16 space-y-4">
-            <h2 className="text-5xl font-black text-[#4a4a4a]">Join the <span className="text-primary">Growth Community Today!</span></h2>
-            <p className="text-gray-500 font-bold tracking-tight text-lg">Click below to become a member</p>
+      {/* Form Section */}
+      <section id="membership-form" className={`py-32 px-4 relative transition-all duration-500 bg-cover bg-center ${!showForm ? "bg-[url('/images/END%20Image_blank4.jpg')] md:bg-[url('/images/END%20Image_blank.jpg')] min-h-[600px] flex items-center justify-end" : "bg-white min-h-auto"
+        }`}>
+        {!showForm ? (
+          <div className="w-full max-w-7xl mx-auto flex flex-col md:items-end md:justify-center h-full px-4 md:px-12">
+            <div className="md:w-1/2 md:text-left text-center space-y-8 mt-[380px] md:mt-0">
+              <h2 className="text-4xl md:text-7xl font-black text-[#4a4a4a] leading-tight">
+                Join the <br />
+                <span className="text-primary text-4xl md:text-8xl block my-2">GROWTH <br /> COMMUNITY</span>
+                <span className="text-primary">Today</span>
+              </h2>
+              <div className="flex justify-center md:justify-end">
+                <button
+                  onClick={() => setShowForm(true)}
+                  className="bg-primary text-white text-2xl md:text-4xl font-black py-4 px-12 rounded-xl shadow-xl hover:bg-primary-dark transition-all transform hover:scale-105"
+                >
+                  Click Here
+                </button>
+              </div>
+            </div>
           </div>
+        ) : (
+          <div className="max-w-3xl mx-auto relative z-10 animate-in fade-in slide-in-from-bottom-10 duration-500">
+            <div className="text-center mb-16 space-y-4">
+              <h2 className="text-5xl font-black text-[#4a4a4a]">Join the <span className="text-primary">Growth Community Today!</span></h2>
+              <p className="text-gray-500 font-bold tracking-tight text-lg">Fill in your details below</p>
+            </div>
 
-          <div className="bg-gray-light/30 p-10 md:p-16 rounded-[3rem] border border-gray-100">
-            <form onSubmit={handleSubmit} className="space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-gray-light/30 p-10 md:p-16 rounded-[3rem] border border-gray-100">
+              <form onSubmit={handleSubmit} className="space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-3">
+                    <label className="text-xs font-black text-gray-500 uppercase tracking-widest ml-2">Full Name</label>
+                    <input
+                      required
+                      type="text"
+                      placeholder="First & Last Name"
+                      className="w-full bg-white border border-gray-200 rounded-2xl px-6 py-5 text-[#4a4a4a] placeholder-gray-300 focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all font-bold"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    />
+                  </div>
+                  <div className="space-y-3">
+                    <label className="text-xs font-black text-gray-500 uppercase tracking-widest ml-2">Gender</label>
+                    <select
+                      required
+                      className="w-full bg-white border border-gray-200 rounded-2xl px-6 py-5 text-[#4a4a4a] focus:outline-none focus:border-primary transition-all font-bold appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlPSIjNDQ0NDQ0IiBzdHJva2Utd2lkdGg9IjIiPjxwYXRoIGQ9Ik02IDlsNiA2IDYtNiIvPjwvc3ZnPg==')] bg-[length:24px] bg-[right_1.5rem_center] bg-no-repeat"
+                      value={formData.gender}
+                      onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+                    >
+                      <option value="" disabled>Select gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select>
+                  </div>
+                </div>
+
                 <div className="space-y-3">
-                  <label className="text-xs font-black text-gray-500 uppercase tracking-widest ml-2">Full Name</label>
+                  <label className="text-xs font-black text-gray-500 uppercase tracking-widest ml-2">Email Address</label>
                   <input
                     required
-                    type="text"
-                    placeholder="First & Last Name"
-                    className="w-full bg-white border border-gray-200 rounded-2xl px-6 py-5 text-[#4a4a4a] placeholder-gray-300 focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all font-bold"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    type="email"
+                    placeholder="We’ll send updates and opportunities here"
+                    className="w-full bg-white border border-gray-200 rounded-2xl px-6 py-5 text-[#4a4a4a] placeholder-gray-300 focus:outline-none focus:border-primary transition-all font-bold"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   />
                 </div>
+
                 <div className="space-y-3">
-                  <label className="text-xs font-black text-gray-500 uppercase tracking-widest ml-2">Gender</label>
-                  <select
-                    required
-                    className="w-full bg-white border border-gray-200 rounded-2xl px-6 py-5 text-[#4a4a4a] focus:outline-none focus:border-primary transition-all font-bold appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlPSIjNDQ0NDQ0IiBzdHJva2Utd2lkdGg9IjIiPjxwYXRoIGQ9Ik02IDlsNiA2IDYtNiIvPjwvc3ZnPg==')] bg-[length:24px] bg-[right_1.5rem_center] bg-no-repeat"
-                    value={formData.gender}
-                    onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
-                  >
-                    <option value="" disabled>Select gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <label className="text-xs font-black text-gray-500 uppercase tracking-widest ml-2">Email Address</label>
-                <input
-                  required
-                  type="email"
-                  placeholder="We’ll send updates and opportunities here"
-                  className="w-full bg-white border border-gray-200 rounded-2xl px-6 py-5 text-[#4a4a4a] placeholder-gray-300 focus:outline-none focus:border-primary transition-all font-bold"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                />
-              </div>
-
-              <div className="space-y-3">
-                <label className="text-xs font-black text-gray-500 uppercase tracking-widest ml-2">Phone Number</label>
-                <input
-                  required
-                  type="tel"
-                  placeholder="WhatsApp-enabled preferred"
-                  className="w-full bg-white border border-gray-200 rounded-2xl px-6 py-5 text-[#4a4a4a] placeholder-gray-300 focus:outline-none focus:border-primary transition-all font-bold"
-                  value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                />
-              </div>
-
-              <div className="space-y-3">
-                <label className="text-xs font-black text-gray-500 uppercase tracking-widest ml-2">Area of Interest (Select all that apply)</label>
-                <div className="grid grid-cols-1 gap-4 mt-2">
-                  {[
-                    "Undergraduate Scholarships",
-                    "Academic & Career Growth",
-                    "Leadership & Personal Development",
-                    "Entrepreneurship & Start-ups",
-                    "Digital & Creative Skills"
-                  ].map((interest) => (
-                    <label key={interest} className="flex items-center gap-3 p-4 bg-white border border-gray-200 rounded-2xl cursor-pointer hover:border-primary/50 transition-all">
-                      <input
-                        type="checkbox"
-                        className="w-5 h-5 accent-primary"
-                        checked={formData.interests.includes(interest)}
-                        onChange={() => handleInterestChange(interest)}
-                      />
-                      <span className="font-bold text-gray-600">{interest}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              <div className="pt-4">
-                <label className="flex items-start gap-4 cursor-pointer">
+                  <label className="text-xs font-black text-gray-500 uppercase tracking-widest ml-2">Phone Number</label>
                   <input
-                    type="checkbox"
                     required
-                    checked={formData.consent}
-                    onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
-                    className="mt-1 w-5 h-5 accent-primary flex-shrink-0"
+                    type="tel"
+                    placeholder="WhatsApp-enabled preferred"
+                    className="w-full bg-white border border-gray-200 rounded-2xl px-6 py-5 text-[#4a4a4a] placeholder-gray-300 focus:outline-none focus:border-primary transition-all font-bold"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   />
-                  <span className="text-gray-500 text-sm font-medium">I agree to receive emails, messages, and updates from the Growth Community.</span>
-                </label>
-              </div>
-
-              {errorMessage && (
-                <div className="p-5 bg-red-50 text-red-500 rounded-2xl text-sm font-bold border border-red-100 italic">
-                  Critical Error: {errorMessage}
                 </div>
-              )}
 
-              <button
-                disabled={status === 'loading'}
-                className="w-full bg-primary text-white py-6 rounded-[2rem] font-black text-xl tracking-tight hover:bg-primary-dark transition-all duration-300 shadow-2xl shadow-primary/20 flex items-center justify-center gap-4 group disabled:opacity-50"
-              >
-                {status === 'loading' ? (
-                  <Loader2 className="w-6 h-6 animate-spin" />
-                ) : (
-                  <>
-                    Click Here to Become a Member
-                    <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
-                  </>
+                <div className="space-y-3">
+                  <label className="text-xs font-black text-gray-500 uppercase tracking-widest ml-2">Area of Interest (Select all that apply)</label>
+                  <div className="grid grid-cols-1 gap-4 mt-2">
+                    {[
+                      "Undergraduate Scholarships",
+                      "Academic & Career Growth",
+                      "Leadership & Personal Development",
+                      "Entrepreneurship & Start-ups",
+                      "Digital & Creative Skills"
+                    ].map((interest) => (
+                      <label key={interest} className="flex items-center gap-3 p-4 bg-white border border-gray-200 rounded-2xl cursor-pointer hover:border-primary/50 transition-all">
+                        <input
+                          type="checkbox"
+                          className="w-5 h-5 accent-primary"
+                          checked={formData.interests.includes(interest)}
+                          onChange={() => handleInterestChange(interest)}
+                        />
+                        <span className="font-bold text-gray-600">{interest}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-4">
+                  <label className="flex items-start gap-4 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      required
+                      checked={formData.consent}
+                      onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
+                      className="mt-1 w-5 h-5 accent-primary flex-shrink-0"
+                    />
+                    <span className="text-gray-500 text-sm font-medium">I agree to receive emails, messages, and updates from the Growth Community.</span>
+                  </label>
+                </div>
+
+                {errorMessage && (
+                  <div className="p-5 bg-red-50 text-red-500 rounded-2xl text-sm font-bold border border-red-100 italic">
+                    Critical Error: {errorMessage}
+                  </div>
                 )}
-              </button>
-            </form>
+
+                <button
+                  disabled={status === 'loading'}
+                  className="w-full bg-primary text-white py-5 md:py-6 px-4 rounded-[1.5rem] md:rounded-[2rem] font-black text-lg md:text-xl tracking-tight hover:bg-primary-dark transition-all duration-300 shadow-xl md:shadow-2xl shadow-primary/20 flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 group disabled:opacity-50 h-auto min-h-[64px]"
+                >
+                  {status === 'loading' ? (
+                    <Loader2 className="w-5 h-5 md:w-6 md:h-6 animate-spin" />
+                  ) : (
+                    <>
+                      <span className="text-center">Click Here to Become a Member</span>
+                      <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-2 transition-transform rotate-90 md:rotate-0" />
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
           </div>
-        </div>
+        )}
       </section>
 
       {/* Minimal Footer */}
