@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { CheckCircle2, ArrowRight, Loader2, Target, Globe, Zap, Sparkles, User, Briefcase, GraduationCap, Lightbulb, Wifi } from 'lucide-react';
+import { CheckCircle2, ArrowRight, Loader2, Target, Globe, Sparkles, User} from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Link from 'next/link';
 

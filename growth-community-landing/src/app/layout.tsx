@@ -8,7 +8,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Growth Community | The FEB10 Project",
+  title: "Growth Community",
   description: "Discover Your Purpose. Unlock Your Potential. Connect Globally.",
 };
 
