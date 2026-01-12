@@ -48,11 +48,20 @@ function Stage2FormContent() {
     const [error, setError] = useState('');
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, fieldName: string) => {
-        if (e.target.files && e.target.files[0]) {
+        const file = e.target.files?.[0];
+        if (file) {
+            // 4MB Limit (Reduced to prevent server payload issues)
+            if (file.size > 4 * 1024 * 1024) {
+                setError(`File "${file.name}" exceeds the 4MB size limit. Please upload a smaller file.`);
+                e.target.value = ''; // Reset input
+                return;
+            }
+
             setFiles(prev => ({
                 ...prev,
-                [fieldName]: e.target.files![0]
+                [fieldName]: file
             }));
+            setError(''); // Clear error on successful selection
         }
     };
 
@@ -60,6 +69,14 @@ function Stage2FormContent() {
         e.preventDefault();
         setIsSubmitting(true);
         setError('');
+
+        // Identity Validation
+        if (!identity.applicationId || !identity.firstName || !identity.surname || !identity.email) {
+            setError('Please fill in all Applicant Details (Name, Email, and ID) before submitting.');
+            setIsSubmitting(false);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+        }
 
         // Validation for required files
         const requiredFields = ['studentId', 'transcript', 'admissionLetter', 'govtId', 'feesProof', 'passport'];
@@ -99,10 +116,10 @@ function Stage2FormContent() {
             }
 
             setIsSubmitted(true);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } catch (err) {
+        } catch (err: any) {
             console.error(err);
-            setError('Upload failed. Please check your internet connection or try smaller files.');
+            setError(err.message || 'Upload failed. Please check your internet connection or try smaller files.');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         } finally {
             setIsSubmitting(false);
         }
@@ -143,7 +160,7 @@ function Stage2FormContent() {
                 {label} {required && <span className="text-red-500">*</span>}
             </label>
             {description && <p className="text-xs text-gray-500 mb-3">{description}</p>}
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col gap-2">
                 <input
                     type="file"
                     onChange={(e) => handleFileChange(e, name)}
@@ -157,10 +174,15 @@ function Stage2FormContent() {
                     "
                 />
                 {files[name] && (
-                    <span className="text-green-600 text-xs font-bold flex items-center gap-1">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                        Uploaded
-                    </span>
+                    <div className="flex items-center gap-2 text-green-600 text-xs font-bold bg-green-50 p-2 rounded-md border border-green-100">
+                        <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span className="truncate max-w-[200px]">{files[name]?.name}</span>
+                        <span className="text-gray-400 font-normal ml-auto">
+                            ({(files[name]!.size / 1024 / 1024).toFixed(2)} MB)
+                        </span>
+                    </div>
                 )}
             </div>
         </div>
@@ -171,21 +193,67 @@ function Stage2FormContent() {
             <div className="border-b pb-4 mb-8">
                 <h3 className="text-2xl font-black text-[#2e3b86]">STAGE 2: DOCUMENT VERIFICATION</h3>
 
-                {identity.applicationId ? (
-                    <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-100">
-                        <p className="text-sm text-blue-900 font-bold">Authenticated Applicant:</p>
-                        <p className="text-lg text-[#2e3b86]">{identity.firstName} {identity.surname}</p>
-                        <p className="text-xs text-gray-500 font-mono mt-1">ID: {identity.applicationId}</p>
+                {/* Identity Section: Auto-filled or Manual Input */}
+                <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-100 space-y-4">
+                    <div className="flex justify-between items-start">
+                        <div>
+                            <p className="text-sm text-blue-900 font-bold mb-1">Applicant Details:</p>
+                            <p className="text-xs text-blue-700 mb-4">
+                                These details connect your documents to your application.
+                            </p>
+                        </div>
+                        {identity.applicationId && (
+                            <span className="bg-blue-200 text-blue-800 text-[10px] px-2 py-1 rounded-full font-bold">
+                                AUTO-FILLED
+                            </span>
+                        )}
                     </div>
-                ) : (
-                    <div className="mt-4 p-4 bg-yellow-50 rounded-lg border border-yellow-100">
-                        <p className="text-sm text-yellow-800">
-                            <strong>Warning:</strong> No Application ID detected. Please ensure you clicked the link from your email.
-                        </p>
-                    </div>
-                )}
 
-                <p className="text-gray-500 mt-2">Upload clear, legible copies of the required documents. Supported formats: PDF, JPG, PNG.</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-xs font-bold text-gray-600 mb-1">First Name</label>
+                            <input
+                                type="text"
+                                value={identity.firstName}
+                                onChange={(e) => setIdentity(prev => ({ ...prev, firstName: e.target.value }))}
+                                className="w-full p-2 text-sm border border-blue-200 rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                                placeholder="Enter First Name"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-xs font-bold text-gray-600 mb-1">Surname</label>
+                            <input
+                                type="text"
+                                value={identity.surname}
+                                onChange={(e) => setIdentity(prev => ({ ...prev, surname: e.target.value }))}
+                                className="w-full p-2 text-sm border border-blue-200 rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                                placeholder="Enter Surname"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-xs font-bold text-gray-600 mb-1">Email Address</label>
+                            <input
+                                type="email"
+                                value={identity.email}
+                                onChange={(e) => setIdentity(prev => ({ ...prev, email: e.target.value }))}
+                                className="w-full p-2 text-sm border border-blue-200 rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                                placeholder="Enter Email"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-xs font-bold text-gray-600 mb-1">Application ID</label>
+                            <input
+                                type="text"
+                                value={identity.applicationId}
+                                onChange={(e) => setIdentity(prev => ({ ...prev, applicationId: e.target.value }))}
+                                className="w-full p-2 text-sm border border-blue-200 rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                                placeholder="e.g. FEB10-..."
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <p className="text-gray-500 mt-4 text-sm">Upload clear, legible copies of the required documents. Supported formats: PDF, JPG, PNG (Max 4MB each).</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">

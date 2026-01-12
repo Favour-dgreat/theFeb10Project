@@ -115,7 +115,14 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ success: true });
 
     } catch (error: any) {
-        console.error("Stage 2 Submission Error:", error);
-        return NextResponse.json({ error: 'Failed to process submission' }, { status: 500 });
+        console.error("Stage 2 Submission Error Details:", {
+            message: error.message,
+            stack: error.stack,
+            cause: error.cause
+        });
+        return NextResponse.json({
+            error: error.message || 'Failed to process submission',
+            details: error.toString()
+        }, { status: 500 });
     }
 }
