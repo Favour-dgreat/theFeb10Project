@@ -23,7 +23,6 @@ export default function Stage2Page() {
 
     return (
         <main className="min-h-screen bg-white">
-            <Navbar />
 
             {/* Hero Section */}
             <div className="relative py-20 bg-[#1a237e] text-white">
