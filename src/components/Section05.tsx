@@ -40,7 +40,7 @@ const Section05 = () => {
                                 To provide opportunities, resources, mentorship, and funding that enable individuals to grow holistically—personally, professionally, and socially—while equipping them with the skills and mindset needed to lead, innovate, and impact their communities positively.
                             </p>
 
-                            <a href="#" className="inline-flex items-center gap-2 font-bold text-white hover:text-[#f06436] transition duration-300 text-sm group/btn">
+                            <a href="/about#mission" className="inline-flex items-center gap-2 font-bold text-white hover:text-[#f06436] transition duration-300 text-sm group/btn">
                                 <span>LEARN MORE</span>
                                 <svg
                                     className="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform"
@@ -80,7 +80,7 @@ const Section05 = () => {
                                 A world where no potential is left untapped—a world where individuals across Africa and beyond are equipped, empowered, and funded to realize their purpose, rise to their fullest capacity, and create lasting, transformative impact in their communities and the world.
                             </p>
 
-                            <a href="#" className="inline-flex items-center gap-2 font-bold text-white hover:text-[#2e3b86] transition duration-300 text-sm group/btn">
+                            <a href="/about#vision" className="inline-flex items-center gap-2 font-bold text-white hover:text-[#2e3b86] transition duration-300 text-sm group/btn">
                                 <span>LEARN MORE</span>
                                 <svg
                                     className="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform"

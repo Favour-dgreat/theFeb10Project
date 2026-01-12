@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { CheckCircle2, ArrowRight, Loader2, Target, Globe, Sparkles, User} from 'lucide-react';
+import { CheckCircle2, ArrowRight, Loader2, Target, Globe, Sparkles, User } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Link from 'next/link';
 
@@ -288,13 +288,13 @@ export default function GrowthCommunityLanding() {
         }`}>
         {!showForm ? (
           <div className="w-full max-w-7xl mx-auto flex flex-col md:items-end md:justify-center h-full px-4 md:px-12">
-            <div className="md:w-1/2 md:text-left text-center space-y-8 mt-[380px] md:mt-0">
+            <div className="md:w-1/2 md:text-left space-y-8 mt-[380px] md:mt-0">
               <h2 className="text-4xl md:text-7xl font-black text-[#4a4a4a] leading-tight">
                 Join the <br />
                 <span className="text-primary text-4xl md:text-8xl block my-2">GROWTH <br /> COMMUNITY</span>
                 <span className="text-primary">Today</span>
               </h2>
-              <div className="flex justify-center md:justify-end">
+              <div className="flex justify-center md:justify-start">
                 <button
                   onClick={() => setShowForm(true)}
                   className="bg-primary text-white text-2xl md:text-4xl font-black py-4 px-12 rounded-xl shadow-xl hover:bg-primary-dark transition-all transform hover:scale-105"
