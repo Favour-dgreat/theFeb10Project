@@ -43,9 +43,6 @@ export default function UnskippableVideo({ src, onComplete, poster }: Unskippabl
         video.addEventListener('loadedmetadata', handleLoadedMetadata);
         video.addEventListener('ended', handleEnded);
 
-        // Prevent seeking by enforcing current time if user tries to skip (though UI won't allow it, keyboard shortcuts might)
-        // Note: Strictly disabling seeking via keyboard is tricky, but we can monitor extensive jumps. 
-        // For a simple "unskippable" requirement, hiding controls is usually sufficiently effective for most users.
 
         return () => {
             video.removeEventListener('timeupdate', handleTimeUpdate);
@@ -87,7 +84,7 @@ export default function UnskippableVideo({ src, onComplete, poster }: Unskippabl
             />
 
             {/* Custom Overlay Controls */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none flex flex-col justify-end p-6 transition-opacity duration-300">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none flex flex-col justify-end px-4 pb-0 transition-opacity duration-300">
 
                 {/* Play/Pause Button in Center (visible when paused) */}
                 <AnimatePresence>
@@ -114,18 +111,18 @@ export default function UnskippableVideo({ src, onComplete, poster }: Unskippabl
                 <div className="pointer-events-auto flex items-center gap-4">
                     <button onClick={togglePlay} className="text-white hover:text-orange-400 transition-colors">
                         {isPlaying ? (
-                            <svg className="w-8 h-8 fill-current" viewBox="0 0 24 24">
+                            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                                 <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
                             </svg>
                         ) : (
-                            <svg className="w-8 h-8 fill-current" viewBox="0 0 24 24">
+                            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                                 <path d="M8 5v14l11-7z" />
                             </svg>
                         )}
                     </button>
 
                     {/* Progress Bar (Visual Only - Non-interactive/Unskippable) */}
-                    <div className="flex-1 h-2 bg-gray-700 rounded-full overflow-hidden relative">
+                    <div className="flex-1 h-1 bg-gray-700 rounded-full overflow-hidden relative">
                         <div
                             className="absolute top-0 left-0 h-full bg-[#f06436]"
                             style={{ width: `${progress}%` }}

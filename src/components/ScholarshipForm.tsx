@@ -159,7 +159,7 @@ const ScholarshipForm = () => {
                                     required
                                     value={formData.firstName}
                                     onChange={handleInputChange}
-                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all"
+                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all text-black bg-white"
                                     placeholder="First Name"
                                 />
                             </div>
@@ -171,7 +171,7 @@ const ScholarshipForm = () => {
                                     required
                                     value={formData.surname}
                                     onChange={handleInputChange}
-                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all"
+                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all text-black bg-white"
                                     placeholder="Surname"
                                 />
                             </div>
@@ -183,7 +183,7 @@ const ScholarshipForm = () => {
                                 name="middleName"
                                 value={formData.middleName}
                                 onChange={handleInputChange}
-                                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all"
+                                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all text-black bg-white"
                                 placeholder="Middle Name (Optional)"
                             />
                         </div>
@@ -195,7 +195,7 @@ const ScholarshipForm = () => {
                                 name="email"
                                 value={formData.email}
                                 onChange={handleInputChange}
-                                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all"
+                                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all text-black bg-white"
                                 placeholder="example@email.com"
                             />
                             <p className="text-[10px] text-gray-500 mt-1">Must be valid — all scholarship communication will be sent here.</p>
@@ -209,7 +209,7 @@ const ScholarshipForm = () => {
                                     name="phone"
                                     value={formData.phone}
                                     onChange={handleInputChange}
-                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all"
+                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all text-black bg-white"
                                     placeholder="+234..."
                                 />
                                 <p className="text-[10px] text-gray-500 mt-1">WhatsApp-enabled preferred.</p>
@@ -220,7 +220,7 @@ const ScholarshipForm = () => {
                                     name="gender"
                                     value={formData.gender}
                                     onChange={handleInputChange}
-                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all bg-white"
+                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all bg-white text-black"
                                 >
                                     <option value="">Select</option>
                                     <option value="Male">Male</option>
@@ -234,7 +234,7 @@ const ScholarshipForm = () => {
                                 name="state"
                                 value={formData.state}
                                 onChange={handleInputChange}
-                                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all bg-white"
+                                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all bg-white text-black"
                             >
                                 <option value="">Select State</option>
                                 <option value="Abia">Abia</option>

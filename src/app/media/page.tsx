@@ -3,10 +3,10 @@
 import { motion } from 'framer-motion';
 
 const videos = [
-    { src: '/videos/media/Video1.mp4', title: 'Video 1' },
-    { src: '/videos/media/Video2.mp4', title: 'Video 2' },
-    { src: '/videos/media/Video3.mp4', title: 'Video 3' },
-    { src: '/videos/media/Video4.mp4', title: 'Video 4' },
+    { src: '/videos/media/Video1.mp4', title: 'Video 1', poster: '/videos/media/1.jpg' },
+    { src: '/videos/media/Video2.mp4', title: 'Video 2', poster: '/videos/media/2.jpg' },
+    { src: '/videos/media/Video3.mp4', title: 'Video 3', poster: '/videos/media/3.jpg' },
+    { src: '/videos/media/Video4.mp4', title: 'Video 4', poster: '/videos/media/4.jpg' },
 ];
 
 export default function MediaPage() {
@@ -48,6 +48,7 @@ export default function MediaPage() {
                                     controls
                                     className="w-full h-full object-cover"
                                     preload="metadata"
+                                    poster={video.poster}
                                 >
                                     <source src={video.src} type="video/mp4" />
                                     Your browser does not support the video tag.

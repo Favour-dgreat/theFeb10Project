@@ -148,7 +148,7 @@ const ScholarshipInfo = () => {
 
                 <div className="prose prose-lg text-gray-700 leading-relaxed mb-8">
                     <p className="mb-4">
-                        The FEB10 Project Scholarship was born from a place of empathy. It originated from lived experiences, personal battles, and the quiet understanding that brilliance should never be buried under financial hardship. Our founder, <span className="font-semibold text-[#1a237e]">Sunny Willz</span>, walked the same road many young Nigerians walk today: a journey defined by resilience, survival, and a relentless commitment to rise above limitation.
+                        The FEB10 Project Scholarship was born from a place of empathy. It originated from lived experiences, personal battles, and the quiet understanding that brilliance should never be buried under financial hardship. Our founder, <a href='https://linktr.ee/sunnywillzthefeb10project' target="_blank"><span className="font-semibold text-[#1a237e]">Sunny Willz</span></a>  , walked the same road many young Nigerians walk today: a journey defined by resilience, survival, and a relentless commitment to rise above limitation.
                     </p>
                     <p className="mb-4">
                         Growing up, he watched his father - a man who never had the privilege of school, yet worked with dignity and strength, sacrifice everything to ensure his son had a chance at education. Entering university was a miracle. Staying in university was the battle. School fees, rent, feeding, books, and basic needs were never guaranteed. Balancing survival with academic excellence felt impossible, yet through relentless sacrifice, resilience, and unwavering determination, he graduated with a first-class degree.
