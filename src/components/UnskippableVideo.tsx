@@ -68,7 +68,7 @@ export default function UnskippableVideo({ src, onComplete, poster }: Unskippabl
     };
 
     return (
-        <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-black group">
+        <div className="relative rounded-3xl overflow-hidden group">
             <video
                 ref={videoRef}
                 src={src}
@@ -84,7 +84,7 @@ export default function UnskippableVideo({ src, onComplete, poster }: Unskippabl
             />
 
             {/* Custom Overlay Controls */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none flex flex-col justify-end px-4 pb-0 transition-opacity duration-300">
+            <div className="absolute inset-0 pointer-events-none flex flex-col justify-end px-4 pb-0 transition-opacity duration-300">
 
                 {/* Play/Pause Button in Center (visible when paused) */}
                 <AnimatePresence>
@@ -122,7 +122,7 @@ export default function UnskippableVideo({ src, onComplete, poster }: Unskippabl
                     </button>
 
                     {/* Progress Bar (Visual Only - Non-interactive/Unskippable) */}
-                    <div className="flex-1 h-1 bg-gray-700 rounded-full overflow-hidden relative">
+                    <div className="flex-1 h-1 rounded-full overflow-hidden relative">
                         <div
                             className="absolute top-0 left-0 h-full bg-[#f06436]"
                             style={{ width: `${progress}%` }}

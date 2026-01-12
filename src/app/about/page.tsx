@@ -34,15 +34,15 @@ export default function About() {
             {/* Main Content Narrative */}
             <section className="py-4 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
-                    <div className="relative h-[200px] md:h-[500px] w-full">
+                    <div className="relative h-[120px] md:h-[370px] w-full">
                         <Image
                             src="/images/About_Image2_jpg.jpg"
                             alt="Sunny Willz"
                             fill
-                            className="object-contain object-[15%_2%] md:object-[50%_2%] opacity-80 bg-gray-50"
+                            className="object-contain object-[15%_2%] md:object-[50%_2%] bg-gray-50"
                         />
                     </div>
-                    <div className="p-8 md:p-12 space-y-6">
+                    <div className="p-8 md:p-12">
                         <h2 className="text-3xl md:text-4xl font-bold text-[#2e3b86]">
                             The FEB10 Project: A Movement Born From Burden, Built for Impact
                         </h2>
