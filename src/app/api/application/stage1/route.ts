@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
         ];
 
         const cc = [
-            { email: "adeshinafavour4@gmail.com" }
+            { email: "admin@thefeb10project.org" }
         ];
 
         const htmlContent = `

@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { MailtrapClient } from 'mailtrap';
-import { uploadToCloudinary } from '@/lib/cloudinary';
 import { db } from '@/lib/firebase';
 import { collection, addDoc, query, where, getDocs, updateDoc } from 'firebase/firestore';
 
@@ -10,37 +9,12 @@ const SENDER_EMAIL = "applications@thefeb10project.org";
 
 export async function POST(req: NextRequest) {
     try {
-        const formData = await req.formData();
-
-        // Extract Identity
-        const applicationId = formData.get('applicationId')?.toString();
-        const firstName = formData.get('firstName')?.toString();
-        const surname = formData.get('surname')?.toString();
-        const email = formData.get('email')?.toString();
+        const body = await req.json();
+        const { applicationId, firstName, surname, email, files } = body;
 
         if (!applicationId || !firstName || !surname || !email) {
             return NextResponse.json({ error: 'Missing identity information' }, { status: 400 });
         }
-
-        // Upload Files to Cloudinary
-        const uploadedFiles: Record<string, string> = {};
-        const fileUploadPromises = [];
-
-        for (const [key, value] of formData.entries()) {
-            if (value instanceof File) {
-                const promise = uploadToCloudinary(value, `feb10_scholarship/${applicationId}`)
-                    // @ts-ignore
-                    .then((result: any) => {
-                        uploadedFiles[key] = result.secure_url;
-                    })
-                    .catch(err => {
-                        console.error(`Failed to upload ${key}:`, err);
-                    });
-                fileUploadPromises.push(promise);
-            }
-        }
-
-        await Promise.all(fileUploadPromises);
 
         // Save to Firebase (Update existing application or create new stage2 entry)
         const applicationsRef = collection(db, 'applications');
@@ -52,9 +26,10 @@ export async function POST(req: NextRequest) {
             await updateDoc(docRef, {
                 stage2: {
                     submittedAt: new Date().toISOString(),
-                    files: uploadedFiles,
+                    files: files,
                     status: 'UNDER_REVIEW'
                 },
+                status: 'UNDER_REVIEW',
                 currentStage: 2
             });
         } else {
@@ -66,7 +41,7 @@ export async function POST(req: NextRequest) {
                 email,
                 stage2: {
                     submittedAt: new Date().toISOString(),
-                    files: uploadedFiles,
+                    files: files,
                     status: 'UNDER_REVIEW'
                 },
                 currentStage: 2,
@@ -76,10 +51,10 @@ export async function POST(req: NextRequest) {
 
         // Email Notification
         const recipients = [{ email: "applications@thefeb10project.org" }];
-        const cc = [{ email: "adeshinafavour4@gmail.com" }];
+        const cc = [{ email: "admin@thefeb10project.org" }];
 
-        const fileLinksHtml = Object.entries(uploadedFiles)
-            .map(([key, url]) => `<li><strong>${key}:</strong> <a href="${url}" target="_blank">View Document</a></li>`)
+        const fileLinksHtml = Object.entries(files || {})
+            .map(([key, url]: [string, any]) => `<li><strong>${key}:</strong> <a href="${url}" target="_blank">View Document</a></li>`)
             .join('');
 
         const htmlContent = `
@@ -96,7 +71,7 @@ export async function POST(req: NextRequest) {
                 ${fileLinksHtml}
             </ul>
             
-            <p><strong>Status:</strong> Saved to Database & Cloudinary.</p>
+            <p><strong>Status:</strong> Saved to Database & Firebase Storage.</p>
             <a href="${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.thefeb10project.org'}/admin/dashboard" style="display:inline-block; padding:10px 20px; background:#1a237e; color:white; text-decoration:none; border-radius:5px; margin-top:20px;">
                 Review in Admin Dashboard
             </a>

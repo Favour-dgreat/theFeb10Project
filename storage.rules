@@ -1,0 +1,15 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /feb10_scholarship/{allPaths=**} {
+      // Allow read and write for the scholarship application files
+      // Given the MVP nature of the project as seen in firestore.rules
+      allow read, write: if true;
+    }
+    
+    // Default deny for everything else
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

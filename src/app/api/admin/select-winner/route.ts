@@ -23,12 +23,12 @@ export async function POST(req: NextRequest) {
         const { firstName, surname, email } = docSnapshot.data();
 
         // Default Live Stream Details if not provided
-        const streamInfo = liveStreamDetails || {
-            date: "February 10th, 2026",
-            time: "10:00 AM WAT",
-            link: "https://www.youtube.com/@TheFeb10Project",
-            platform: "YouTube Live"
-        };
+        // const streamInfo = liveStreamDetails || {
+        //     date: "February 10th, 2026",
+        //     time: "10:00 AM WAT",
+        //     link: "https://www.youtube.com/@TheFeb10Project",
+        //     platform: "YouTube Live"
+        // };
 
         const htmlContent = `
             <div style="font-family: Arial, sans-serif; color: #333;">

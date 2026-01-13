@@ -3,6 +3,8 @@
 import { useState, useEffect, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { useSearchParams } from 'next/navigation';
+import { storage } from '@/lib/firebase';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 function Stage2FormContent() {
     const searchParams = useSearchParams();
@@ -87,38 +89,49 @@ function Stage2FormContent() {
             return;
         }
 
-        const formData = new FormData();
-        // Append Identity
-        formData.append('applicationId', identity.applicationId);
-        formData.append('firstName', identity.firstName);
-        formData.append('surname', identity.surname);
-        formData.append('email', identity.email);
-
-        // Append Files
-        Object.keys(files).forEach(key => {
-            const file = files[key];
-            if (file) {
-                formData.append(key, file);
-            }
-        });
-
         try {
+            // 1. Upload Files to Firebase Storage
+            const uploadedUrls: Record<string, string> = {};
+            const uploadPromises = Object.keys(files).map(async (key) => {
+                const file = files[key];
+                if (file) {
+                    const storageRef = ref(storage, `feb10_scholarship/${identity.applicationId}/${key}_${Date.now()}_${file.name}`);
+                    await uploadBytes(storageRef, file);
+                    const url = await getDownloadURL(storageRef);
+                    uploadedUrls[key] = url;
+                }
+            });
+
+            await Promise.all(uploadPromises);
+
+            // 2. Send Data to API
+            const payload = {
+                applicationId: identity.applicationId,
+                firstName: identity.firstName,
+                surname: identity.surname,
+                email: identity.email,
+                files: uploadedUrls
+            };
+
             const response = await fetch('/api/application/stage2', {
                 method: 'POST',
-                body: formData, // fetch automatically sets Content-Type to multipart/form-data
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
             });
 
             const result = await response.json();
 
             if (!response.ok) {
-                throw new Error(result.error || 'Upload failed');
+                throw new Error(result.error || 'Submission failed');
             }
 
             setIsSubmitted(true);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (err: any) {
             console.error(err);
-            setError(err.message || 'Upload failed. Please check your internet connection or try smaller files.');
+            setError(err.message || 'Upload failed. Please check your internet connection and try again.');
         } finally {
             setIsSubmitting(false);
         }
