@@ -1,5 +1,6 @@
 'use client';
 
+import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
 
 const videos = [
@@ -67,6 +68,8 @@ export default function MediaPage() {
                     ))}
                 </div>
             </section>
+                    <Footer/>
+
         </div>
     );
 }

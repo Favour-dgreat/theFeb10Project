@@ -57,7 +57,7 @@ const Section05 = () => {
                         <ul className="space-y-3">
                             <li><a href="/about" className="hover:text-white transition-colors">About Us</a></li>
                             <li><a href="/scholarship" className="hover:text-white transition-colors">Scholarships</a></li>
-                            <li><a href="/initiatives" className="hover:text-white transition-colors">Initiatives</a></li>
+                            <li><a href="https://growthcommunity.thefeb10project.org/" className="hover:text-white transition-colors">Initiatives</a></li>
                             <li><a href="/media" className="hover:text-white transition-colors">Media</a></li>
                             <li><a href="/volunteer" className="hover:text-white transition-colors">Volunteer</a></li>
                         </ul>

@@ -43,7 +43,7 @@ const Navbar = () => {
       subItems: [
         { name: 'Testimonials', href: '/media#testimonials' },
         { name: 'Videos', href: '/media#videos' },
-        { name: 'Social Links', href: '/media#social-links' }
+        { name: 'Social Links', href: '/socials' }
       ]
     },
   ];

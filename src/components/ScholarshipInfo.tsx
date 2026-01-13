@@ -167,19 +167,19 @@ const ScholarshipInfo = () => {
                     <ul className="list-none space-y-2 mb-4">
                         <li className="flex items-start gap-2">
                             <span className="text-black shrink-0 ">★</span>
-                            <span>Demonstrating a strong commitment to academic excellence through consistent effort and performance</span>
+                            <span className="text-gray-700">Demonstrating a strong commitment to academic excellence through consistent effort and performance</span>
                         </li>
                         <li className="flex items-start gap-2">
                             <span className="text-black shrink-0 ">★</span>
-                            <span>Disciplined, focused, and driven to succeed</span>
+                            <span className="text-gray-700">Disciplined, focused, and driven to succeed</span>
                         </li>
                         <li className="flex items-start gap-2">
                             <span className="text-black shrink-0 ">★</span>
-                            <span>Experiencing genuine financial challenges</span>
+                            <span className="text-gray-700">Experiencing genuine financial challenges</span>
                         </li>
                         <li className="flex items-start gap-2">
                             <span className="text-black shrink-0 ">★</span>
-                            <span>Eager to grow, learn, and positively impact their communities</span>
+                            <span className="text-gray-700">Eager to grow, learn, and positively impact their communities</span>
                         </li>
                     </ul>
                 </div>
