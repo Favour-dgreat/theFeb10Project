@@ -31,40 +31,45 @@ export async function POST(req: NextRequest) {
         };
 
         const htmlContent = `
-            <div style="text-align: center;">
-                <h1 style="color: #1a237e;">CONGRATULATIONS!</h1>
-                <h2 style="color: #f06436;">You are a FEB10 Scholar Finalist</h2>
-            </div>
-            
-            <p>Dear ${firstName} ${surname},</p>
-            
-            <p>We are absolutely thrilled to inform you that after a rigorous review process, you have been selected as a final recipient of the <strong>The FEB10 Project Scholarship</strong>.</p>
-            
-            <p>Your application stood out for its academic excellence, compelling story, and clear vision.</p>
-            
-            <div style="background-color: #fef3c7; border: 2px solid #f59e0b; padding: 20px; border-radius: 8px; margin: 30px 0;">
-                <h3 style="margin-top:0; color: #92400e;">🎉 GRAND ANNOUNCEMENT EVENT</h3>
-                <p>The official winners' ceremony and fund disbursement details will be announced live.</p>
-                <p><strong>Date:</strong> ${streamInfo.date}</p>
-                <p><strong>Time:</strong> ${streamInfo.time}</p>
-                <p><strong>Platform:</strong> ${streamInfo.platform}</p>
-                
-                <a href="${streamInfo.link}" style="display: block; width: fit-content; margin: 20px auto; padding: 15px 30px; background-color: #d946ef; color: white; text-decoration: none; border-radius: 30px; font-weight: bold; text-align: center;">
-                    SET REMINDER FOR LIVE STREAM
-                </a>
-            </div>
+            <div style="font-family: Arial, sans-serif; color: #333;">
+                <p>Dear ${firstName} ${surname},</p>
 
-            <p>Please ensure you are available and have a stable internet connection. We may call you live on air!</p>
-            
-            <p>Once again, congratulations. You represent the future.</p>
-            
-            <p>Warm Regards,<br>The FEB10 Project Team</p>
+                <p>We are pleased to inform you that after a careful and rigorous review process, your application has been successfully shortlisted, and you have advanced to the final stage of The FEB10 Project Scholarship selection process.</p>
+
+                <p>Your application stood out for your strong commitment to academics, clarity of purpose, and the effort reflected throughout your submission.</p>
+
+                <div style="background-color: #f8f9fa; border: 1px solid #e2e8f0; padding: 20px; border-radius: 12px; margin: 25px 0;">
+                    <h3 style="color: #2e3b86; margin-top: 0;">🎉 FINAL WINNERS ANNOUNCEMENT (LIVE)</h3>
+                    <p>The official scholarship recipients will be announced live during The FEB10 Project announcement event.</p>
+                    
+                    <p style="margin-bottom: 5px;"><strong>Date:</strong> Sunday, 15th February 2026</p>
+                    <p style="margin-bottom: 5px;"><strong>Time:</strong> To be announced</p>
+                    <p style="margin-bottom: 15px;"><strong>Platform:</strong> Live stream (details coming soon)</p>
+
+                    <div style="background-color: #fff3cd; border-left: 4px solid #f59e0b; padding: 15px; border-radius: 4px;">
+                        <p style="margin: 0; font-weight: bold; color: #854d0e;">📌 Important:</p>
+                        <p style="margin: 5px 0 0; font-size: 14px; color: #854d0e;">
+                            Specific details about the live stream — including the exact time and viewing links — will be shared across our official social media platforms: <br>
+                            <strong>@TheFEB10Project</strong>
+                        </p>
+                    </div>
+                </div>
+
+                <p>We encourage you to stay connected and watch out for updates as we approach the final announcement.</p>
+
+                <p>Thank you for being part of this journey, and we wish you the very best as we move into the final stage.</p>
+
+                <p style="margin-top: 30px;">
+                    Warm regards,<br>
+                    <strong>The FEB10 Project Team</strong>
+                </p>
+            </div>
         `;
 
         await client.send({
             from: { email: SENDER_EMAIL, name: "The FEB10 Project" },
             to: [{ email }],
-            subject: "OFFICIAL: You have been Selected!",
+            subject: "Congratulations! You’ve Advanced to the Final Stage – FEB10 Project Scholarship",
             html: htmlContent,
             category: "Winner Selection",
         });

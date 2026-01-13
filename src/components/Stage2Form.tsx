@@ -74,7 +74,6 @@ function Stage2FormContent() {
         if (!identity.applicationId || !identity.firstName || !identity.surname || !identity.email) {
             setError('Please fill in all Applicant Details (Name, Email, and ID) before submitting.');
             setIsSubmitting(false);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
             return;
         }
 
@@ -116,10 +115,10 @@ function Stage2FormContent() {
             }
 
             setIsSubmitted(true);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (err: any) {
             console.error(err);
             setError(err.message || 'Upload failed. Please check your internet connection or try smaller files.');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         } finally {
             setIsSubmitting(false);
         }

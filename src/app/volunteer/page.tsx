@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { CheckCircle2, User, Mail, Phone, MapPin, ArrowRight, Loader2 } from 'lucide-react';
 
@@ -42,6 +41,7 @@ export default function VolunteerPage() {
 
             if (res.ok) {
                 setStatus('success');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
                 const data = await res.json();
                 setErrorMessage(data.error || 'Something went wrong. Please try again.');

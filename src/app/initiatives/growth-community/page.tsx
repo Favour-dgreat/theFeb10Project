@@ -33,6 +33,7 @@ export default function GrowthCommunityPage() {
 
             if (res.ok) {
                 setStatus('success');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
                 const data = await res.json();
                 setErrorMessage(data.error || 'Something went wrong. Please try again.');

@@ -17,7 +17,7 @@ function Stage1FormContent() {
     const [formData, setFormData] = useState({
         matricNumber: '',
         department: '',
-        school:'',
+        school: '',
         level: '',
         cgpa: '',
         essay: ''
@@ -85,6 +85,7 @@ function Stage1FormContent() {
 
             // Success
             setIsSubmitted(true);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (err) {
             console.error(err);
             setError('Failed to submit application. Please try again.');

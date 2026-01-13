@@ -123,7 +123,7 @@ const ScholarshipInfo = () => {
             content: (
                 <div className="space-y-4 text-gray-700">
                     <p>
-                        The application deadline for the FEB10 Project 2026 Scholarship is <b>31st January 2026.</b>
+                        The application deadline for the FEB10 Project 2026 Scholarship is <b>10th February 2026.</b>
                     </p>
                     <p>
                         All updates and official announcements will be published on our website and social media platforms.
@@ -166,19 +166,19 @@ const ScholarshipInfo = () => {
                     <p className="font-semibold text-gray-800 mb-2">We are committed to supporting students who are:</p>
                     <ul className="list-none space-y-2 mb-4">
                         <li className="flex items-start gap-2">
-                            <span className="text-[#FFD700] shrink-0 ">★</span>
+                            <span className="text-black shrink-0 ">★</span>
                             <span>Demonstrating a strong commitment to academic excellence through consistent effort and performance</span>
                         </li>
                         <li className="flex items-start gap-2">
-                            <span className="text-[#FFD700] shrink-0 ">★</span>
+                            <span className="text-black shrink-0 ">★</span>
                             <span>Disciplined, focused, and driven to succeed</span>
                         </li>
                         <li className="flex items-start gap-2">
-                            <span className="text-[#FFD700] shrink-0 ">★</span>
+                            <span className="text-black shrink-0 ">★</span>
                             <span>Experiencing genuine financial challenges</span>
                         </li>
                         <li className="flex items-start gap-2">
-                            <span className="text-[#FFD700] shrink-0 ">★</span>
+                            <span className="text-black shrink-0 ">★</span>
                             <span>Eager to grow, learn, and positively impact their communities</span>
                         </li>
                     </ul>
