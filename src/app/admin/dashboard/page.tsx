@@ -42,6 +42,23 @@ export default function AdminDashboard() {
     }, [isAuthenticated]);
 
     // Actions
+    const handleInviteStage1 = async (appId: string) => {
+        if (!confirm('Send Stage 1 invitation/reminder to this applicant?')) return;
+
+        try {
+            const res = await fetch('/api/admin/invite-stage1', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ applicationId: appId })
+            });
+            if (res.ok) alert('Invitation sent successfully!');
+            else alert('Failed to send invitation');
+        } catch (e) {
+            console.error(e);
+            alert('Error sending invitation');
+        }
+    };
+
     const handleInviteStage2 = async (appId: string) => {
         if (!confirm('Are you sure you want to invite this applicant to Stage 2?')) return;
 
@@ -161,9 +178,14 @@ export default function AdminDashboard() {
                             <thead className="bg-gray-50 border-b">
                                 <tr>
                                     <th className="p-4 text-xs font-bold text-gray-500 uppercase">Applicant</th>
+                                    <th className="p-4 text-xs font-bold text-gray-500 uppercase">Joined</th>
                                     <th className="p-4 text-xs font-bold text-gray-500 uppercase">Status</th>
+                                    <th className="p-4 text-xs font-bold text-gray-500 uppercase">Stage 0 Info</th>
                                     <th className="p-4 text-xs font-bold text-gray-500 uppercase">Stage 1 Info</th>
                                     <th className="p-4 text-xs font-bold text-gray-500 uppercase">Stage 2 Info</th>
+                                    <th className="p-4 text-xs font-bold text-gray-500 uppercase">S0 Email</th>
+                                    <th className="p-4 text-xs font-bold text-gray-500 uppercase">S1 Email</th>
+                                    <th className="p-4 text-xs font-bold text-gray-500 uppercase">S2 Email</th>
                                     <th className="p-4 text-xs font-bold text-gray-500 uppercase">Actions</th>
                                 </tr>
                             </thead>
@@ -181,14 +203,53 @@ export default function AdminDashboard() {
                                                 <div className="text-xs font-mono text-gray-400 mt-1">{app.applicationId}</div>
                                             </td>
                                             <td className="p-4">
+                                                <div className="text-xs text-gray-600">
+                                                    {app.createdAt ? new Date(app.createdAt).toLocaleDateString() : '-'}
+                                                </div>
+                                                <div className="text-[10px] text-gray-400">
+                                                    {app.createdAt ? new Date(app.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}
+                                                </div>
+                                            </td>
+                                            <td className="p-4">
                                                 <span className={`px-3 py-1 rounded-full text-xs font-bold ${app.status === 'SELECTED_WINNER' ? 'bg-green-100 text-green-700' :
-                                                        app.status === 'STAGE_2_INVITED' ? 'bg-purple-100 text-purple-700' :
+                                                    app.status === 'STAGE_2_INVITED' ? 'bg-purple-100 text-purple-700' :
+                                                        app.status === 'STAGE_1_INVITED' ? 'bg-blue-100 text-blue-700' :
                                                             app.status === 'STAGE_1_SUBMITTED' ? 'bg-yellow-100 text-yellow-800' :
                                                                 app.stage2?.status === 'UNDER_REVIEW' ? 'bg-orange-100 text-orange-800' :
                                                                     'bg-gray-100 text-gray-600'
                                                     }`}>
                                                     {app.stage2?.status === 'UNDER_REVIEW' ? 'S2 SUBMITTED' : app.status?.replace(/_/g, ' ')}
                                                 </span>
+                                            </td>
+                                            <td className="p-4 text-sm text-gray-600">
+                                                <div className="font-semibold text-gray-900">{app.firstName} {app.stage0?.middleName ? `${app.stage0.middleName} ` : ''}{app.surname}</div>
+                                                <div className="text-xs text-blue-600">{app.email}</div>
+                                                {app.stage0 && (
+                                                    <div className="mt-2 text-[10px] space-y-0.5 border-t pt-2">
+                                                        <div className="flex justify-between"><span>Phone:</span> <span className="font-medium text-gray-800">{app.stage0.phone}</span></div>
+                                                        <div className="flex justify-between"><span>Gender:</span> <span className="font-medium text-gray-800">{app.stage0.gender}</span></div>
+                                                        <div className="flex justify-between"><span>State Of Residence:</span> <span className="font-medium text-gray-800">{app.stage0.stateOfResidence}</span></div>
+
+                                                        {!app.stage0.migrated ? (
+                                                            <div className="mt-1 pt-1 border-t text-[9px] grid grid-cols-2 gap-1">
+                                                                <div className={app.stage0.isEnrolled ? 'text-green-600 font-bold' : 'text-red-500'}>
+                                                                    {app.stage0.isEnrolled ? '✓ FUTA' : '✗ Not FUTA'}
+                                                                </div>
+                                                                <div className={app.stage0.agreesToProcess ? 'text-green-600 font-bold' : 'text-red-500'}>
+                                                                    {app.stage0.agreesToProcess ? '✓ Process' : '✗ Process'}
+                                                                </div>
+                                                                <div className={app.stage0.consentCommunication ? 'text-blue-600' : 'text-gray-400'}>
+                                                                    {app.stage0.consentCommunication ? '✓ Email' : '✗ Email'}
+                                                                </div>
+                                                                <div className={app.stage0.consentInstructions ? 'text-blue-600' : 'text-gray-400'}>
+                                                                    {app.stage0.consentInstructions ? '✓ Instr.' : '✗ Instr.'}
+                                                                </div>
+                                                            </div>
+                                                        ) : (
+                                                            <div className="mt-1 text-gray-400 italic text-[9px]">Migrated record (missing detail)</div>
+                                                        )}
+                                                    </div>
+                                                )}
                                             </td>
                                             <td className="p-4 text-sm text-gray-600 max-w-xs">
                                                 {app.stage1 ? (
@@ -214,7 +275,43 @@ export default function AdminDashboard() {
                                                 ) : <span className="text-gray-400 italic text-xs">No files</span>}
                                             </td>
                                             <td className="p-4">
+                                                {app.emailStatus === 'SENT' ? (
+                                                    <span className="text-green-600 font-bold text-xs" title="Enrollment notification sent to applicant and admin">SENT</span>
+                                                ) : app.emailStatus === 'FAILED' ? (
+                                                    <span className="text-red-500 font-bold text-xs">FAILED</span>
+                                                ) : app.emailStatus === 'PENDING' ? (
+                                                    <span className="text-yellow-600 font-bold text-xs animate-pulse">PENDING</span>
+                                                ) : <span className="text-gray-400 text-xs">-</span>}
+                                            </td>
+                                            <td className="p-4">
+                                                {app.stage1?.emailStatus === 'SENT' ? (
+                                                    <span className="text-green-600 font-bold text-xs">SENT</span>
+                                                ) : app.stage1?.emailStatus === 'FAILED' ? (
+                                                    <span className="text-red-500 font-bold text-xs">FAILED</span>
+                                                ) : app.stage1?.emailStatus === 'PENDING' ? (
+                                                    <span className="text-yellow-600 font-bold text-xs">PENDING</span>
+                                                ) : <span className="text-gray-400 text-xs">-</span>}
+                                            </td>
+                                            <td className="p-4">
+                                                {app.stage2?.emailStatus === 'SENT' ? (
+                                                    <span className="text-green-600 flex items-center gap-1 text-xs font-bold">SENT</span>
+                                                ) : app.stage2?.emailStatus === 'FAILED' ? (
+                                                    <span className="text-red-500 flex items-center gap-1 text-xs font-bold">FAILED</span>
+                                                ) : app.stage2?.emailStatus === 'PENDING' ? (
+                                                    <span className="text-yellow-600 flex items-center gap-1 text-xs font-bold">PENDING</span>
+                                                ) : <span className="text-gray-400 text-xs">-</span>}
+                                            </td>
+                                            <td className="p-4">
                                                 <div className="flex flex-col space-y-2">
+                                                    {(app.status === 'ENROLLED' || app.status === 'STAGE_1_INVITED') && (
+                                                        <button
+                                                            onClick={() => handleInviteStage1(app.applicationId)}
+                                                            className="bg-blue-600 text-white px-3 py-2 rounded text-xs font-bold hover:bg-blue-700"
+                                                        >
+                                                            {app.status === 'STAGE_1_INVITED' ? 'Resend Invite S1' : 'Invite Stage 1'}
+                                                        </button>
+                                                    )}
+
                                                     {app.status === 'STAGE_1_SUBMITTED' && (
                                                         <button
                                                             onClick={() => handleInviteStage2(app.applicationId)}

@@ -1,49 +1,95 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { MailtrapClient } from 'mailtrap';
 import { db } from '@/lib/firebase';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, query, where, getDocs, doc, updateDoc } from 'firebase/firestore';
 
 // Initialize Mailtrap client
 const TOKEN = process.env.MailtrapAPIkey || "";
 const client = new MailtrapClient({ token: TOKEN });
 
-const SENDER_EMAIL = "applications@thefeb10project.org"; // Use a verified sender in Mailtrap or placeholder
+const SENDER_EMAIL = "applications@thefeb10project.org";
 
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
-        const { firstName, surname, email } = body;
+        console.log("[Enrollment API] Incoming Body:", body);
+        const {
+            firstName: rawFirstName,
+            surname: rawSurname,
+            email: rawEmail,
+            middleName,
+            phone,
+            gender,
+            stateOfResidence,
+            isEnrolled,
+            agreesToProcess,
+            consentCommunication,
+            consentInstructions
+        } = body;
+
+        // 1. Sanitization & Validation
+        const firstName = rawFirstName?.trim();
+        const surname = rawSurname?.trim();
+        const email = rawEmail?.trim().toLowerCase();
 
         if (!firstName || !surname || !email) {
             return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
         }
 
-        // Generate unique Application ID
+        const applicationsRef = collection(db, "applications");
+
+        // 2. Duplicate Check (Stage 0)
+        // Check by Email
+        const qEmail = query(applicationsRef, where('email', '==', email));
+        const emailSnap = await getDocs(qEmail);
+
+        if (!emailSnap.empty) {
+            return NextResponse.json({
+                error: 'An application with this email already exists.'
+            }, { status: 409 });
+        }
+
+        // Check by Name (Basic identity protection)
+        const qName = query(applicationsRef,
+            where('firstName', '==', firstName),
+            where('surname', '==', surname)
+        );
+        const nameSnap = await getDocs(qName);
+
+        if (!nameSnap.empty) {
+            return NextResponse.json({
+                error: 'An application with this name already exists.'
+            }, { status: 409 });
+        }
+
+        // 3. Generate unique Application ID
         const applicationId = `FEB-${Date.now().toString().slice(-6)}-${Math.random().toString(36).substring(2, 5).toUpperCase()}`;
 
-        // Save to Firebase
-        await addDoc(collection(db, "applications"), {
+        // 4. Save to Firebase with Status tracking
+        const docRef = await addDoc(applicationsRef, {
             applicationId,
             firstName,
             surname,
             email,
+            stage0: {
+                middleName: middleName || "",
+                phone: phone || "",
+                gender: gender || "",
+                stateOfResidence: stateOfResidence || "",
+                isEnrolled: isEnrolled || false,
+                agreesToProcess: agreesToProcess || false,
+                consentCommunication: consentCommunication || false,
+                consentInstructions: consentInstructions || false
+            },
             currentStage: 0,
             status: "ENROLLED",
+            emailStatus: "PENDING", // Stage 0 Enrollment Email status
             createdAt: new Date().toISOString()
         });
 
-        // Send Email via Mailtrap
-        const sender = {
-            email: SENDER_EMAIL,
-            name: "The FEB10 Project Team",
-        };
-        const recipients = [
-            {
-                email: email,
-            }
-        ];
+        const finalDocId = docRef.id;
 
-        // Create the Stage 1 Link with query parameters to carry over user context
+        // 5. Create the Stage 1 Link
         const stage1Url = new URL("https://www.thefeb10project.org/application/stage1");
         stage1Url.searchParams.append("applicationId", applicationId);
         stage1Url.searchParams.append("email", email);
@@ -52,7 +98,16 @@ export async function POST(req: NextRequest) {
 
         const stage1Link = stage1Url.toString();
 
-        const htmlContent = `
+        // 6. IMMEDIATELY return success to the user
+        const response = NextResponse.json({
+            success: true,
+            applicationId
+        });
+
+        // 7. Background Email Sending (Stage 0)
+        (async () => {
+            try {
+                const htmlContent = `
 <!DOCTYPE html>
 <html>
 <head>
@@ -124,44 +179,52 @@ export async function POST(req: NextRequest) {
     </div>
 </body>
 </html>
-        `;
+                `;
 
-        // Send confirmation to Applicant
-        await client.send({
-            from: sender,
-            to: recipients,
-            subject: "Your FEB10 Project Scholarship Application – Next Step Required",
-            text: `Dear ${firstName} ${surname},\n\nYour application has been received. Your ID is ${applicationId}.\n\nNext Step: Watch Orientation Video 1 here: ${stage1Link}`,
-            html: htmlContent,
-            category: "Scholarship Enrollment",
-        });
+                // Applicant Email
+                await client.send({
+                    from: { email: SENDER_EMAIL, name: "The FEB10 Project Team" },
+                    to: [{ email: email }],
+                    subject: "Your FEB10 Project Scholarship Application – Next Step Required",
+                    text: `Dear ${firstName} ${surname},\n\nYour application has been received. Your ID is ${applicationId}.\n\nNext Step: Watch Orientation Video 1 here: ${stage1Link}`,
+                    html: htmlContent,
+                    category: "Scholarship Enrollment",
+                });
 
-        // Send Notification to Admins
-        const adminHtml = `
-            <h2>New Scholarship Enrollment</h2>
-            <p><strong>Name:</strong> ${firstName} ${surname}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Application ID:</strong> ${applicationId}</p>
-            <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
-        `;
+                // Admin Notification
+                const adminHtml = `
+                    <h2>New Scholarship Enrollment</h2>
+                    <p><strong>Name:</strong> ${firstName} ${surname}</p>
+                    <p><strong>Email:</strong> ${email}</p>
+                    <p><strong>Application ID:</strong> ${applicationId}</p>
+                    <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
+                `;
 
-        await client.send({
-            from: { email: SENDER_EMAIL, name: "Scholarship System" },
-            to: [{ email: "applications@thefeb10project.org" }],
-            cc: [{ email: "admin@thefeb10project.org" }],
-            subject: `New Enrollment: ${firstName} ${surname}`,
-            text: `New Enrollment\nName: ${firstName} ${surname}\nEmail: ${email}\nID: ${applicationId}`,
-            html: adminHtml,
-            category: "New Enrollment Notification",
-        });
+                await client.send({
+                    from: { email: SENDER_EMAIL, name: "Scholarship System" },
+                    to: [{ email: "applications@thefeb10project.org" }],
+                    cc: [{ email: "admin@thefeb10project.org" }],
+                    subject: `New Enrollment: ${firstName} ${surname}`,
+                    text: `New Enrollment\nName: ${firstName} ${surname}\nEmail: ${email}\nID: ${applicationId}`,
+                    html: adminHtml,
+                    category: "New Enrollment Notification",
+                });
 
-        return NextResponse.json({
-            success: true,
-            applicationId
-        });
+                // Update status to SENT
+                const applicationRef = doc(db, 'applications', finalDocId);
+                await updateDoc(applicationRef, { emailStatus: 'SENT' });
+
+            } catch (emailError) {
+                console.error("Async Enrollment Email Error:", emailError);
+                const applicationRef = doc(db, 'applications', finalDocId);
+                await updateDoc(applicationRef, { emailStatus: 'FAILED' });
+            }
+        })();
+
+        return response;
 
     } catch (error: any) {
-        console.error("Mailtrap Error:", error);
+        console.error("Enrollment Critical Error:", error);
         return NextResponse.json({ error: 'Failed to process application' }, { status: 500 });
     }
 }

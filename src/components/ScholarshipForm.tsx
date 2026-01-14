@@ -13,7 +13,7 @@ const ScholarshipForm = () => {
         email: '',
         phone: '',
         gender: '',
-        state: '',
+        stateOfResidence: '',
 
         // Step 2
         isEnrolled: null as boolean | null,
@@ -68,6 +68,7 @@ const ScholarshipForm = () => {
 
         setIsSubmitting(true);
         setError('');
+        console.log("[ScholarshipForm] Submitting Payload:", formData);
 
         try {
             const response = await fetch('/api/scholarship/submit', {
@@ -232,8 +233,8 @@ const ScholarshipForm = () => {
                         <div>
                             <label className="block text-xs font-semibold text-gray-600 mb-1 uppercase">State of Residence</label>
                             <select
-                                name="state"
-                                value={formData.state}
+                                name="stateOfResidence"
+                                value={formData.stateOfResidence}
                                 onChange={handleInputChange}
                                 className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all bg-white text-black"
                             >
@@ -425,7 +426,7 @@ const ScholarshipForm = () => {
 
                                     // Step 1 Validation
                                     if (currentStep === 1) {
-                                        if (!formData.firstName || !formData.surname || !formData.email || !formData.phone || !formData.gender || !formData.state) {
+                                        if (!formData.firstName || !formData.surname || !formData.email || !formData.phone || !formData.gender || !formData.stateOfResidence) {
                                             setError("Please fill in all required fields.");
                                             return;
                                         }

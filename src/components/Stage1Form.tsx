@@ -86,9 +86,9 @@ function Stage1FormContent() {
             // Success
             setIsSubmitted(true);
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        } catch (err) {
+        } catch (err: any) {
             console.error(err);
-            setError('Failed to submit application. Please try again.');
+            setError(err.message || 'Failed to submit application. Please try again.');
         } finally {
             setIsSubmitting(false);
         }
