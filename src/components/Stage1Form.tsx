@@ -141,7 +141,7 @@ function Stage1FormContent() {
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label className="block text-sm font-bold text-gray-700 mb-2">Matriculation Number</label>
+                        <label className="block text-sm text-black font-bold text-gray-700 mb-2">Matriculation Number</label>
                         <input
                             type="text"
                             name="matricNumber"
@@ -152,7 +152,7 @@ function Stage1FormContent() {
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-bold text-gray-700 mb-2">School/Faculty</label>
+                        <label className="block text-sm text-black font-bold text-gray-700 mb-2">School/Faculty</label>
                         <input
                             type="text"
                             name="school"
@@ -163,7 +163,7 @@ function Stage1FormContent() {
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-bold text-gray-700 mb-2">Department</label>
+                        <label className="block text-sm text-black font-bold text-gray-700 mb-2">Department</label>
                         <input
                             type="text"
                             name="department"
@@ -177,12 +177,12 @@ function Stage1FormContent() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label className="block text-sm font-bold text-gray-700 mb-2">Level</label>
+                        <label className="block text-sm text-black font-bold text-gray-700 mb-2">Level</label>
                         <select
                             name="level"
                             value={formData.level}
                             onChange={handleInputChange}
-                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#f06436] focus:border-transparent outline-none bg-white"
+                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#f06436] focus:border-transparent outline-none bg-white text-black"
                         >
                             <option value="">Select Level</option>
                             <option value="100">100 Level</option>
@@ -216,7 +216,7 @@ function Stage1FormContent() {
                         value={formData.essay}
                         onChange={handleInputChange}
                         rows={5}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#f06436] focus:border-transparent outline-none resize-none"
+                        className="w-full text-black p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#f06436] focus:border-transparent outline-none resize-none"
                         placeholder="Start typing here..."
                     ></textarea>
                 </div>
