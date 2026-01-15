@@ -32,14 +32,6 @@ export async function POST(req: NextRequest) {
         );
         const emailSnap = await getDocs(qEmail);
 
-        // Check Name
-        const qName = query(applicationsRef,
-            where('firstName', '==', firstName),
-            where('surname', '==', surname),
-            where('status', '==', 'STAGE_1_SUBMITTED')
-        );
-        const nameSnap = await getDocs(qName);
-
         // Check Matric
         const qMatric = query(applicationsRef,
             where('stage1.matricNumber', '==', matricNumber),
@@ -47,7 +39,7 @@ export async function POST(req: NextRequest) {
         );
         const matricSnap = await getDocs(qMatric);
 
-        if (!emailSnap.empty || !nameSnap.empty || !matricSnap.empty) {
+        if (!emailSnap.empty || !matricSnap.empty) {
             return NextResponse.json({
                 error: 'Your record already exists. Multiple submissions are not allowed.'
             }, { status: 409 });

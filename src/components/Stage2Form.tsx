@@ -227,7 +227,7 @@ function Stage2FormContent() {
                                 type="text"
                                 value={identity.firstName}
                                 onChange={(e) => setIdentity(prev => ({ ...prev, firstName: e.target.value }))}
-                                className="w-full p-2 text-sm border border-blue-200 rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                                className="w-full p-2 text-sm border text-black border-blue-200 rounded focus:ring-2 focus:ring-blue-500 outline-none"
                                 placeholder="Enter First Name"
                             />
                         </div>
@@ -237,7 +237,7 @@ function Stage2FormContent() {
                                 type="text"
                                 value={identity.surname}
                                 onChange={(e) => setIdentity(prev => ({ ...prev, surname: e.target.value }))}
-                                className="w-full p-2 text-sm border border-blue-200 rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                                className="w-full p-2 text-sm border text-black border-blue-200 rounded focus:ring-2 focus:ring-blue-500 outline-none"
                                 placeholder="Enter Surname"
                             />
                         </div>
@@ -247,7 +247,7 @@ function Stage2FormContent() {
                                 type="email"
                                 value={identity.email}
                                 onChange={(e) => setIdentity(prev => ({ ...prev, email: e.target.value }))}
-                                className="w-full p-2 text-sm border border-blue-200 rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                                className="w-full p-2 text-sm border text-black border-blue-200 rounded focus:ring-2 focus:ring-blue-500 outline-none"
                                 placeholder="Enter Email"
                             />
                         </div>
@@ -257,7 +257,7 @@ function Stage2FormContent() {
                                 type="text"
                                 value={identity.applicationId}
                                 onChange={(e) => setIdentity(prev => ({ ...prev, applicationId: e.target.value }))}
-                                className="w-full p-2 text-sm border border-blue-200 rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                                className="w-full p-2 text-sm border text-black border-blue-200 rounded focus:ring-2 focus:ring-blue-500 outline-none"
                                 placeholder="e.g. FEB10-..."
                             />
                         </div>
