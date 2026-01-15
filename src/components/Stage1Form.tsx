@@ -147,7 +147,7 @@ function Stage1FormContent() {
                             name="matricNumber"
                             value={formData.matricNumber}
                             onChange={handleInputChange}
-                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#f06436] focus:border-transparent outline-none"
+                            className="w-full text-black p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#f06436] focus:border-transparent outline-none"
                             placeholder="e.g. AAA/00/0000"
                         />
                     </div>
@@ -158,7 +158,7 @@ function Stage1FormContent() {
                             name="school"
                             value={formData.school}
                             onChange={handleInputChange}
-                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#f06436] focus:border-transparent outline-none"
+                            className="w-full text-black p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#f06436] focus:border-transparent outline-none"
                             placeholder="Your School/Faculty"
                         />
                     </div>
@@ -169,7 +169,7 @@ function Stage1FormContent() {
                             name="department"
                             value={formData.department}
                             onChange={handleInputChange}
-                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#f06436] focus:border-transparent outline-none"
+                            className="w-full text-black p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#f06436] focus:border-transparent outline-none"
                             placeholder="Your Department"
                         />
                     </div>
@@ -182,7 +182,7 @@ function Stage1FormContent() {
                             name="level"
                             value={formData.level}
                             onChange={handleInputChange}
-                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#f06436] focus:border-transparent outline-none bg-white text-black"
+                            className="w-full text-black p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#f06436] focus:border-transparent outline-none bg-white text-black"
                         >
                             <option value="">Select Level</option>
                             <option value="100">100 Level</option>
@@ -202,7 +202,7 @@ function Stage1FormContent() {
                             name="cgpa"
                             value={formData.cgpa}
                             onChange={handleInputChange}
-                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#f06436] focus:border-transparent outline-none"
+                            className="w-full text-black p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#f06436] focus:border-transparent outline-none"
                             placeholder="e.g. 3.50"
                         />
                     </div>
