@@ -128,7 +128,6 @@ function Stage2FormContent() {
             }
 
             setIsSubmitted(true);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (err: any) {
             console.error(err);
             setError(err.message || 'Upload failed. Please check your internet connection and try again.');

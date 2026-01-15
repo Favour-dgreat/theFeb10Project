@@ -38,7 +38,6 @@ export async function POST(req: NextRequest) {
 
         const applicationsRef = collection(db, "applications");
 
-        // 2. Duplicate Check (Stage 0)
         // Check by Email
         const qEmail = query(applicationsRef, where('email', '==', email));
         const emailSnap = await getDocs(qEmail);
@@ -46,19 +45,6 @@ export async function POST(req: NextRequest) {
         if (!emailSnap.empty) {
             return NextResponse.json({
                 error: 'An application with this email already exists.'
-            }, { status: 409 });
-        }
-
-        // Check by Name (Basic identity protection)
-        const qName = query(applicationsRef,
-            where('firstName', '==', firstName),
-            where('surname', '==', surname)
-        );
-        const nameSnap = await getDocs(qName);
-
-        if (!nameSnap.empty) {
-            return NextResponse.json({
-                error: 'An application with this name already exists.'
             }, { status: 409 });
         }
 

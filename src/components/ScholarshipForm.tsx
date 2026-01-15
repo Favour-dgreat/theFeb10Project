@@ -84,7 +84,6 @@ const ScholarshipForm = () => {
             if (response.ok) {
                 setApplicationId(result.applicationId);
                 setIsSubmitted(true);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
                 setError(result.error || "Submission failed. Please try again.");
             }
@@ -296,7 +295,7 @@ const ScholarshipForm = () => {
                                 Are you a currently enrolled undergraduate student at The Federal University of Technology, Akure?
                             </p>
                             <div className="flex gap-4">
-                                <label className="flex items-center gap-2 cursor-pointer">
+                                <label className="flex items-center text-black gap-2 cursor-pointer">
                                     <input
                                         type="radio"
                                         name="isEnrolled"
@@ -306,7 +305,7 @@ const ScholarshipForm = () => {
                                     />
                                     <span>Yes</span>
                                 </label>
-                                <label className="flex items-center gap-2 cursor-pointer">
+                                <label className="flex items-center text-black gap-2 cursor-pointer">
                                     <input
                                         type="radio"
                                         name="isEnrolled"

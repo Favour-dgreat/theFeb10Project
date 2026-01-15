@@ -85,7 +85,6 @@ function Stage1FormContent() {
 
             // Success
             setIsSubmitted(true);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (err: any) {
             console.error(err);
             setError(err.message || 'Failed to submit application. Please try again.');
@@ -211,7 +210,7 @@ function Stage1FormContent() {
 
                 <div>
                     <label className="block text-sm font-bold text-gray-700 mb-2">Why do you need this scholarship?</label>
-                    <p className="text-xs text-gray-500 mb-2">Briefly explain your financial situation and how this scholarship will assist you (Max 200 words).</p>
+                    <p className="text-xs text-gray-500 mb-2">Briefly explain your financial situation and how this scholarship will assist you (Max 250 - 400 words).</p>
                     <textarea
                         name="essay"
                         value={formData.essay}
