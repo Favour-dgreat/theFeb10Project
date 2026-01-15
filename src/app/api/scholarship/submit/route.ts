@@ -98,16 +98,10 @@ export async function POST(req: NextRequest) {
 
         const stage1Link = stage1Url.toString();
 
-        // 6. IMMEDIATELY return success to the user
-        const response = NextResponse.json({
-            success: true,
-            applicationId
-        });
-
-        // 7. Background Email Sending (Stage 0)
-        (async () => {
-            try {
-                const htmlContent = `
+        // 6. Send Applicant Email SYNCHRONOUSLY to ensure delivery
+        // This prevents the serverless function from terminating before the email is sent
+        try {
+            const htmlContent = `
 <!DOCTYPE html>
 <html>
 <head>
@@ -181,47 +175,58 @@ export async function POST(req: NextRequest) {
 </html>
                 `;
 
-                // Applicant Email
-                await client.send({
-                    from: { email: SENDER_EMAIL, name: "The FEB10 Project Team" },
-                    to: [{ email: email }],
-                    subject: "Your FEB10 Project Scholarship Application – Next Step Required",
-                    text: `Dear ${firstName} ${surname},\n\nYour application has been received. Your ID is ${applicationId}.\n\nNext Step: Watch Orientation Video 1 here: ${stage1Link}`,
-                    html: htmlContent,
-                    category: "Scholarship Enrollment",
-                });
+            await client.send({
+                from: { email: SENDER_EMAIL, name: "The FEB10 Project Team" },
+                to: [{ email: email }],
+                subject: "Your FEB10 Project Scholarship Application – Next Step Required",
+                text: `Dear ${firstName} ${surname},\n\nYour application has been received. Your ID is ${applicationId}.\n\nNext Step: Watch Orientation Video 1 here: ${stage1Link}`,
+                html: htmlContent,
+                category: "Scholarship Enrollment",
+            });
 
-                // Admin Notification
-                const adminHtml = `
-                    <h2>New Scholarship Enrollment</h2>
-                    <p><strong>Name:</strong> ${firstName} ${surname}</p>
-                    <p><strong>Email:</strong> ${email}</p>
-                    <p><strong>Application ID:</strong> ${applicationId}</p>
-                    <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
-                `;
+            // Update status to SENT
+            const applicationRef = doc(db, 'applications', finalDocId);
+            await updateDoc(applicationRef, { emailStatus: 'SENT' });
 
-                await client.send({
-                    from: { email: SENDER_EMAIL, name: "Scholarship System" },
-                    to: [{ email: "applications@thefeb10project.org" }],
-                    cc: [{ email: "admin@thefeb10project.org" }],
-                    subject: `New Enrollment: ${firstName} ${surname}`,
-                    text: `New Enrollment\nName: ${firstName} ${surname}\nEmail: ${email}\nID: ${applicationId}`,
-                    html: adminHtml,
-                    category: "New Enrollment Notification",
-                });
+            // 7. Background Admin Notification (Optional/Best Effort)
+            (async () => {
+                try {
+                    const adminHtml = `
+                        <h2>New Scholarship Enrollment</h2>
+                        <p><strong>Name:</strong> ${firstName} ${surname}</p>
+                        <p><strong>Email:</strong> ${email}</p>
+                        <p><strong>Application ID:</strong> ${applicationId}</p>
+                        <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
+                    `;
 
-                // Update status to SENT
-                const applicationRef = doc(db, 'applications', finalDocId);
-                await updateDoc(applicationRef, { emailStatus: 'SENT' });
+                    await client.send({
+                        from: { email: SENDER_EMAIL, name: "Scholarship System" },
+                        to: [{ email: "applications@thefeb10project.org" }],
+                        cc: [{ email: "admin@thefeb10project.org" }],
+                        subject: `New Enrollment: ${firstName} ${surname}`,
+                        text: `New Enrollment\nName: ${firstName} ${surname}\nEmail: ${email}\nID: ${applicationId}`,
+                        html: adminHtml,
+                        category: "New Enrollment Notification",
+                    });
+                } catch (adminError) {
+                    console.error("Admin Notification Background Error:", adminError);
+                }
+            })();
 
-            } catch (emailError) {
-                console.error("Async Enrollment Email Error:", emailError);
-                const applicationRef = doc(db, 'applications', finalDocId);
-                await updateDoc(applicationRef, { emailStatus: 'FAILED' });
-            }
-        })();
+        } catch (emailError: any) {
+            console.error("Enrollment Email Error:", emailError);
+            // Update status to FAILED with error message
+            const applicationRef = doc(db, 'applications', finalDocId);
+            await updateDoc(applicationRef, {
+                emailStatus: 'FAILED',
+                emailError: emailError?.message || String(emailError)
+            });
+        }
 
-        return response;
+        return NextResponse.json({
+            success: true,
+            applicationId
+        });
 
     } catch (error: any) {
         console.error("Enrollment Critical Error:", error);
