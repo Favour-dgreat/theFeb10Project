@@ -328,7 +328,7 @@ const ScholarshipForm = () => {
                                 Do you agree to follow the full multi-step application process, including video orientation and document verification?
                             </p>
                             <div className="flex gap-4">
-                                <label className="flex items-center gap-2 cursor-pointer">
+                                <label className="flex text-black items-center gap-2 cursor-pointer">
                                     <input
                                         type="radio"
                                         name="agreesToProcess"
