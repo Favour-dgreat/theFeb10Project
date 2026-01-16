@@ -11,14 +11,14 @@ const SENDER_EMAIL = "applications@thefeb10project.org";
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
-        const { matricNumber: rawMatric, department, level, cgpa, essay, firstName: rawFirstName, surname: rawSurname, email: rawEmail, applicationId } = body;
+        const { school, phone, matricNumber: rawMatric, department, level, cgpa, essay, firstName: rawFirstName, surname: rawSurname, email: rawEmail, applicationId } = body;
 
         const matricNumber = rawMatric?.trim().toUpperCase();
         const firstName = rawFirstName?.trim();
         const surname = rawSurname?.trim();
         const email = rawEmail?.trim().toLowerCase();
 
-        if (!matricNumber || !department || !level || !cgpa || !essay || !firstName || !surname || !email) {
+        if (!school || !phone || !matricNumber || !department || !level || !cgpa || !essay || !firstName || !surname || !email) {
             return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
         }
 
@@ -48,9 +48,12 @@ export async function POST(req: NextRequest) {
         // 2. Prepare Database Update
         let finalDocId = null;
         const updateData = {
+            'stage0.phone': phone, // Back-fill missing Stage 0 data
             stage1: {
                 matricNumber,
+                school,
                 department,
+                phone, // Record in Stage 1 as well
                 level,
                 cgpa,
                 essay,
@@ -75,6 +78,7 @@ export async function POST(req: NextRequest) {
         if (!finalDocId) {
             const newDoc = await addDoc(applicationsRef, {
                 ...updateData,
+                'stage0.phone': phone,
                 applicationId: applicationId || `GEN-${Date.now()}`,
                 firstName,
                 surname,
@@ -134,6 +138,7 @@ export async function POST(req: NextRequest) {
             
             <h3>Academic Information</h3>
             <p><strong>Matric Number:</strong> ${matricNumber}</p>
+            <p><strong>School/Faculty:</strong> ${school}</p>
             <p><strong>Department:</strong> ${department}</p>
             <p><strong>Level:</strong> ${level}</p>
             <p><strong>CGPA:</strong> ${cgpa}</p>

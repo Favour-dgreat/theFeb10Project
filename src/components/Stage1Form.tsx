@@ -15,6 +15,7 @@ function Stage1FormContent() {
     });
 
     const [formData, setFormData] = useState({
+        phone: '',
         matricNumber: '',
         department: '',
         school: '',
@@ -57,7 +58,7 @@ function Stage1FormContent() {
         setError('');
 
         // Basic Validation
-        if (!formData.matricNumber || !formData.department || !formData.level || !formData.cgpa || !formData.essay) {
+        if (!formData.phone || !formData.matricNumber || !formData.department || !formData.level || !formData.cgpa || !formData.essay) {
             setError('Please fill in all fields.');
             setIsSubmitting(false);
             return;
@@ -139,6 +140,20 @@ function Stage1FormContent() {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="p-4 bg-gray-50 rounded-lg border border-gray-200 mb-6">
+                    <label className="block text-sm text-black font-bold text-gray-700 mb-2">Primary Phone Number (WhatsApp preferred)</label>
+                    <input
+                        type="tel"
+                        name="phone"
+                        required
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        className="w-full text-black p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#f06436] focus:border-transparent outline-none bg-white"
+                        placeholder="e.g. 08012345678"
+                    />
+                    <p className="text-xs text-gray-500 mt-2">Required: This will be our primary way of contacting you for updates.</p>
+                </div>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label className="block text-sm text-black font-bold text-gray-700 mb-2">Matriculation Number</label>

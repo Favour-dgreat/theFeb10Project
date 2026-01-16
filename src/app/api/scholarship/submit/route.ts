@@ -228,6 +228,7 @@ export async function POST(req: NextRequest) {
             <div class="data-box">
                 <p><strong>Name:</strong> ${firstName} ${surname}</p>
                 <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Phone:</strong> ${phone || 'Not Provided'}</p>
                 <p><strong>Application ID:</strong> ${applicationId}</p>
                 <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
             </div>

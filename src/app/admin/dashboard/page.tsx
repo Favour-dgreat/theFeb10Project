@@ -11,6 +11,7 @@ export default function AdminDashboard() {
     const [applications, setApplications] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState('all'); // all, stage1, stage2, winners
+    const [searchTerm, setSearchTerm] = useState('');
 
     // Simple Auth
     const handleLogin = (e: React.FormEvent) => {
@@ -93,13 +94,51 @@ export default function AdminDashboard() {
         }
     };
 
+    const exportToCSV = (data: any[], filename = 'export.csv') => {
+        if (data.length === 0) {
+            alert('No data to export');
+            return;
+        }
+
+        const headers = ['Application ID', 'Name', 'Email', 'Phone', 'Status', 'Joined', 'School', 'Department', 'CGPA'];
+        const csvRows = [
+            headers.join(','),
+            ...data.map(app => [
+                app.applicationId,
+                `"${app.firstName} ${app.surname}"`,
+                app.email,
+                app.stage0?.phone || app.phone || '',
+                app.status,
+                app.createdAt ? new Date(app.createdAt).toLocaleDateString() : '',
+                app.stage1?.school || '',
+                app.stage1?.department || '',
+                app.stage1?.cgpa || ''
+            ].join(','))
+        ];
+
+        const blob = new Blob([csvRows.join('\n')], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.setAttribute('hidden', '');
+        a.setAttribute('href', url);
+        a.setAttribute('download', filename);
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    };
+
     // Filtering
     const filteredApps = applications.filter(app => {
-        if (activeTab === 'all') return true;
-        if (activeTab === 'stage1') return app.status === 'STAGE_1_SUBMITTED';
-        if (activeTab === 'stage2') return app.status === 'UNDER_REVIEW' || app.status === 'STAGE_2_INVITED'; // Show opened and submitted stage 2
-        if (activeTab === 'winners') return app.status === 'SELECTED_WINNER';
-        return true;
+        // Tab Filter
+        let matchesTab = true;
+        if (activeTab === 'stage1') matchesTab = app.status === 'STAGE_1_SUBMITTED';
+        else if (activeTab === 'stage2') matchesTab = app.status === 'UNDER_REVIEW' || app.status === 'STAGE_2_INVITED';
+        else if (activeTab === 'winners') matchesTab = app.status === 'SELECTED_WINNER';
+
+        // Search Filter (Email)
+        const matchesSearch = app.email?.toLowerCase().includes(searchTerm.toLowerCase());
+
+        return matchesTab && matchesSearch;
     });
 
     if (!isAuthenticated) {
@@ -126,9 +165,25 @@ export default function AdminDashboard() {
             {/* Header */}
             <header className="bg-[#1a237e] text-white p-6 shadow-md">
                 <div className="max-w-7xl mx-auto flex justify-between items-center">
-                    <div>
-                        <h1 className="text-2xl font-bold">FEB10 Admin Dashboard</h1>
-                        <p className="text-blue-200 text-sm">Managing {applications.length} applications</p>
+                    <div className="flex items-center space-x-4">
+                        <div className="text-right mr-4">
+                            <h1 className="text-2xl font-bold">FEB10 Admin Dashboard</h1>
+                            <p className="text-blue-200 text-sm">Managing {applications.length} applications</p>
+                        </div>
+                        <div className="flex space-x-2">
+                            <button
+                                onClick={() => exportToCSV(filteredApps, `applicants_${activeTab}_${Date.now()}.csv`)}
+                                className="bg-green-600 hover:bg-green-700 text-white text-xs font-bold py-2 px-4 rounded shadow-sm flex items-center gap-2"
+                            >
+                                📊 Export {activeTab.toUpperCase()} CSV
+                            </button>
+                            <button
+                                onClick={() => window.open('/api/admin/audit-phones?format=csv&onlyMissing=true')}
+                                className="bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold py-2 px-4 rounded shadow-sm flex items-center gap-2"
+                            >
+                                ⚠️ Missing Phones CSV
+                            </button>
+                        </div>
                     </div>
                     <button onClick={() => { localStorage.removeItem('admin_auth'); setIsAuthenticated(false); }} className="text-sm bg-blue-800 px-4 py-2 rounded hover:bg-blue-700">Logout</button>
                 </div>
@@ -155,20 +210,37 @@ export default function AdminDashboard() {
                     </div>
                 </div>
 
-                {/* Tabs */}
-                <div className="flex space-x-2 mb-6 overflow-x-auto pb-2">
-                    {['all', 'stage1', 'stage2', 'winners'].map((tab) => (
-                        <button
-                            key={tab}
-                            onClick={() => setActiveTab(tab)}
-                            className={`px-6 py-3 rounded-full font-bold transition-all ${activeTab === tab ? 'bg-[#1a237e] text-white shadow-lg' : 'bg-white text-gray-600 hover:bg-gray-100'}`}
-                        >
-                            {tab === 'all' && 'All Applications'}
-                            {tab === 'stage1' && 'Review Stage 1'}
-                            {tab === 'stage2' && 'Review Stage 2'}
-                            {tab === 'winners' && 'Final Winners'}
-                        </button>
-                    ))}
+                {/* Tabs & Search */}
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                    <div className="flex space-x-2 overflow-x-auto pb-2 md:pb-0">
+                        {['all', 'stage1', 'stage2', 'winners'].map((tab) => (
+                            <button
+                                key={tab}
+                                onClick={() => setActiveTab(tab)}
+                                className={`px-6 py-3 rounded-full font-bold transition-all whitespace-nowrap ${activeTab === tab ? 'bg-[#1a237e] text-white shadow-lg' : 'bg-white text-gray-600 hover:bg-gray-100'}`}
+                            >
+                                {tab === 'all' && 'All Applications'}
+                                {tab === 'stage1' && 'Review Stage 1'}
+                                {tab === 'stage2' && 'Review Stage 2'}
+                                {tab === 'winners' && 'Final Winners'}
+                            </button>
+                        ))}
+                    </div>
+
+                    <div className="relative flex-grow md:max-w-md">
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                        <input
+                            type="text"
+                            placeholder="Search by email..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="block w-full text-black pl-10 pr-3 py-3 border border-gray-200 rounded-xl leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm shadow-sm"
+                        />
+                    </div>
                 </div>
 
                 {/* Table */}
@@ -254,7 +326,8 @@ export default function AdminDashboard() {
                                             <td className="p-4 text-sm text-gray-600 max-w-xs">
                                                 {app.stage1 ? (
                                                     <div>
-                                                        <div className="font-semibold">{app.stage1.department} ({app.stage1.level}L)</div>
+                                                        <div className="font-semibold text-gray-900">{app.stage1.school}</div>
+                                                        <div className="text-gray-600">{app.stage1.department} ({app.stage1.level}L)</div>
                                                         <div>CGPA: {app.stage1.cgpa}</div>
                                                         <details className="mt-1 cursor-pointer text-blue-600 text-xs">
                                                             <summary>Read Essay</summary>
