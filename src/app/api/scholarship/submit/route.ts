@@ -93,8 +93,11 @@ export async function POST(req: NextRequest) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <meta name="supported-color-schemes" content="light dark">
     <title>Scholarship Application Received</title>
     <style>
+        :root { color-scheme: light dark; supported-color-schemes: light dark; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333333; margin: 0; padding: 0; background-color: #f8f9fa; }
         .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; }
         .header { background-color: #1a237e; padding: 40px 20px; text-align: center; }
@@ -104,13 +107,27 @@ export async function POST(req: NextRequest) {
         .id-label { font-size: 14px; color: #666666; margin-bottom: 5px; display: block; }
         .id-value { font-size: 24px; font-weight: bold; color: #1a237e; letter-spacing: 1px; }
         .cta-box { background-color: #f0f2ff; border-left: 4px solid #1a237e; padding: 20px; margin: 25px 0; border-radius: 0 8px 8px 0; }
-        .button { display: inline-block; padding: 16px 32px; background-color: #FFD700; color: #1a237e !important; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; margin-top: 20px; transition: background-color 0.3s ease; }
+        .button { display: inline-block; padding: 16px 32px; background-color: #FFD700 !important; color: #000000 !important; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; margin-top: 20px; text-align: center; }
         .footer { background-color: #f8f9fa; padding: 30px; text-align: center; font-size: 13px; color: #777777; border-top: 1px solid #eeeeee; }
         .steps { margin: 25px 0; padding-left: 20px; }
         .steps li { margin-bottom: 12px; }
         h2 { color: #1a237e; font-size: 20px; border-bottom: 2px solid #FFD700; display: inline-block; padding-bottom: 5px; margin-top: 0; }
         .social-links { margin-top: 20px; }
         .social-links a { margin: 0 10px; color: #1a237e; text-decoration: none; }
+
+        @media (prefers-color-scheme: dark) {
+            body { background-color: #121212 !important; color: #eeeeee !important; }
+            .container { background-color: #1e1e1e !important; }
+            .content { color: #eeeeee !important; }
+            .application-id { background-color: #2c2c2c !important; border-color: #FFD700 !important; }
+            .id-label { color: #bbbbbb !important; }
+            .id-value { color: #FFD700 !important; }
+            .cta-box { background-color: #2c2c2c !important; border-left-color: #FFD700 !important; color: #eeeeee !important; }
+            .button { background-color: #FFD700 !important; color: #000000 !important; }
+            h2 { color: #FFD700 !important; border-bottom-color: #FFD700 !important; }
+            .footer { background-color: #121212 !important; color: #888888 !important; border-top-color: #333333 !important; }
+            .social-links a { color: #FFD700 !important; }
+        }
     </style>
 </head>
 <body>
@@ -134,7 +151,7 @@ export async function POST(req: NextRequest) {
             <h2>Next Step: Orientation</h2>
             <div class="cta-box">
                 <p style="margin-top: 0;">To proceed, you must now watch <strong>Orientation Video 1</strong>. This is a compulsory part of your application process.</p>
-                <a href="${stage1Link}" class="button">WATCH VIDEO & CONTINUE</a>
+                <a href="${stage1Link}" class="button" style="display: inline-block; padding: 16px 32px; background-color: #FFD700; color: #000000; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; margin-top: 20px; text-align: center;">WATCH VIDEO & CONTINUE</a>
             </div>
 
             <h3>What's Next?</h3>
@@ -174,15 +191,53 @@ export async function POST(req: NextRequest) {
             const applicationRef = doc(db, 'applications', finalDocId);
             await updateDoc(applicationRef, { emailStatus: 'SENT' });
 
-            // 7. Background Admin Notification (Optional/Best Effort)
             (async () => {
                 try {
                     const adminHtml = `
-                        <h2>New Scholarship Enrollment</h2>
-                        <p><strong>Name:</strong> ${firstName} ${surname}</p>
-                        <p><strong>Email:</strong> ${email}</p>
-                        <p><strong>Application ID:</strong> ${applicationId}</p>
-                        <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <meta name="supported-color-schemes" content="light dark">
+    <title>New Enrollment Notification</title>
+    <style>
+        :root { color-scheme: light dark; supported-color-schemes: light dark; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333333; margin: 0; padding: 0; background-color: #f8f9fa; }
+        .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #eeeeee; }
+        .content { padding: 30px; }
+        .data-box { background-color: #f0f2ff; padding: 20px; border-radius: 8px; }
+        h2 { color: #1a237e; margin-top: 0; }
+        .footer { padding: 20px; background-color: #f8f9fa; text-align: center; font-size: 13px; color: #777777; border-top: 1px solid #eeeeee; }
+
+        @media (prefers-color-scheme: dark) {
+            body { background-color: #121212 !important; color: #eeeeee !important; }
+            .container { background-color: #1e1e1e !important; border-color: #333333 !important; }
+            .content { color: #eeeeee !important; }
+            .data-box { background-color: #2c2c2c !important; color: #eeeeee !important; }
+            h2 { color: #FFD700 !important; }
+            .footer { background-color: #121212 !important; border-top-color: #333333 !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <h2>New Scholarship Enrollment</h2>
+            <div class="data-box">
+                <p><strong>Name:</strong> ${firstName} ${surname}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Application ID:</strong> ${applicationId}</p>
+                <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
+            </div>
+        </div>
+        <div class="footer">
+            <p>© ${new Date().getFullYear()} The FEB10 Project Admin System</p>
+        </div>
+    </div>
+</body>
+</html>
                     `;
 
                     await client.send({

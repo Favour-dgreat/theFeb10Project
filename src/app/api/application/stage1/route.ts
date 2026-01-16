@@ -91,24 +91,64 @@ export async function POST(req: NextRequest) {
         (async () => {
             try {
                 const htmlContent = `
-                    <h2>New Stage 1 Application Submitted</h2>
-                    <div style="background: #eef; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                        <h3 style="margin-top:0;">Applicant Details</h3>
-                        <p><strong>Name:</strong> ${firstName} ${surname}</p>
-                        <p><strong>Email:</strong> ${email}</p>
-                        <p><strong>Application ID:</strong> ${applicationId || 'N/A'}</p>
-                    </div>
-                    
-                    <h3>Academic Information</h3>
-                    <p><strong>Matric Number:</strong> ${matricNumber}</p>
-                    <p><strong>Department:</strong> ${department}</p>
-                    <p><strong>Level:</strong> ${level}</p>
-                    <p><strong>CGPA:</strong> ${cgpa}</p>
-                    
-                    <h3>Essay</h3>
-                    <blockquote style="background: #f9f9f9; padding: 10px; border-left: 5px solid #ccc;">
-                        ${essay.replace(/\n/g, '<br>')}
-                    </blockquote>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <meta name="supported-color-schemes" content="light dark">
+    <title>New Stage 1 Application</title>
+    <style>
+        :root { color-scheme: light dark; supported-color-schemes: light dark; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333333; margin: 0; padding: 0; background-color: #f8f9fa; }
+        .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #eeeeee; }
+        .content { padding: 30px; }
+        .data-box { background-color: #f0f2ff; padding: 20px; border-radius: 8px; margin-bottom: 25px; }
+        .essay-box { background-color: #f9f9f9; padding: 20px; border-left: 5px solid #ccc; font-style: italic; }
+        h2 { color: #1a237e; margin-top: 0; }
+        h3 { color: #1a237e; margin-bottom: 15px; }
+        .footer { padding: 20px; background-color: #f8f9fa; text-align: center; font-size: 13px; color: #777777; border-top: 1px solid #eeeeee; }
+
+        @media (prefers-color-scheme: dark) {
+            body { background-color: #121212 !important; color: #eeeeee !important; }
+            .container { background-color: #1e1e1e !important; border-color: #333333 !important; }
+            .content { color: #eeeeee !important; }
+            .data-box { background-color: #2c2c2c !important; color: #eeeeee !important; }
+            .essay-box { background-color: #2c2c2c !important; color: #dddddd !important; border-left-color: #FFD700 !important; }
+            h2, h3 { color: #FFD700 !important; }
+            .footer { background-color: #121212 !important; border-top-color: #333333 !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <h2>New Stage 1 Application Submitted</h2>
+            <div class="data-box">
+                <h3 style="margin-top:0;">Applicant Details</h3>
+                <p><strong>Name:</strong> ${firstName} ${surname}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Application ID:</strong> ${applicationId || 'N/A'}</p>
+            </div>
+            
+            <h3>Academic Information</h3>
+            <p><strong>Matric Number:</strong> ${matricNumber}</p>
+            <p><strong>Department:</strong> ${department}</p>
+            <p><strong>Level:</strong> ${level}</p>
+            <p><strong>CGPA:</strong> ${cgpa}</p>
+            
+            <h3>Essay</h3>
+            <div class="essay-box">
+                ${essay.replace(/\n/g, '<br>')}
+            </div>
+        </div>
+        <div class="footer">
+            <p>© ${new Date().getFullYear()} The FEB10 Project Admin System</p>
+        </div>
+    </div>
+</body>
+</html>
                 `;
 
                 await client.send({

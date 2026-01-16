@@ -79,18 +79,62 @@ export async function POST(req: NextRequest) {
                     .join('');
 
                 const htmlContent = `
-                    <h2>New Stage 2 Submission Completed</h2>
-                    <div style="background: #eef; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                        <h3 style="margin-top:0;">Applicant Details</h3>
-                        <p><strong>Name:</strong> ${firstName} ${surname}</p>
-                        <p><strong>Email:</strong> ${email}</p>
-                        <p><strong>Application ID:</strong> ${applicationId}</p>
-                    </div>
-                    
-                    <h3>Uploaded Documents</h3>
-                    <ul>
-                        ${fileLinksHtml}
-                    </ul>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <meta name="supported-color-schemes" content="light dark">
+    <title>Stage 2 Submission Completed</title>
+    <style>
+        :root { color-scheme: light dark; supported-color-schemes: light dark; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333333; margin: 0; padding: 0; background-color: #f8f9fa; }
+        .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #eeeeee; }
+        .content { padding: 30px; }
+        .data-box { background-color: #f0f2ff; padding: 20px; border-radius: 8px; margin-bottom: 25px; }
+        .list-box { background-color: #f9f9f9; padding: 20px; border-radius: 8px; }
+        h2 { color: #1a237e; margin-top: 0; }
+        h3 { color: #1a237e; margin-bottom: 15px; }
+        .footer { padding: 20px; background-color: #f8f9fa; text-align: center; font-size: 13px; color: #777777; border-top: 1px solid #eeeeee; }
+        a { color: #1a237e; text-decoration: none; font-weight: bold; }
+
+        @media (prefers-color-scheme: dark) {
+            body { background-color: #121212 !important; color: #eeeeee !important; }
+            .container { background-color: #1e1e1e !important; border-color: #333333 !important; }
+            .content { color: #eeeeee !important; }
+            .data-box { background-color: #2c2c2c !important; color: #eeeeee !important; }
+            .list-box { background-color: #2c2c2c !important; color: #dddddd !important; }
+            h2, h3 { color: #FFD700 !important; }
+            a { color: #FFD700 !important; }
+            .footer { background-color: #121212 !important; border-top-color: #333333 !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <h2>New Stage 2 Submission Completed</h2>
+            <div class="data-box">
+                <h3 style="margin-top:0;">Applicant Details</h3>
+                <p><strong>Name:</strong> ${firstName} ${surname}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Application ID:</strong> ${applicationId}</p>
+            </div>
+            
+            <h3>Uploaded Documents</h3>
+            <div class="list-box">
+                <ul style="margin:0; padding-left: 20px;">
+                    ${fileLinksHtml}
+                </ul>
+            </div>
+        </div>
+        <div class="footer">
+            <p>© ${new Date().getFullYear()} The FEB10 Project Admin System</p>
+        </div>
+    </div>
+</body>
+</html>
                 `;
 
                 await client.send({
