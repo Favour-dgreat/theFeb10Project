@@ -39,10 +39,40 @@ export async function POST(req: NextRequest) {
         );
         const matricSnap = await getDocs(qMatric);
 
-        if (!emailSnap.empty || !matricSnap.empty) {
-            return NextResponse.json({
-                error: 'Your record already exists. Multiple submissions are not allowed.'
-            }, { status: 409 });
+        let duplicateToUpdate = null;
+
+        if (!emailSnap.empty) {
+            const doc = emailSnap.docs[0];
+            const data = doc.data();
+            const storedPhone = data.stage1?.phone || data.stage0?.phone || data['stage0.phone'];
+
+            // Allow update if phone is missing or invalid
+            if (!storedPhone || storedPhone === 'N/A' || String(storedPhone).trim() === '') {
+                duplicateToUpdate = doc;
+            } else {
+                return NextResponse.json({
+                    error: 'Your record already exists. Multiple submissions are not allowed.'
+                }, { status: 409 });
+            }
+        }
+
+        if (!matricSnap.empty) {
+            const doc = matricSnap.docs[0];
+            if (duplicateToUpdate) {
+                if (doc.id !== duplicateToUpdate.id) {
+                    return NextResponse.json({ error: 'This matric number is already in use.' }, { status: 409 });
+                }
+            } else {
+                const data = doc.data();
+                const storedPhone = data.stage1?.phone || data.stage0?.phone || data['stage0.phone'];
+                if (!storedPhone || storedPhone === 'N/A' || String(storedPhone).trim() === '') {
+                    duplicateToUpdate = doc;
+                } else {
+                    return NextResponse.json({
+                        error: 'Your record already exists (Matric Number).'
+                    }, { status: 409 });
+                }
+            }
         }
 
         // 2. Prepare Database Update
@@ -64,14 +94,23 @@ export async function POST(req: NextRequest) {
             emailStatus: 'PENDING'
         };
 
+        // If duplicate found and allowed, update it
+        if (duplicateToUpdate) {
+            await updateDoc(duplicateToUpdate.ref, updateData);
+            finalDocId = duplicateToUpdate.id;
+        }
+
         if (applicationId) {
             const q = query(applicationsRef, where('applicationId', '==', applicationId));
             const querySnapshot = await getDocs(q);
 
             if (!querySnapshot.empty) {
                 const docRef = querySnapshot.docs[0].ref;
-                await updateDoc(docRef, updateData);
-                finalDocId = docRef.id;
+                // Avoid double update if it's the same doc
+                if (docRef.id !== finalDocId) {
+                    await updateDoc(docRef, updateData);
+                    finalDocId = docRef.id;
+                }
             }
         }
 
