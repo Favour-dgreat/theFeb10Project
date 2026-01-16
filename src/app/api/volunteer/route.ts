@@ -75,6 +75,8 @@ export async function POST(req: NextRequest) {
             .content { color: #eeeeee !important; }
             .header { background-color: #1a237e !important; }
             .alert-box { background-color: #3d1c10 !important; border-left-color: #f06436 !important; color: #ff9d7e !important; }
+            .social-section { border-top-color: #333333 !important; }
+            .social-text { color: #FFD700 !important; }
             .footer { background-color: #121212 !important; border-top-color: #333333 !important; }
         }
     </style>
@@ -97,6 +99,23 @@ export async function POST(req: NextRequest) {
             </p>
         </div>
         <div class="footer">
+            <div class="social-section" style="border-top: 1px solid #eeeeee; padding-top: 20px; margin-bottom: 20px; text-align: center;">
+                <p class="social-text" style="margin-bottom: 15px; font-weight: bold; color: #1a237e;">Stay Connected & Don't Miss Updates:</p>
+                <div style="display: block;">
+                    <a href="https://www.facebook.com/share/1ay9naqt35/?mibextid=wwXIfr" style="text-decoration: none; margin: 0 10px; display: inline-block;">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" width="24" height="24" alt="Facebook">
+                    </a>
+                    <a href="https://www.linkedin.com/company/the-feb10-project/" style="text-decoration: none; margin: 0 10px; display: inline-block;">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png" width="24" height="24" alt="LinkedIn">
+                    </a>
+                    <a href="https://www.instagram.com/thefeb10project?igsh=amEydWsxemU4NHI%3D&utm_source=qr" style="text-decoration: none; margin: 0 10px; display: inline-block;">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="24" height="24" alt="Instagram">
+                    </a>
+                    <a href="https://x.com/thefeb10project" style="text-decoration: none; margin: 0 10px; display: inline-block;">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3256/3256013.png" width="24" height="24" alt="X">
+                    </a>
+                </div>
+            </div>
             <p>© ${new Date().getFullYear()} The FEB10 Project. All rights reserved.</p>
         </div>
     </div>
