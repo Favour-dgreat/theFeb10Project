@@ -100,7 +100,12 @@ export default function AdminDashboard() {
             return;
         }
 
-        const headers = ['Application ID', 'Name', 'Email', 'Phone', 'Status', 'Joined', 'School', 'Department', 'CGPA'];
+        const headers = [
+            'Application ID', 'Name', 'Email', 'Phone', 'Status', 'Joined',
+            'School', 'Department', 'Matric Number', 'Level', 'CGPA', 'Essay',
+            'S2: Student ID', 'S2: Transcript', 'S2: Admission Letter', 'S2: Govt ID',
+            'S2: Fees Proof', 'S2: Passport', 'S2: Financial Need', 'S2: Other Docs'
+        ];
         const csvRows = [
             headers.join(','),
             ...data.map(app => [
@@ -110,9 +115,20 @@ export default function AdminDashboard() {
                 app.stage0?.phone || app.phone || '',
                 app.status,
                 app.createdAt ? new Date(app.createdAt).toLocaleDateString() : '',
-                app.stage1?.school || '',
-                app.stage1?.department || '',
-                app.stage1?.cgpa || ''
+                `"${(app.stage1?.school || '').replace(/"/g, '""')}"`,
+                `"${(app.stage1?.department || '').replace(/"/g, '""')}"`,
+                app.stage1?.matricNumber || '',
+                app.stage1?.level || '',
+                app.stage1?.cgpa || '',
+                `"${(app.stage1?.essay || '').replace(/"/g, '""')}"`,
+                app.stage2?.files?.studentId || '',
+                app.stage2?.files?.transcript || '',
+                app.stage2?.files?.admissionLetter || '',
+                app.stage2?.files?.govtId || '',
+                app.stage2?.files?.feesProof || '',
+                app.stage2?.files?.passport || '',
+                app.stage2?.files?.financialNeed || '',
+                app.stage2?.files?.otherDocs || ''
             ].join(','))
         ];
 
