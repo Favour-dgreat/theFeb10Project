@@ -123,7 +123,7 @@ const ScholarshipInfo = () => {
             content: (
                 <div className="space-y-4 text-gray-700">
                     <p>
-                        The application deadline for the FEB10 Project 2026 Scholarship is <b>10th February 2026.</b>
+                        The application deadline for the FEB10 Project 2026 Scholarship is <b>18th February 2026.</b>
                     </p>
                     <p>
                         All updates and official announcements will be published on our website and social media platforms.
