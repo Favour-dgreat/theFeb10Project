@@ -77,7 +77,7 @@ export async function POST(req: NextRequest) {
                 <h3 style="margin-top: 0;">🎉 FINAL WINNERS ANNOUNCEMENT (LIVE)</h3>
                 <p>The official scholarship recipients will be announced live during The FEB10 Project announcement event.</p>
                 
-                <p style="margin-bottom: 5px;"><strong>Date:</strong> Sunday, 15th February 2026</p>
+                <p style="margin-bottom: 5px;"><strong>Date:</strong> Wednesday, 18th February 2026</p>
                 <p style="margin-bottom: 5px;"><strong>Time:</strong> To be announced</p>
                 <p style="margin-bottom: 15px;"><strong>Platform:</strong> Live stream (details coming soon)</p>
 
