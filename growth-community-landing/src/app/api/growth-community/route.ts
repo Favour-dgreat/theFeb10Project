@@ -3,8 +3,10 @@ import { MailtrapClient } from 'mailtrap';
 
 const TOKEN = process.env.MailtrapAPIkey || "";
 const client = new MailtrapClient({ token: TOKEN });
-const SENDER_EMAIL = "applications@thefeb10project.org";
-const ADMIN_EMAIL = "admin@thefeb10project.org";
+const SENDER_EMAIL = "thegrowthcommunity@thefeb10project.org";
+const ADMIN_EMAIL = "thegrowthcommunity@thefeb10project.org";
+import { adminDb } from '@/lib/firebase';
+
 
 export async function POST(req: NextRequest) {
     try {
@@ -15,7 +17,24 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
         }
 
+        try {
+            await adminDb.collection('growth_community_members').add({
+                name,
+                email,
+                gender,
+                phone,
+                interests: interests || [],
+                createdAt: new Date().toISOString(),
+            });
+        } catch (dbError) {
+            console.error("Error saving to Firestore:", dbError);
+            // Continue to send email even if DB save fails, or maybe we should error? 
+            // Ideally we want both. But if DB fails, we probably want to know.
+            // For now, logging it is safer than blocking the user if email works.
+        }
+
         if (!TOKEN) {
+
             console.error("Mailtrap API Key is missing");
             return NextResponse.json({ error: 'System configuration error' }, { status: 500 });
         }
@@ -51,8 +70,6 @@ export async function POST(req: NextRequest) {
             .data-box td { color: #bbbbbb !important; }
             .data-box td[style*="font-weight: bold"] { color: #a3cc39 !important; }
             .button { background-color: #a3cc39 !important; color: #000000 !important; }
-            .social-section { border-top-color: #333333 !important; }
-            .social-text { color: #a3cc39 !important; }
             .footer { background-color: #121212 !important; color: #888888 !important; }
         }
     </style>
@@ -65,8 +82,8 @@ export async function POST(req: NextRequest) {
         </div>
         <div class="content">
             <p style="font-size: 16px; margin-bottom: 24px;">Hello <strong>${name}</strong>,</p>
-            <p style="font-size: 16px; margin-bottom: 24px;">You’re officially part of a community built to help you learn, grow, network, and unlock opportunities. We are thrilled to have you with us.</p>
-            <p style="font-size: 16px; margin-bottom: 24px;">The Growth Community is your launchpad for discovering purpose and maximizing potential. Get ready for updates, resources, and opportunities designed to support your personal and professional growth.</p>
+            <p style="font-size: 16px; margin-bottom: 24px;">We’re excited to officially welcome you to the Growth Community — a space created to help you learn, grow, connect, and unlock life-changing opportunities.</p>
+            <p style="font-size: 16px; margin-bottom: 24px;">You’re now part of a community designed to serve as your launchpad for purpose discovery and maximum potential. Expect timely updates, valuable resources, and opportunities focused on your personal, academic, and professional growth.</p>
             
             <div class="data-box">
                 <h3 style="margin-top: 0; margin-bottom: 15px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Your Profile Details</h3>
@@ -89,25 +106,32 @@ export async function POST(req: NextRequest) {
             <div style="margin-top: 40px; text-align: center;">
                 <a href="https://growthcommunity.thefeb10project.org/" class="button" style="background-color: #a3cc39; color: #000000; padding: 14px 28px; text-decoration: none; border-radius: 30px; font-weight: bold; display: inline-block;">Visit Our Website</a>
             </div>
-        </div>
-        <div class="footer">
-            <div class="social-section" style="border-top: 1px solid #eeeeee; padding-top: 20px; margin-bottom: 20px; text-align: center;">
-                <p class="social-text" style="margin-bottom: 15px; font-weight: bold; color: #1a237e;">Stay Connected & Don't Miss Updates:</p>
-                <div style="display: block;">
-                    <a href="https://www.facebook.com/share/1ay9naqt35/?mibextid=wwXIfr" style="text-decoration: none; margin: 0 10px; display: inline-block;">
-                        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" width="24" height="24" alt="Facebook">
+
+            <div style="margin-top: 50px; border-top: 2px solid #eeeeee; padding-top: 30px;">
+                <h3 style="color: #2e3b86; margin-top: 0; font-size: 20px; margin-bottom: 15px;">Stay Connected — Don’t Miss Out</h3>
+                <p style="font-size: 15px; line-height: 1.7; color: #555555; margin-bottom: 25px;">
+                    To ensure you never miss important updates, opportunities, or announcements, we encourage you to follow and engage with us on our official platforms. Our social media channels are where we share timely updates, affiliate scholarship opportunities within our network, and other initiatives designed to support your academic and personal growth. Following us on social media helps you stay connected and ensures you don’t miss out on important scholarship and growth opportunities.
+                </p>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="https://www.instagram.com/growthcommunity.space/" style="display: inline-block; margin: 10px; text-align: center; text-decoration: none; color: #333333;">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="48" height="48" alt="Instagram" style="display: block; margin: 0 auto 8px;">
+                        <span style="font-weight: bold; font-size: 14px;">Instagram</span>
                     </a>
-                    <a href="https://www.linkedin.com/company/the-feb10-project/" style="text-decoration: none; margin: 0 10px; display: inline-block;">
-                        <img src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png" width="24" height="24" alt="LinkedIn">
+                    
+                    <a href="https://www.linkedin.com/company/growth-community-global/" style="display: inline-block; margin: 10px; text-align: center; text-decoration: none; color: #333333;">
+                         <img src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png" width="48" height="48" alt="LinkedIn" style="display: block; margin: 0 auto 8px;">
+                        <span style="font-weight: bold; font-size: 14px;">LinkedIn</span>
                     </a>
-                    <a href="https://www.instagram.com/thefeb10project?igsh=amEydWsxemU4NHI%3D&utm_source=qr" style="text-decoration: none; margin: 0 10px; display: inline-block;">
-                        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="24" height="24" alt="Instagram">
-                    </a>
-                    <a href="https://x.com/thefeb10project" style="text-decoration: none; margin: 0 10px; display: inline-block;">
-                        <img src="https://cdn-icons-png.flaticon.com/512/3256/3256013.png" width="24" height="24" alt="X">
+                    
+                    <a href="https://www.facebook.com/profile.php?id=61585987801344" style="display: inline-block; margin: 10px; text-align: center; text-decoration: none; color: #333333;">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" width="48" height="48" alt="Facebook" style="display: block; margin: 0 auto 8px;">
+                        <span style="font-weight: bold; font-size: 14px;">Facebook</span>
                     </a>
                 </div>
             </div>
+        </div>
+        <div class="footer">
             <p style="margin: 0;">© ${new Date().getFullYear()} The FEB10 Project. Growth Community Initiative.</p>
         </div>
     </div>
@@ -118,7 +142,6 @@ export async function POST(req: NextRequest) {
         await client.send({
             from: { email: SENDER_EMAIL, name: "Growth Community" },
             to: [{ email: email }], // Send to user
-            bcc: [{ email: ADMIN_EMAIL }], // BCC Admin
             subject: `Welcome to the Growth Community, ${name}!`,
             html: htmlContent,
             category: "Growth Community Welcome",

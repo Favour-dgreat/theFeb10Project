@@ -140,7 +140,6 @@ export async function POST(req: NextRequest) {
                 await client.send({
                     from: { email: SENDER_EMAIL, name: "Stage 2 System" },
                     to: [{ email: "applications@thefeb10project.org" }],
-                    cc: [{ email: "admin@thefeb10project.org" }],
                     subject: `Stage 2 COMPLETE: ${firstName} ${surname}`,
                     text: `New Stage 2 Submission from ${firstName} ${surname}.`,
                     html: htmlContent,

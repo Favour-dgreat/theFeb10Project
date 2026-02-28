@@ -261,7 +261,6 @@ export async function POST(req: NextRequest) {
                     await client.send({
                         from: { email: SENDER_EMAIL, name: "Scholarship System" },
                         to: [{ email: "applications@thefeb10project.org" }],
-                        cc: [{ email: "admin@thefeb10project.org" }],
                         subject: `New Enrollment: ${firstName} ${surname}`,
                         text: `New Enrollment\nName: ${firstName} ${surname}\nEmail: ${email}\nID: ${applicationId}`,
                         html: adminHtml,

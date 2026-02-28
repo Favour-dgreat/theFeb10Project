@@ -69,33 +69,32 @@ export async function POST(req: NextRequest) {
         <div class="content">
             <p>Dear ${firstName} ${surname},</p>
 
-            <p>We are pleased to inform you that after a careful and rigorous review process, your application has been successfully shortlisted, and you have advanced to the final stage of The FEB10 Project Scholarship selection process.</p>
-
-            <p>Your application stood out for your strong commitment to academics, clarity of purpose, and the effort reflected throughout your submission.</p>
+            <p>You are required to join the FEB10 Project Undergraduate Scholarship 2026 Live Announcement.</p>
 
             <div class="info-box">
-                <h3 style="margin-top: 0;">🎉 FINAL WINNERS ANNOUNCEMENT (LIVE)</h3>
-                <p>The official scholarship recipients will be announced live during The FEB10 Project announcement event.</p>
-                
-                <p style="margin-bottom: 5px;"><strong>Date:</strong> Wednesday, 18th February 2026</p>
-                <p style="margin-bottom: 5px;"><strong>Time:</strong> To be announced</p>
-                <p style="margin-bottom: 15px;"><strong>Platform:</strong> Live stream (details coming soon)</p>
+                <p style="margin-bottom: 5px;"><strong>📅 Date:</strong> Sunday, 1st March 2026</p>
+                <p style="margin-bottom: 5px;"><strong>⏰ Time:</strong> 6:30 PM (WAT)</p>
+                <p style="margin-bottom: 15px;"><strong>📍 Where:</strong> Live on <a href="https://web.facebook.com/sunnywillz01">Sunny Willz's Facebook page</a> — hosted by the Founder of the FEB10 Project.</p>
 
                 <div class="note-box">
                     <p style="margin: 0; font-weight: bold;">📌 Important:</p>
                     <p style="margin: 5px 0 0; font-size: 14px;">
-                        Specific details about the live stream — including the exact time and viewing links — will be shared across our official social media platforms: <br>
-                        <strong>@TheFEB10Project</strong>
+                        The scholarship <strong>winners will be announced live</strong> during this session. <strong>Attendance is mandatory</strong> — this is the only way to know the results as they happen.
                     </p>
                 </div>
             </div>
 
-            <p>We encourage you to stay connected and watch out for updates as we approach the final announcement.</p>
-            <p>Thank you for being part of this journey, and we wish you the very best as we move into the final stage.</p>
+            <p>For transparency, the live session will also be made available on the official FEB10 Project platforms after the broadcast.</p>
+            
+            <p>To stay connected and gain additional value, you can follow Sunny Willz for leadership insights, personal development tips, and updates on future FEB10 opportunities: Follow <a href="https://web.facebook.com/sunnywillz01"> Sunny Willz</a></p>
+
+            <p>We expect <strong>all shortlisted applicants</strong> to join the live session — do not miss it.</p>
+            
+            <p><strong>Join the live session now:</strong> <a href="https://web.facebook.com/sunnywillz01">Sunny Willz's Facebook page</a></p>
 
             <p style="margin-top: 30px;">
                 Warm regards,<br>
-                <strong>The FEB10 Project Team</strong>
+                <strong>The FEB10 Project Scholarship Team.</strong>
             </p>
         </div>
         <div class="footer">
@@ -126,7 +125,7 @@ export async function POST(req: NextRequest) {
         await client.send({
             from: { email: SENDER_EMAIL, name: "The FEB10 Project" },
             to: [{ email }],
-            subject: "Congratulations! You’ve Advanced to the Final Stage – FEB10 Project Scholarship",
+            subject: "FEB10 Project Scholarship Live Announcement – 1st March 2026",
             html: htmlContent,
             category: "Winner Selection",
         });
