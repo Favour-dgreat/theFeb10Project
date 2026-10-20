@@ -6,6 +6,8 @@ const TOKEN = process.env.MailtrapAPIkey || "";
 const client = new MailtrapClient({ token: TOKEN });
 const SENDER_EMAIL = "thegrowthcommunity@thefeb10project.org";
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
