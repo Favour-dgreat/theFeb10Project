@@ -3,11 +3,16 @@
 import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
 
-const videos = [
-    { src: '/videos/media/Video1.mp4', title: 'Video 1', poster: '/videos/media/1.jpg' },
-    { src: '/videos/media/Video2.mp4', title: 'Video 2', poster: '/videos/media/2.jpg' },
-    { src: '/videos/media/Video3.mp4', title: 'Video 3', poster: '/videos/media/3.jpg' },
-    { src: '/videos/media/Video4.mp4', title: 'Video 4', poster: '/videos/media/4.jpg' },
+const spotlightVideos = [
+    { src: '/videos/media/AwardeesVideo1_mp4.mp4', title: 'Awardee Spotlight 1', poster: '/videos/media/awardee1.png' },
+    { src: '/videos/media/AwardeesVideo2_mp4.mp4', title: 'Awardee Spotlight 2', poster: '/videos/media/awardee2.png' },
+];
+
+const mediaVideos = [
+    { src: '/videos/media/Video1.mp4', title: 'Community Outreach 1', poster: '/videos/media/1.jpg' },
+    { src: '/videos/media/Video2.mp4', title: 'Community Outreach 2', poster: '/videos/media/2.jpg' },
+    { src: '/videos/media/Video3.mp4', title: 'Community Outreach 3', poster: '/videos/media/3.jpg' },
+    { src: '/videos/media/Video4.mp4', title: 'Community Outreach 4', poster: '/videos/media/4.jpg' },
 ];
 
 export default function MediaPage() {
@@ -32,43 +37,87 @@ export default function MediaPage() {
                 </div>
             </section>
 
-            {/* Video Grid */}
-            <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-                    {videos.map((video, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className="group"
-                        >
-                            <div className="relative rounded-2xl overflow-hidden shadow-xl bg-gray-900 aspect-video ring-1 ring-black/5">
-                                <video
-                                    controls
-                                    className="w-full h-full object-cover"
-                                    preload="metadata"
-                                    poster={video.poster}
-                                >
-                                    <source src={video.src} type="video/mp4" />
-                                    Your browser does not support the video tag.
-                                </video>
+            {/* Video Sections */}
+            <section id="videos" className="py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-20">
+                {/* Vertical Awardee Spotlights (9:16) */}
+                <div>
+                    <div className="text-center mb-10">
+                        <span className="text-xs font-bold tracking-widest text-[#f06436] uppercase bg-orange-50 px-3.5 py-1.5 rounded-full border border-orange-100">
+                            Awardee Spotlights
+                        </span>
+                        <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 mt-3">
+                            Voices of Tomorrow&apos;s Leaders
+                        </h2>
+                    </div>
 
-                                {/* Optional overlay before play - standard browser controls usually handle this well enough, 
-                    but we can add a subtle border/glow on hover */}
-                                <div className="absolute inset-0 ring-1 ring-inset ring-black/10 rounded-2xl pointer-events-none group-hover:ring-[#f06436]/50 transition-all duration-300" />
-                            </div>
-                            <div className="mt-4 flex items-center justify-between">
-                                {/* <h3 className="text-lg font-bold text-gray-800 group-hover:text-[#f06436] transition-colors">
-                                    {video.title}
-                                </h3> */}
-                            </div>
-                        </motion.div>
-                    ))}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-12 max-w-8xl mx-auto justify-center">
+                        {spotlightVideos.map((video, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: "-50px" }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                className="group flex flex-col items-center w-full"
+                            >
+                                <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-black aspect-[9/16] w-full max-w-[540px] ring-1 ring-black/10">
+                                    <video
+                                        controls
+                                        playsInline
+                                        className="w-full h-full object-cover"
+                                        preload="metadata"
+                                        poster={video.poster}
+                                    >
+                                        <source src={video.src} type="video/mp4" />
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <div className="absolute inset-0 ring-1 ring-inset ring-black/10 rounded-2xl pointer-events-none group-hover:ring-[#f06436]/50 transition-all duration-300" />
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Horizontal Media Highlights (16:9) */}
+                <div>
+                    <div className="text-center mb-10">
+                        <span className="text-xs font-bold tracking-widest text-[#2e3b86] uppercase bg-blue-50 px-3.5 py-1.5 rounded-full border border-blue-100">
+                            Outreach &amp; Moments
+                        </span>
+                        <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 mt-3">
+                            Initiatives in Action
+                        </h2>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                        {mediaVideos.map((video, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: "-50px" }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                className="group"
+                            >
+                                <div className="relative rounded-2xl overflow-hidden shadow-xl bg-gray-900 aspect-video ring-1 ring-black/5">
+                                    <video
+                                        controls
+                                        playsInline
+                                        className="w-full h-full object-cover"
+                                        preload="metadata"
+                                        poster={video.poster}
+                                    >
+                                        <source src={video.src} type="video/mp4" />
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <div className="absolute inset-0 ring-1 ring-inset ring-black/10 rounded-2xl pointer-events-none group-hover:ring-[#f06436]/50 transition-all duration-300" />
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
             </section>
-                    <Footer/>
+            <Footer />
 
         </div>
     );

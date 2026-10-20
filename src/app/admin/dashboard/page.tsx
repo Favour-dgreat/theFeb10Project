@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { db } from '@/lib/firebase';
 import { collection, query, orderBy, onSnapshot, where } from 'firebase/firestore';
 
@@ -187,6 +188,12 @@ export default function AdminDashboard() {
                             <p className="text-blue-200 text-sm">Managing {applications.length} applications</p>
                         </div>
                         <div className="flex space-x-2">
+                            <Link
+                                href="/admin/growth-community"
+                                className="bg-[#f06436] hover:bg-[#d95328] text-white text-xs font-bold py-2 px-4 rounded shadow-sm flex items-center gap-2"
+                            >
+                                👥 Growth Community
+                            </Link>
                             <button
                                 onClick={() => exportToCSV(filteredApps, `applicants_${activeTab}_${Date.now()}.csv`)}
                                 className="bg-green-600 hover:bg-green-700 text-white text-xs font-bold py-2 px-4 rounded shadow-sm flex items-center gap-2"

@@ -1,6 +1,7 @@
 import { adminDb } from '@/lib/firebase';
 import { Download, Users } from 'lucide-react';
 import ClientDownloadButton from '@/app/dashboard/ClientDownloadButton';
+import SendInviteButton from '@/app/dashboard/SendInviteButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -23,7 +24,9 @@ export default async function Dashboard() {
                 phone: data.phone || '',
                 gender: data.gender || '',
                 interests: Array.isArray(data.interests) ? data.interests.join(', ') : (data.interests || ''),
-                createdAt: data.createdAt || ''
+                createdAt: data.createdAt || '',
+                inviteSent: Boolean(data.inviteSent),
+                inviteSentAt: data.inviteSentAt || null,
             };
         });
     } catch (e: any) {
@@ -66,12 +69,13 @@ export default async function Dashboard() {
                                     <th className="p-4">Phone</th>
                                     <th className="p-4">Gender</th>
                                     <th className="p-4">Interests</th>
+                                    <th className="p-4">Actions</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-100">
                                 {members.length === 0 ? (
                                     <tr>
-                                        <td colSpan={6} className="p-8 text-center text-gray-400">
+                                        <td colSpan={7} className="p-8 text-center text-gray-400">
                                             No members found yet.
                                         </td>
                                     </tr>
@@ -90,6 +94,9 @@ export default async function Dashboard() {
                                             <td className="p-4">{member.gender}</td>
                                             <td className="p-4 max-w-xs truncate" title={member.interests}>
                                                 {member.interests}
+                                            </td>
+                                            <td className="p-4 whitespace-nowrap">
+                                                <SendInviteButton member={member} />
                                             </td>
                                         </tr>
                                     ))
